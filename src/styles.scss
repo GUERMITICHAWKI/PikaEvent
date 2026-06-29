@@ -1,1 +1,83 @@
 /* You can add global styles to this file, and also import other style files */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700;900&family=Inter:wght@300;400;500;600&family=Dancing+Script:wght@600;700&display=swap');
+
+@layer base {
+  * { box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    @apply font-sans text-dark bg-white overflow-x-hidden;
+  }
+
+  h1, h2, h3, h4 {
+    @apply font-serif;
+  }
+
+  a { @apply no-underline; }
+
+  ::-webkit-scrollbar { width: 5px; }
+  ::-webkit-scrollbar-track { @apply bg-cream; }
+  ::-webkit-scrollbar-thumb { @apply bg-gold rounded-full; }
+}
+
+@layer components {
+
+  .btn-gold {
+    @apply bg-gold text-white font-semibold px-8 py-3 rounded-pill
+           transition-all duration-300 cursor-pointer border-none
+           hover:bg-gold-dark hover:-translate-y-0.5 hover:shadow-gold
+           inline-block text-center;
+  }
+
+  .btn-outline-gold {
+    @apply bg-transparent text-gold font-semibold px-8 py-3 rounded-pill
+           border-2 border-gold transition-all duration-300 cursor-pointer
+           hover:bg-gold hover:text-white inline-block text-center;
+  }
+
+  .btn-outline-white {
+    @apply bg-transparent text-white font-semibold px-8 py-3 rounded-pill
+           border-2 border-white transition-all duration-300 cursor-pointer
+           hover:bg-white hover:text-dark inline-block text-center;
+  }
+
+  .container-main {
+    @apply max-w-6xl mx-auto px-6 md:px-8;
+  }
+
+  .section-title {
+    @apply font-serif text-3xl md:text-4xl text-dark mb-2;
+  }
+
+  .gold-line {
+    @apply w-12 h-0.5 bg-gold mx-auto mt-3 mb-8;
+  }
+
+  .card-product {
+    @apply bg-white rounded-2xl overflow-hidden shadow-card
+           transition-all duration-300 cursor-pointer
+           hover:-translate-y-2 hover:shadow-xl;
+  }
+
+  .badge-promo {
+    @apply bg-white text-dark text-xs font-semibold
+           px-3 py-1 rounded-full shadow-sm;
+  }
+
+  .badge-bestseller {
+    @apply bg-gold text-white text-xs font-bold
+           px-3 py-1 rounded-full;
+  }
+
+  .gold-text {
+    background: linear-gradient(135deg, #C9973A, #F0C060, #C9973A);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+}
