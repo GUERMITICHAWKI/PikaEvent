@@ -1,1 +1,239 @@
-<p>cart works!</p>
+<!-- ===== HEADER ===== -->
+<div class="bg-dark border-b border-white/10">
+  <div class="container-main py-8">
+    <nav class="flex items-center gap-2 text-white/40 text-sm mb-4">
+      <a routerLink="/" class="hover:text-gold transition-colors">Accueil</a>
+      <span>/</span>
+      <span class="text-gold">Votre panier</span>
+    </nav>
+    <h1 class="font-serif text-4xl text-white">
+      Votre <span class="gold-text">Panier</span>
+    </h1>
+  </div>
+</div>
+
+<div class="h-0.5 bg-gradient-to-r from-transparent via-gold to-transparent"></div>
+
+<!-- ===== CONTENU ===== -->
+<section class="py-16 bg-cream min-h-screen">
+  <div class="container-main">
+
+    @if (isEmpty()) {
+
+      <!-- Panier vide -->
+      <div class="flex flex-col items-center justify-center py-32 text-center">
+        <div class="w-24 h-24 rounded-full bg-gold/10 flex items-center
+                    justify-center mb-6">
+          <svg class="w-12 h-12 text-gold" fill="none"
+               stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round"
+                  stroke-width="1.5"
+                  d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"/>
+          </svg>
+        </div>
+        <h2 class="font-serif text-3xl text-dark mb-3">
+          Votre panier est vide
+        </h2>
+        <p class="text-gray-400 mb-8 max-w-sm">
+          Découvrez nos créations handmade et ajoutez vos favoris au panier.
+        </p>
+        <a routerLink="/boutique" class="btn-gold">
+          Voir les produits
+        </a>
+      </div>
+
+    } @else {
+
+      <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+
+        <!-- ===== LISTE ARTICLES ===== -->
+        <div class="lg:col-span-2 space-y-4">
+
+          <!-- Header liste -->
+          <div class="flex items-center justify-between mb-6">
+            <h2 class="font-serif text-xl text-dark">
+              {{ cartCount() }} article(s)
+            </h2>
+            <button
+              (click)="clear()"
+              class="text-sm text-gray-400 hover:text-red-400
+                     transition-colors duration-200 flex items-center gap-1">
+              <svg class="w-4 h-4" fill="none" stroke="currentColor"
+                   viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M19 7l-.867 12.142A2 2 0 0116.138 21
+                         H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6
+                         m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/>
+              </svg>
+              Vider le panier
+            </button>
+          </div>
+
+          <!-- Articles -->
+          @for (item of cartItems(); track item.product.id) {
+            <div class="bg-white rounded-2xl p-5 shadow-sm
+                        flex items-center gap-5 group
+                        hover:shadow-card transition-shadow duration-300">
+
+              <!-- Image -->
+              <div class="w-20 h-20 rounded-xl overflow-hidden
+                          bg-cream flex-shrink-0 relative">
+                <img
+                  [src]="item.product.images[0]"
+                  [alt]="item.product.name"
+                  class="w-full h-full object-cover"
+                  onerror="this.style.display='none'"
+                />
+                <div class="absolute inset-0 flex items-center
+                            justify-center -z-10 bg-cream">
+                  <span class="text-2xl">🌸</span>
+                </div>
+              </div>
+
+              <!-- Infos -->
+              <div class="flex-1 min-w-0">
+                <p class="text-xs text-gold/70 uppercase tracking-wider
+                          font-medium mb-1">
+                  {{ item.product.category }}
+                </p>
+                <h3 class="font-serif text-dark font-semibold truncate">
+                  {{ item.product.name }}
+                </h3>
+                <p class="text-gold font-bold mt-1">
+                  {{ formatPrice(item.product.price) }}
+                </p>
+              </div>
+
+              <!-- Quantité -->
+              <div class="flex items-center border-2 border-gray-100
+                          rounded-pill overflow-hidden flex-shrink-0">
+                <button
+                  (click)="decrease(item)"
+                  class="w-9 h-9 flex items-center justify-center
+                         text-gray-400 hover:bg-gray-100 hover:text-dark
+                         transition-colors text-lg font-bold">
+                  −
+                </button>
+                <span class="w-8 text-center text-sm font-semibold text-dark">
+                  {{ item.quantity }}
+                </span>
+                <button
+                  (click)="increase(item)"
+                  class="w-9 h-9 flex items-center justify-center
+                         text-gray-400 hover:bg-gray-100 hover:text-dark
+                         transition-colors text-lg font-bold">
+                  +
+                </button>
+              </div>
+
+              <!-- Sous-total -->
+              <div class="text-right flex-shrink-0 hidden sm:block">
+                <p class="text-xs text-gray-400 mb-1">Sous-total</p>
+                <p class="font-bold text-dark">
+                  {{ formatPrice(item.product.price * item.quantity) }}
+                </p>
+              </div>
+
+              <!-- Supprimer -->
+              <button
+                (click)="remove(item.product.id)"
+                class="w-9 h-9 rounded-full flex items-center justify-center
+                       text-gray-300 hover:bg-red-50 hover:text-red-400
+                       transition-all duration-200 flex-shrink-0">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor"
+                     viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round"
+                        stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+                </svg>
+              </button>
+
+            </div>
+          }
+
+          <!-- Continuer les achats -->
+          <div class="pt-4">
+            <a routerLink="/boutique"
+               class="inline-flex items-center gap-2 text-gold
+                      hover:text-gold-dark text-sm font-medium
+                      transition-colors duration-200">
+              <svg class="w-4 h-4" fill="none" stroke="currentColor"
+                   viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round"
+                      stroke-width="2" d="M15 19l-7-7 7-7"/>
+              </svg>
+              Continuer les achats
+            </a>
+          </div>
+        </div>
+
+        <!-- ===== RÉSUMÉ COMMANDE ===== -->
+        <div class="lg:col-span-1">
+          <div class="bg-white rounded-2xl shadow-sm p-6 sticky top-32">
+
+            <h2 class="font-serif text-xl text-dark mb-6 pb-4
+                       border-b border-gray-100">
+              Résumé de la commande
+            </h2>
+
+            <!-- Détails -->
+            <div class="space-y-3 mb-6">
+              <div class="flex justify-between text-sm">
+                <span class="text-gray-500">
+                  Sous-total ({{ cartCount() }} article(s))
+                </span>
+                <span class="font-medium text-dark">
+                  {{ formatPrice(cartTotal()) }}
+                </span>
+              </div>
+              <div class="flex justify-between text-sm">
+                <span class="text-gray-500">Livraison</span>
+                <span class="text-green-500 font-medium">Gratuite 🚚</span>
+              </div>
+              <div class="flex justify-between text-sm">
+                <span class="text-gray-500">Paiement</span>
+                <span class="font-medium text-dark">À la livraison</span>
+              </div>
+            </div>
+
+            <!-- Séparateur -->
+            <div class="h-px bg-gray-100 mb-6"></div>
+
+            <!-- Total -->
+            <div class="flex justify-between items-center mb-8">
+              <span class="font-semibold text-dark">Total</span>
+              <span class="font-serif text-2xl text-gold font-bold">
+                {{ formatPrice(cartTotal()) }}
+              </span>
+            </div>
+
+            <!-- Bouton commander -->
+            <a routerLink="/contact" class="btn-gold w-full text-center
+                                            py-4 text-base block">
+              ✓ Commander maintenant
+            </a>
+
+            <!-- Infos sécurité -->
+            <div class="mt-6 space-y-2">
+              <div class="flex items-center gap-2 text-xs text-gray-400">
+                <span>🔒</span>
+                <span>Paiement sécurisé à la livraison</span>
+              </div>
+              <div class="flex items-center gap-2 text-xs text-gray-400">
+                <span>🔄</span>
+                <span>Remplacement garanti si cassé</span>
+              </div>
+              <div class="flex items-center gap-2 text-xs text-gray-400">
+                <span>🚚</span>
+                <span>Livraison gratuite partout en Tunisie</span>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+    }
+
+  </div>
+</section>
