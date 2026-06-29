@@ -1,1 +1,128 @@
-<p>shop works!</p>
+<!-- ===== HERO BOUTIQUE ===== -->
+<section class="bg-dark py-20 relative overflow-hidden">
+  <div class="absolute inset-0">
+    <div class="absolute top-0 right-0 w-64 h-64 bg-gold/5 rounded-full blur-3xl"></div>
+    <div class="absolute bottom-0 left-0 w-48 h-48 bg-gold/5 rounded-full blur-3xl"></div>
+  </div>
+  <div class="container-main relative z-10">
+    <!-- Breadcrumb -->
+    <nav class="flex items-center gap-2 text-white/40 text-sm mb-8">
+      <a routerLink="/" class="hover:text-gold transition-colors">Accueil</a>
+      <span>/</span>
+      <span class="text-gold">Packs Décoration</span>
+    </nav>
+
+    <div class="flex flex-col md:flex-row md:items-end justify-between gap-6">
+      <div>
+        <h1 class="font-serif text-4xl md:text-5xl text-white mb-3">
+          Notre <span class="gold-text">Boutique</span>
+        </h1>
+        <div class="w-12 h-0.5 bg-gold mb-4"></div>
+        <p class="text-white/50 max-w-md">
+          Découvrez nos créations handmade uniques, faites avec passion et élégance.
+        </p>
+      </div>
+      <div class="text-right">
+        <span class="text-gold font-serif text-3xl font-bold">
+          {{ productCount() }}
+        </span>
+        <span class="text-white/50 text-sm ml-2">produit(s) disponible(s)</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Séparateur doré -->
+<div class="h-0.5 bg-gradient-to-r from-transparent via-gold to-transparent"></div>
+
+<!-- ===== FILTRES & RECHERCHE ===== -->
+<section class="bg-white sticky top-[72px] z-40 shadow-sm border-b border-gray-100">
+  <div class="container-main py-4">
+    <div class="flex flex-col md:flex-row gap-4 items-center justify-between">
+
+      <!-- Catégories -->
+      <div class="flex flex-wrap gap-2">
+        @for (cat of categories; track cat.key) {
+          <button
+            (click)="setCategory(cat.key)"
+            [class]="selectedCategory() === cat.key
+              ? 'bg-gold text-white border-gold'
+              : 'bg-white text-gray-600 border-gray-200 hover:border-gold hover:text-gold'"
+            class="px-5 py-2 rounded-pill border text-sm font-medium
+                   transition-all duration-200 cursor-pointer">
+            {{ cat.label }}
+          </button>
+        }
+      </div>
+
+      <div class="flex gap-3 items-center w-full md:w-auto">
+        <!-- Recherche -->
+        <div class="relative flex-1 md:w-48">
+          <input
+            type="text"
+            placeholder="Rechercher..."
+            (input)="setSearch($event)"
+            class="w-full pl-9 pr-4 py-2 border border-gray-200 rounded-pill
+                   text-sm focus:outline-none focus:border-gold
+                   transition-colors duration-200"
+          />
+          <svg class="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400"
+               fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                  d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
+          </svg>
+        </div>
+
+        <!-- Tri -->
+        <select
+          (change)="setSort($event)"
+          class="px-4 py-2 border border-gray-200 rounded-pill text-sm
+                 focus:outline-none focus:border-gold transition-colors
+                 duration-200 bg-white text-gray-600 cursor-pointer">
+          @for (opt of sortOptions; track opt.key) {
+            <option [value]="opt.key">{{ opt.label }}</option>
+          }
+        </select>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== GRILLE PRODUITS ===== -->
+<section class="py-16 bg-cream min-h-screen">
+  <div class="container-main">
+
+    @if (filteredProducts().length > 0) {
+
+      <!-- Grille -->
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+        @for (product of filteredProducts(); track product.id) {
+          <app-product-card
+            [product]="product"
+            (addToCartEvent)="addToCart($event)">
+          </app-product-card>
+        }
+      </div>
+
+    } @else {
+
+      <!-- Aucun résultat -->
+      <div class="flex flex-col items-center justify-center py-32 text-center">
+        <div class="text-6xl mb-6">🔍</div>
+        <h3 class="font-serif text-2xl text-dark mb-3">
+          Aucun produit trouvé
+        </h3>
+        <p class="text-gray-400 mb-8">
+          Essayez de modifier vos filtres ou votre recherche.
+        </p>
+        <button
+          (click)="setCategory('tous')"
+          class="btn-gold">
+          Voir tous les produits
+        </button>
+      </div>
+
+    }
+
+  </div>
+</section>

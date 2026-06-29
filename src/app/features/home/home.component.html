@@ -1,1 +1,259 @@
-<p>home works!</p>
+<!-- ===================== HERO ===================== -->
+<section class="relative min-h-screen bg-dark overflow-hidden flex items-center">
+
+  <!-- Fond décoratif -->
+  <div class="absolute inset-0">
+    <div class="absolute top-0 left-0 w-full h-full
+                bg-gradient-to-br from-dark via-dark-soft to-dark"></div>
+    <div class="absolute top-20 right-20 w-96 h-96 rounded-full
+                bg-gold/5 blur-3xl"></div>
+    <div class="absolute bottom-20 left-20 w-64 h-64 rounded-full
+                bg-gold/5 blur-3xl"></div>
+    <!-- Cercles décoratifs -->
+    <div class="absolute top-1/4 right-1/4 w-2 h-2 bg-gold rounded-full
+                animate-ping opacity-60"></div>
+    <div class="absolute bottom-1/3 left-1/3 w-1.5 h-1.5 bg-gold/60
+                rounded-full animate-ping"
+         style="animation-delay:1s"></div>
+  </div>
+
+  <div class="container-main relative z-10 w-full">
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center py-20">
+
+      <!-- Texte gauche -->
+      <div class="animate-slide-left">
+
+        <div class="inline-flex items-center gap-2 bg-gold/10 border border-gold/30
+                    rounded-full px-4 py-2 mb-6">
+          <span class="w-2 h-2 bg-gold rounded-full animate-pulse"></span>
+          <span class="text-gold text-xs font-semibold tracking-widest uppercase">
+            Nouvelle Collection 2026
+          </span>
+        </div>
+
+        <h1 class="font-serif text-5xl md:text-6xl lg:text-7xl text-white
+                   leading-tight mb-6">
+          L'art de la
+          <span class="block gold-text">décoration</span>
+          <span class="block text-white/80 text-4xl md:text-5xl font-light italic">
+            handmade
+          </span>
+        </h1>
+
+        <div class="w-16 h-0.5 bg-gold mb-6"></div>
+
+        <p class="text-white/60 text-lg leading-relaxed mb-10 max-w-md">
+          Des créations uniques et élégantes, faites avec passion —
+          pour sublimer vos moments les plus précieux.
+        </p>
+
+        <div class="flex flex-wrap gap-4">
+          <a routerLink="/boutique" class="btn-gold text-base px-10 py-4">
+            Acheter maintenant
+          </a>
+          <a routerLink="/boutique" class="btn-outline-white text-base px-10 py-4">
+            Voir les packs →
+          </a>
+        </div>
+
+        <!-- Mini stats -->
+        <div class="flex gap-8 mt-12 pt-8 border-t border-white/10">
+          @for (stat of stats; track stat.label) {
+            <div class="text-center">
+              <div class="text-gold font-serif text-2xl font-bold">
+                {{ stat.value }}
+              </div>
+              <div class="text-white/40 text-xs mt-1">{{ stat.label }}</div>
+            </div>
+          }
+        </div>
+      </div>
+
+      <!-- Image droite -->
+      <div class="relative animate-fade-in hidden lg:block">
+        <div class="relative">
+          <!-- Cadre décoratif -->
+          <div class="absolute -inset-4 border border-gold/20 rounded-3xl"></div>
+          <div class="absolute -inset-8 border border-gold/10 rounded-3xl"></div>
+
+          <!-- Image principale -->
+          <div class="relative rounded-2xl overflow-hidden aspect-[4/5] bg-dark-soft">
+            <img
+              src="assets/images/hero/hero-main.jpg"
+              alt="Pika Event Décoration"
+              class="w-full h-full object-cover opacity-90"
+              onerror="this.style.display='none'"
+            />
+            <!-- Placeholder si pas d'image -->
+            <div class="absolute inset-0 flex items-center justify-center
+                        bg-gradient-to-br from-dark-soft to-dark">
+              <div class="text-center">
+                <div class="text-8xl mb-4">🌸</div>
+                <p class="text-gold font-script text-2xl">Pika Event</p>
+                <p class="text-white/40 text-sm mt-2">Handmade By Afef</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Badge flottant -->
+          <div class="absolute -bottom-4 -left-4 bg-gold text-white
+                      rounded-2xl px-5 py-3 shadow-gold">
+            <div class="text-xs font-medium opacity-80">Livraison</div>
+            <div class="font-bold text-sm">Gratuite 🚚</div>
+          </div>
+
+          <!-- Badge flottant 2 -->
+          <div class="absolute -top-4 -right-4 bg-white text-dark
+                      rounded-2xl px-5 py-3 shadow-card">
+            <div class="text-xs font-medium text-gray-500">Packs dispo</div>
+            <div class="font-bold text-dark text-sm">24 créations ✨</div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Scroll indicator -->
+  <div class="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col
+              items-center gap-2 animate-bounce">
+    <span class="text-white/30 text-xs tracking-widest">SCROLL</span>
+    <div class="w-0.5 h-8 bg-gradient-to-b from-gold to-transparent"></div>
+  </div>
+</section>
+
+<!-- ===================== FEATURES ===================== -->
+<section class="py-16 bg-white border-b border-gray-100">
+  <div class="container-main">
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-8">
+      @for (f of features; track f.title) {
+        <div class="text-center group">
+          <div class="w-16 h-16 rounded-full bg-cream mx-auto mb-4
+                      flex items-center justify-center text-2xl
+                      group-hover:bg-gold/10 transition-all duration-300
+                      group-hover:scale-110">
+            {{ f.icon }}
+          </div>
+          <h3 class="font-semibold text-dark text-sm mb-1">{{ f.title }}</h3>
+          <p class="text-gray-400 text-xs leading-relaxed">{{ f.desc }}</p>
+        </div>
+      }
+    </div>
+  </div>
+</section>
+
+<!-- ===================== SELECTION SPECIALE ===================== -->
+<section class="py-24 relative overflow-hidden">
+
+  <!-- Fond hexagones -->
+  <div class="absolute inset-0 bg-cream">
+    <div class="absolute inset-0 opacity-30"
+         style="background-image: url('assets/images/hero/hexagons.png');
+                background-size: cover;"></div>
+  </div>
+
+  <div class="container-main relative z-10 text-center">
+    <span class="inline-block bg-gold/10 text-gold text-xs font-semibold
+                 tracking-widest uppercase px-4 py-2 rounded-full mb-4">
+      Offre limitée
+    </span>
+    <h2 class="font-serif text-3xl md:text-5xl text-dark mb-4 max-w-3xl mx-auto">
+      Sélection spéciale de produits disponibles
+      <span class="gold-text"> pour une durée limitée.</span>
+    </h2>
+    <p class="text-gray-500 italic mb-10 max-w-xl mx-auto">
+      Découvrez nos créations coup de cœur, choisies avec soin pour vous.
+    </p>
+    <a routerLink="/boutique" class="btn-gold text-base px-12 py-4">
+      Commander maintenant
+    </a>
+  </div>
+</section>
+
+<!-- ===================== PRODUITS POPULAIRES ===================== -->
+<section class="py-24 bg-white">
+  <div class="container-main">
+
+    <!-- Titre section -->
+    <div class="text-center mb-16">
+      <span class="text-gold text-xs font-semibold tracking-widest uppercase">
+        Nos best-sellers
+      </span>
+      <h2 class="section-title mt-2">Produits populaires</h2>
+      <div class="gold-line"></div>
+    </div>
+
+    <!-- Grille produits -->
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+      @for (product of popularProducts(); track product.id) {
+        <app-product-card
+          [product]="product"
+          (addToCartEvent)="addToCart($event)">
+        </app-product-card>
+      }
+    </div>
+
+    <!-- CTA voir plus -->
+    <div class="text-center mt-12">
+      <a routerLink="/boutique" class="btn-outline-gold">
+        Voir tous les packs →
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== POURQUOI NOUS ===================== -->
+<section class="py-24 bg-dark relative overflow-hidden">
+
+  <div class="absolute inset-0">
+    <div class="absolute top-0 right-0 w-96 h-96 bg-gold/5 rounded-full blur-3xl"></div>
+    <div class="absolute bottom-0 left-0 w-64 h-64 bg-gold/5 rounded-full blur-3xl"></div>
+  </div>
+
+  <div class="container-main relative z-10">
+    <div class="text-center mb-16">
+      <span class="text-gold text-xs font-semibold tracking-widest uppercase">
+        Notre engagement
+      </span>
+      <h2 class="font-serif text-3xl md:text-4xl text-white mt-2">
+        Pourquoi choisir <span class="gold-text">Pika Event ?</span>
+      </h2>
+      <div class="gold-line"></div>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+
+      <div class="bg-white/5 border border-white/10 rounded-2xl p-8
+                  hover:border-gold/40 transition-all duration-300 group">
+        <div class="text-4xl mb-4">✋</div>
+        <h3 class="font-serif text-xl text-white mb-3">100% Handmade</h3>
+        <p class="text-white/50 text-sm leading-relaxed">
+          Chaque pièce est fabriquée à la main avec soin et passion.
+          Aucune production industrielle, que de l'artisanat authentique.
+        </p>
+      </div>
+
+      <div class="bg-white/5 border border-white/10 rounded-2xl p-8
+                  hover:border-gold/40 transition-all duration-300 group
+                  md:-translate-y-4">
+        <div class="text-4xl mb-4">💎</div>
+        <h3 class="font-serif text-xl text-white mb-3">Qualité Premium</h3>
+        <p class="text-white/50 text-sm leading-relaxed">
+          Matériaux sélectionnés avec soin. Finitions dorées, fleurs séchées,
+          céramique de qualité pour un rendu exceptionnel.
+        </p>
+      </div>
+
+      <div class="bg-white/5 border border-white/10 rounded-2xl p-8
+                  hover:border-gold/40 transition-all duration-300 group">
+        <div class="text-4xl mb-4">🔄</div>
+        <h3 class="font-serif text-xl text-white mb-3">Garantie cassé</h3>
+        <p class="text-white/50 text-sm leading-relaxed">
+          Article cassé = remplacement gratuit. Votre satisfaction
+          est notre priorité absolue.
+        </p>
+      </div>
+
+    </div>
+  </div>
+</section>
