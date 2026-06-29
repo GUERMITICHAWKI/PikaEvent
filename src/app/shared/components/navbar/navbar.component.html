@@ -1,1 +1,139 @@
-<p>navbar works!</p>
+<!-- Barre d'annonces -->
+<div class="bg-gold text-white text-xs font-medium overflow-hidden py-2">
+  <div class="flex animate-marquee whitespace-nowrap w-max">
+    <span class="mx-12">🚚 Livraison gratuite sur toute la Tunisie</span>
+    <span class="mx-12">💛 Emballé avec amour</span>
+    <span class="mx-12">⭐ Service client excellent</span>
+    <span class="mx-12">🎁 Packs handmade uniques</span>
+    <span class="mx-12">🚚 Livraison gratuite sur toute la Tunisie</span>
+    <span class="mx-12">💛 Emballé avec amour</span>
+    <span class="mx-12">⭐ Service client excellent</span>
+    <span class="mx-12">🎁 Packs handmade uniques</span>
+  </div>
+</div>
+
+<!-- Navbar principale -->
+<nav [class]="scrolled()
+  ? 'sticky top-0 z-50 bg-dark/95 backdrop-blur-md shadow-lg transition-all duration-300'
+  : 'sticky top-0 z-50 bg-dark transition-all duration-300'">
+
+  <div class="container-main flex items-center justify-between py-4">
+
+    <!-- Logo -->
+    <a routerLink="/" class="flex items-center gap-3 group">
+      <div class="w-10 h-10 rounded-full border-2 border-gold
+                  flex items-center justify-center
+                  group-hover:bg-gold transition-all duration-300">
+        <span class="text-gold group-hover:text-white text-lg font-bold
+                     transition-colors duration-300">P</span>
+      </div>
+      <div class="flex flex-col leading-tight">
+        <span class="font-script text-gold text-xl">Pika Event</span>
+        <span class="text-white/50 text-xs tracking-widest">HANDMADE BY AFEF</span>
+      </div>
+    </a>
+
+    <!-- Menu desktop -->
+    <ul class="hidden md:flex items-center gap-10">
+      <li>
+        <a routerLink="/"
+           routerLinkActive="text-gold border-b-2 border-gold"
+           [routerLinkActiveOptions]="{exact:true}"
+           class="text-white/80 hover:text-gold text-sm font-medium
+                  tracking-wider uppercase transition-colors duration-200 pb-1">
+          Accueil
+        </a>
+      </li>
+      <li>
+        <a routerLink="/boutique"
+           routerLinkActive="text-gold border-b-2 border-gold"
+           class="text-white/80 hover:text-gold text-sm font-medium
+                  tracking-wider uppercase transition-colors duration-200 pb-1">
+          Packs Décoration
+        </a>
+      </li>
+      <li>
+        <a routerLink="/contact"
+           routerLinkActive="text-gold border-b-2 border-gold"
+           class="text-white/80 hover:text-gold text-sm font-medium
+                  tracking-wider uppercase transition-colors duration-200 pb-1">
+          Contact
+        </a>
+      </li>
+    </ul>
+
+    <!-- Actions droite -->
+    <div class="flex items-center gap-4">
+
+      <!-- Panier -->
+      <a routerLink="/panier" class="relative group">
+        <div class="w-10 h-10 rounded-full border border-white/20
+                    flex items-center justify-center
+                    group-hover:border-gold transition-all duration-300">
+          <svg class="w-5 h-5 text-white/80 group-hover:text-gold transition-colors"
+               fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+                  d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"/>
+          </svg>
+        </div>
+        @if (cartCount() > 0) {
+          <span class="absolute -top-1 -right-1 bg-gold text-white
+                       text-xs w-5 h-5 rounded-full flex items-center
+                       justify-center font-bold">
+            {{ cartCount() }}
+          </span>
+        }
+      </a>
+
+      <!-- Burger mobile -->
+      <button class="md:hidden w-10 h-10 flex flex-col items-center
+                     justify-center gap-1.5 group"
+              (click)="toggleMenu()">
+        <span [class]="menuOpen()
+          ? 'w-6 h-0.5 bg-gold rotate-45 translate-y-2 transition-all duration-300'
+          : 'w-6 h-0.5 bg-white/80 transition-all duration-300'">
+        </span>
+        <span [class]="menuOpen()
+          ? 'w-6 h-0.5 bg-gold opacity-0 transition-all duration-300'
+          : 'w-6 h-0.5 bg-white/80 transition-all duration-300'">
+        </span>
+        <span [class]="menuOpen()
+          ? 'w-6 h-0.5 bg-gold -rotate-45 -translate-y-2 transition-all duration-300'
+          : 'w-6 h-0.5 bg-white/80 transition-all duration-300'">
+        </span>
+      </button>
+    </div>
+  </div>
+
+  <!-- Menu mobile -->
+  @if (menuOpen()) {
+    <div class="md:hidden bg-dark-soft border-t border-white/10 animate-fade-in">
+      <ul class="flex flex-col py-4">
+        <li>
+          <a routerLink="/" (click)="closeMenu()"
+             class="block px-6 py-3 text-white/80 hover:text-gold
+                    hover:bg-white/5 text-sm font-medium tracking-wider
+                    uppercase transition-all duration-200">
+            Accueil
+          </a>
+        </li>
+        <li>
+          <a routerLink="/boutique" (click)="closeMenu()"
+             class="block px-6 py-3 text-white/80 hover:text-gold
+                    hover:bg-white/5 text-sm font-medium tracking-wider
+                    uppercase transition-all duration-200">
+            Packs Décoration
+          </a>
+        </li>
+        <li>
+          <a routerLink="/contact" (click)="closeMenu()"
+             class="block px-6 py-3 text-white/80 hover:text-gold
+                    hover:bg-white/5 text-sm font-medium tracking-wider
+                    uppercase transition-all duration-200">
+            Contact
+          </a>
+        </li>
+      </ul>
+    </div>
+  }
+</nav>
