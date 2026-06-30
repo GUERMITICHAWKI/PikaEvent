@@ -20,7 +20,7 @@ export class NavbarComponent {
 
   @HostListener('window:scroll')
   onScroll() {
-    this.scrolled.set(window.scrollY > 50);
+    this.scrolled.set(window.scrollY > 80);
   }
 
   toggleMenu() {

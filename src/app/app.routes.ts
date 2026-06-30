@@ -31,5 +31,10 @@ export const routes: Routes = [
       import('./features/contact/contact.component')
         .then(m => m.ContactComponent)
   },
-  { path: '**', redirectTo: '' }
+  {
+    path: '**',
+    loadComponent: () =>
+      import('./features/not-found/not-found.component')
+        .then(m => m.NotFoundComponent)
+  }
 ];

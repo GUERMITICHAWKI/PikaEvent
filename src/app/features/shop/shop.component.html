@@ -41,19 +41,26 @@
     <div class="flex flex-col md:flex-row gap-4 items-center justify-between">
 
       <!-- Catégories -->
-      <div class="flex flex-wrap gap-2">
-        @for (cat of categories; track cat.key) {
-          <button
-            (click)="setCategory(cat.key)"
-            [class]="selectedCategory() === cat.key
-              ? 'bg-gold text-white border-gold'
-              : 'bg-white text-gray-600 border-gray-200 hover:border-gold hover:text-gold'"
-            class="px-5 py-2 rounded-pill border text-sm font-medium
-                   transition-all duration-200 cursor-pointer">
-            {{ cat.label }}
-          </button>
-        }
-      </div>
+<div class="flex flex-wrap gap-2">
+  @for (cat of categories; track cat.key) {
+    <button
+      (click)="setCategory(cat.key)"
+      [class]="selectedCategory() === cat.key
+        ? 'bg-gold text-white border-gold'
+        : 'bg-white text-gray-600 border-gray-200 hover:border-gold hover:text-gold'"
+      class="flex items-center gap-2 px-5 py-2 rounded-pill border text-sm
+             font-medium transition-all duration-200 cursor-pointer">
+      <span>{{ cat.icon }}</span>
+      <span>{{ cat.label }}</span>
+      <span [class]="selectedCategory() === cat.key
+        ? 'bg-white/20 text-white'
+        : 'bg-gray-100 text-gray-400'"
+            class="text-xs px-2 py-0.5 rounded-full font-bold">
+        {{ countByCategory(cat.key) }}
+      </span>
+    </button>
+  }
+</div>
 
       <div class="flex gap-3 items-center w-full md:w-auto">
         <!-- Recherche -->

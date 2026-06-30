@@ -7,17 +7,22 @@ module.exports = {
     extend: {
       colors: {
         gold: {
-          DEFAULT: '#C9973A',
+          DEFAULT: '#3B82C4',   // bleu devient la couleur "gold" (principale)
+          light:   '#5FA3DE',
+          dark:    '#2A6BA8',
+        },
+        accent: {
+          DEFAULT: '#C9973A',   // l'ancien or devient un accent discret
           light:   '#F0C060',
-          dark:    '#A67C2E',
         },
         cream: {
-          DEFAULT: '#FAF6EF',
-          dark:    '#F0E8D8',
+          DEFAULT: '#F4F7FA',   // blanc bleuté doux
+          dark:    '#E5EBF1',
         },
         dark: {
-          DEFAULT: '#0D0D0D',
-          soft:    '#1A1A1A',
+          DEFAULT: '#0F2A47',   // bleu marine profond
+          soft:    '#16395E',
+          deep:    '#0A1E33',
         }
       },
       fontFamily: {
@@ -29,8 +34,8 @@ module.exports = {
         'pill': '50px',
       },
       boxShadow: {
-        'gold': '0 8px 24px rgba(201,151,58,0.35)',
-        'card': '0 8px 32px rgba(0,0,0,0.12)',
+        'gold': '0 8px 24px rgba(59,130,196,0.35)',
+        'card': '0 8px 32px rgba(15,42,71,0.10)',
       },
       animation: {
         'fade-up':    'fadeUp 0.6s ease forwards',

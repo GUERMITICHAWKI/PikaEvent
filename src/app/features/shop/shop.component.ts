@@ -4,6 +4,7 @@ import { RouterLink } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { ProductService } from '../../core/services/product.service';
 import { CartService } from '../../core/services/cart.service';
+import { ToastService } from '../../core/services/toast.service';
 import { ProductCardComponent } from '../../shared/components/product-card/product-card.component';
 import { Product, SortOption } from '../../core/models/product.model';
 
@@ -21,10 +22,8 @@ export class ShopComponent implements OnInit {
   selectedSort = signal<SortOption>('default');
   searchQuery = signal<string>('');
 
-  categories = [
-    { key: 'tous',             label: 'Tous' },
-    { key: 'packs-decoration', label: 'Packs Décoration' },
-  ];
+  // ✅ Catégories dynamiques depuis le service (synchronisées avec les produits)
+  categories = this.productService.getCategories();
 
   sortOptions = [
     { key: 'default',    label: 'Tri par défaut' },
@@ -38,12 +37,10 @@ export class ShopComponent implements OnInit {
   filteredProducts = computed(() => {
     let list = this.allProducts();
 
-    // Filtre catégorie
     if (this.selectedCategory() !== 'tous') {
       list = list.filter(p => p.category === this.selectedCategory());
     }
 
-    // Filtre recherche
     if (this.searchQuery().trim()) {
       const q = this.searchQuery().toLowerCase();
       list = list.filter(p =>
@@ -52,15 +49,21 @@ export class ShopComponent implements OnInit {
       );
     }
 
-    // Tri
     return this.productService.sort(list, this.selectedSort());
   });
 
   productCount = computed(() => this.filteredProducts().length);
 
+  // Compteur par catégorie (pour affichage badge)
+  countByCategory(catKey: string): number {
+    if (catKey === 'tous') return this.allProducts().length;
+    return this.allProducts().filter(p => p.category === catKey).length;
+  }
+
   constructor(
     private productService: ProductService,
-    private cartService: CartService
+    private cartService: CartService,
+    private toastService: ToastService
   ) {}
 
   ngOnInit() {
@@ -83,6 +86,7 @@ export class ShopComponent implements OnInit {
 
   addToCart(product: Product) {
     this.cartService.add(product);
+    this.toastService.show(`${product.name} ajouté au panier !`);
   }
 
   formatPrice(price: number): string {

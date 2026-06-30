@@ -1,44 +1,39 @@
 <!-- ===================== HERO ===================== -->
-<section class="relative min-h-screen bg-dark overflow-hidden flex items-center">
+<section class="relative min-h-[85vh] md:min-h-[88vh] overflow-hidden flex items-center"
+         style="background: linear-gradient(135deg, #16395E 0%, #0F2A47 60%, #16395E 100%);"
+>
 
-  <!-- Fond décoratif -->
   <div class="absolute inset-0">
-    <div class="absolute top-0 left-0 w-full h-full
-                bg-gradient-to-br from-dark via-dark-soft to-dark"></div>
     <div class="absolute top-20 right-20 w-96 h-96 rounded-full
                 bg-gold/5 blur-3xl"></div>
     <div class="absolute bottom-20 left-20 w-64 h-64 rounded-full
                 bg-gold/5 blur-3xl"></div>
-    <!-- Cercles décoratifs -->
-    <div class="absolute top-1/4 right-1/4 w-2 h-2 bg-gold rounded-full
-                animate-ping opacity-60"></div>
+    <div class="absolute top-1/4 right-1/4 w-2 h-2 bg-gold
+                rounded-full animate-ping opacity-60"></div>
     <div class="absolute bottom-1/3 left-1/3 w-1.5 h-1.5 bg-gold/60
-                rounded-full animate-ping"
-         style="animation-delay:1s"></div>
+                rounded-full animate-ping" style="animation-delay:1s"></div>
   </div>
 
   <div class="container-main relative z-10 w-full">
-    <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center py-20">
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center py-16">
 
       <!-- Texte gauche -->
       <div class="animate-slide-left">
-
-        <div class="inline-flex items-center gap-2 bg-gold/10 border border-gold/30
-                    rounded-full px-4 py-2 mb-6">
+        <div class="inline-flex items-center gap-2 bg-gold/10 border
+                    border-gold/30 rounded-full px-4 py-2 mb-6">
           <span class="w-2 h-2 bg-gold rounded-full animate-pulse"></span>
           <span class="text-gold text-xs font-semibold tracking-widest uppercase">
             Nouvelle Collection 2026
           </span>
         </div>
 
-        <h1 class="font-serif text-5xl md:text-6xl lg:text-7xl text-white
-                   leading-tight mb-6">
-          L'art de la
-          <span class="block gold-text">décoration</span>
-          <span class="block text-white/80 text-4xl md:text-5xl font-light italic">
-            handmade
-          </span>
-        </h1>
+          <h1 class="font-serif text-3xl sm:text-4xl md:text-5xl lg:text-6xl text-white
+            leading-tight mb-6">
+    L'art de la
+    <span class="block gold-text">décoration</span>
+    <span class="block text-white/80 text-2xl sm:text-3xl md:text-4xl
+                font-light italic">handmade</span>
+  </h1>
 
         <div class="w-16 h-0.5 bg-gold mb-6"></div>
 
@@ -47,87 +42,93 @@
           pour sublimer vos moments les plus précieux.
         </p>
 
-        <div class="flex flex-wrap gap-4">
-          <a routerLink="/boutique" class="btn-gold text-base px-10 py-4">
-            Acheter maintenant
-          </a>
-          <a routerLink="/boutique" class="btn-outline-white text-base px-10 py-4">
-            Voir les packs →
-          </a>
-        </div>
+              <div class="flex flex-col xs:flex-row flex-wrap gap-3 sm:gap-4">
+        <a routerLink="/boutique" class="btn-gold text-sm sm:text-base px-6 sm:px-10 py-3 sm:py-4 text-center">
+          Acheter maintenant
+        </a>
+        <a routerLink="/boutique" class="btn-outline-white text-sm sm:text-base px-6 sm:px-10 py-3 sm:py-4 text-center">
+          Voir les packs →
+        </a>
+      </div>
 
-        <!-- Mini stats -->
-        <div class="flex gap-8 mt-12 pt-8 border-t border-white/10">
-          @for (stat of stats; track stat.label) {
-            <div class="text-center">
-              <div class="text-gold font-serif text-2xl font-bold">
-                {{ stat.value }}
-              </div>
-              <div class="text-white/40 text-xs mt-1">{{ stat.label }}</div>
-            </div>
-          }
+        <div class="grid grid-cols-2 sm:flex sm:gap-8 gap-4 mt-10 pt-6 border-t border-white/10">
+  @for (stat of stats; track stat.label) {
+    <div class="text-center">
+      <div class="text-gold font-serif text-xl sm:text-2xl font-bold">
+        {{ stat.value }}
+      </div>
+      <div class="text-white/40 text-[10px] sm:text-xs mt-1">{{ stat.label }}</div>
+    </div>
+  }
+</div>
+      </div>
+
+      <!-- Image hero -->
+      <!-- Image hero -->
+<!-- Image hero -->
+<div class="relative animate-fade-in hidden lg:flex items-center">
+  <div class="relative w-full max-w-md mx-auto my-8">
+
+    <!-- Cadre décoratif -->
+    <div class="absolute -inset-4 border border-accent/20 rounded-3xl pointer-events-none"></div>
+
+    <!-- Conteneur image -->
+    <div class="relative rounded-2xl overflow-hidden aspect-[4/5] m-2
+                shadow-2xl ring-1 ring-white/10"
+         style="background: linear-gradient(135deg, #16395E 0%, #0F2A47 60%, #16395E 100%);">
+
+      <img
+        src="assets/images/hero/hero-main.jpg"
+        alt="Pika Event Décoration"
+        class="absolute inset-0 w-full h-full object-cover object-center"
+        onerror="this.style.display='none'"
+      />
+
+      <!-- Léger overlay pour unifier le ton de l'image avec le thème bleu -->
+      <div class="absolute inset-0 bg-gradient-to-t from-dark/30 via-transparent to-transparent"></div>
+
+      <!-- Placeholder décoratif -->
+      <div class="absolute inset-0 flex flex-col items-center justify-center gap-6 z-10">
+        <div class="w-24 h-24 rounded-full border-2 border-accent/30
+                    flex items-center justify-center">
+          <div class="w-16 h-16 rounded-full border border-accent/40
+                      flex items-center justify-center">
+            <span class="font-script text-accent text-3xl">P</span>
+          </div>
+        </div>
+        <div class="text-center">
+          <p class="font-script text-accent text-xl mb-1">Pika Event</p>
+          <p class="text-white/30 text-xs tracking-widest uppercase">
+            Handmade By Afef
+          </p>
         </div>
       </div>
 
-      <!-- Image droite -->
-      <div class="relative animate-fade-in hidden lg:block">
-        <div class="relative">
-          <!-- Cadre décoratif -->
-          <div class="absolute -inset-4 border border-gold/20 rounded-3xl"></div>
-          <div class="absolute -inset-8 border border-gold/10 rounded-3xl"></div>
+      
+    
 
-          <!-- Image principale -->
-          <div class="relative rounded-2xl overflow-hidden aspect-[4/5] bg-dark-soft">
-            <img
-              src="assets/images/hero/hero-main.jpg"
-              alt="Pika Event Décoration"
-              class="w-full h-full object-cover opacity-90"
-              onerror="this.style.display='none'"
-            />
-            <!-- Placeholder si pas d'image -->
-            <div class="absolute inset-0 flex items-center justify-center
-                        bg-gradient-to-br from-dark-soft to-dark">
-              <div class="text-center">
-                <div class="text-8xl mb-4">🌸</div>
-                <p class="text-gold font-script text-2xl">Pika Event</p>
-                <p class="text-white/40 text-sm mt-2">Handmade By Afef</p>
-              </div>
-            </div>
-          </div>
+      
 
-          <!-- Badge flottant -->
-          <div class="absolute -bottom-4 -left-4 bg-gold text-white
-                      rounded-2xl px-5 py-3 shadow-gold">
-            <div class="text-xs font-medium opacity-80">Livraison</div>
-            <div class="font-bold text-sm">Gratuite 🚚</div>
-          </div>
-
-          <!-- Badge flottant 2 -->
-          <div class="absolute -top-4 -right-4 bg-white text-dark
-                      rounded-2xl px-5 py-3 shadow-card">
-            <div class="text-xs font-medium text-gray-500">Packs dispo</div>
-            <div class="font-bold text-dark text-sm">24 créations ✨</div>
-          </div>
-        </div>
-      </div>
+    </div>
+  </div>
+</div>
 
     </div>
   </div>
 
   <!-- Scroll indicator -->
-  <div class="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col
-              items-center gap-2 animate-bounce">
+  <div class="absolute bottom-6 left-1/2 -translate-x-1/2
+              flex flex-col items-center gap-2 animate-bounce">
     <span class="text-white/30 text-xs tracking-widest">SCROLL</span>
-    <div class="w-0.5 h-8 bg-gradient-to-b from-gold to-transparent"></div>
+    <div class="w-0.5 h-6 bg-gradient-to-b from-gold to-transparent"></div>
   </div>
 </section>
-
 <!-- ===================== FEATURES ===================== -->
-<section class="py-16 bg-white border-b border-gray-100">
+<section class="py-14 bg-white border-b border-gray-100">
   <div class="container-main">
     <div class="grid grid-cols-2 md:grid-cols-4 gap-8">
       @for (f of features; track f.title) {
-        <div class="text-center group">
+        <div class="text-center group cursor-default">
           <div class="w-16 h-16 rounded-full bg-cream mx-auto mb-4
                       flex items-center justify-center text-2xl
                       group-hover:bg-gold/10 transition-all duration-300
@@ -144,21 +145,14 @@
 
 <!-- ===================== SELECTION SPECIALE ===================== -->
 <section class="py-24 relative overflow-hidden">
-
-  <!-- Fond hexagones -->
-  <div class="absolute inset-0 bg-cream">
-    <div class="absolute inset-0 opacity-30"
-         style="background-image: url('assets/images/hero/hexagons.png');
-                background-size: cover;"></div>
-  </div>
-
+  <div class="absolute inset-0 bg-cream"></div>
   <div class="container-main relative z-10 text-center">
     <span class="inline-block bg-gold/10 text-gold text-xs font-semibold
                  tracking-widest uppercase px-4 py-2 rounded-full mb-4">
       Offre limitée
     </span>
     <h2 class="font-serif text-3xl md:text-5xl text-dark mb-4 max-w-3xl mx-auto">
-      Sélection spéciale de produits disponibles
+      Sélection spéciale disponibles
       <span class="gold-text"> pour une durée limitée.</span>
     </h2>
     <p class="text-gray-500 italic mb-10 max-w-xl mx-auto">
@@ -170,12 +164,12 @@
   </div>
 </section>
 
-<!-- ===================== PRODUITS POPULAIRES ===================== -->
+<!-- ===================== PRODUITS + FILTRES ===================== -->
 <section class="py-24 bg-white">
   <div class="container-main">
 
-    <!-- Titre section -->
-    <div class="text-center mb-16">
+    <!-- Titre -->
+    <div class="text-center mb-10">
       <span class="text-gold text-xs font-semibold tracking-widest uppercase">
         Nos best-sellers
       </span>
@@ -183,18 +177,74 @@
       <div class="gold-line"></div>
     </div>
 
-    <!-- Grille produits -->
+    <!-- ===== FILTRES CATÉGORIES ===== -->
+<div class="flex flex-wrap justify-center gap-3 mb-12 px-4
+            overflow-x-auto pb-2 sm:overflow-visible sm:pb-0">
+  @for (cat of categories; track cat.key) {
+    <button
+      (click)="setCategory(cat.key)"
+      [class]="activeCategory() === cat.key
+        ? 'bg-gold text-white border-gold shadow-gold scale-105'
+        : 'bg-white text-gray-500 border-gray-200 hover:border-gold hover:text-gold hover:scale-105'"
+      class="flex items-center gap-2 px-6 py-2.5 rounded-pill border-2
+             text-sm font-medium transition-all duration-300 cursor-pointer
+             flex-shrink-0 relative">
+
+      <span class="text-base">{{ cat.icon }}</span>
+      <span>{{ cat.label }}</span>
+
+      <span [class]="activeCategory() === cat.key
+        ? 'bg-white/25 text-white'
+        : 'bg-gray-100 text-gray-400'"
+            class="text-xs px-2 py-0.5 rounded-full font-bold min-w-5
+                   text-center transition-colors duration-300">
+        {{ categoryCounts()[cat.key] }}
+      </span>
+
+      @if (activeCategory() === cat.key) {
+        <span class="absolute -bottom-1 left-1/2 -translate-x-1/2
+                     w-1.5 h-1.5 bg-gold rounded-full"></span>
+      }
+    </button>
+  }
+</div>
+
+<!-- Grille produits filtrés avec transition -->
+<div [class]="isTransitioning()
+    ? 'opacity-0 translate-y-2'
+    : 'opacity-100 translate-y-0'"
+     class="transition-all duration-200">
+
+  @if (filteredProducts().length > 0) {
     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-      @for (product of popularProducts(); track product.id) {
+      @for (product of filteredProducts(); track product.id) {
         <app-product-card
           [product]="product"
           (addToCartEvent)="addToCart($event)">
         </app-product-card>
       }
     </div>
+  } @else {
+    <div class="text-center py-20 animate-fade-in">
+      <div class="w-20 h-20 rounded-full bg-cream mx-auto mb-6
+                  flex items-center justify-center text-3xl">
+        🔍
+      </div>
+      <p class="text-dark font-serif text-xl mb-2">
+        Aucun produit dans cette catégorie
+      </p>
+      <p class="text-gray-400 text-sm mb-6">
+        Essayez une autre catégorie ou voyez tous nos produits
+      </p>
+      <button (click)="setCategory('tous')" class="btn-outline-gold">
+        Voir tous les produits
+      </button>
+    </div>
+  }
+</div>
 
-    <!-- CTA voir plus -->
-    <div class="text-center mt-12">
+    <!-- CTA -->
+    <div class="text-center mt-14">
       <a routerLink="/boutique" class="btn-outline-gold">
         Voir tous les packs →
       </a>
@@ -203,15 +253,16 @@
 </section>
 
 <!-- ===================== POURQUOI NOUS ===================== -->
-<section class="py-24 bg-dark relative overflow-hidden">
-
+<section class="py-20 relative overflow-hidden"
+style="background: linear-gradient(135deg, #16395E 0%, #0F2A47 60%, #16395E 100%);">
   <div class="absolute inset-0">
-    <div class="absolute top-0 right-0 w-96 h-96 bg-gold/5 rounded-full blur-3xl"></div>
-    <div class="absolute bottom-0 left-0 w-64 h-64 bg-gold/5 rounded-full blur-3xl"></div>
+    <div class="absolute top-0 right-0 w-96 h-96 bg-gold/5
+                rounded-full blur-3xl"></div>
+    <div class="absolute bottom-0 left-0 w-64 h-64 bg-gold/5
+                rounded-full blur-3xl"></div>
   </div>
-
   <div class="container-main relative z-10">
-    <div class="text-center mb-16">
+    <div class="text-center mb-14">
       <span class="text-gold text-xs font-semibold tracking-widest uppercase">
         Notre engagement
       </span>
@@ -222,38 +273,23 @@
     </div>
 
     <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-
-      <div class="bg-white/5 border border-white/10 rounded-2xl p-8
-                  hover:border-gold/40 transition-all duration-300 group">
-        <div class="text-4xl mb-4">✋</div>
-        <h3 class="font-serif text-xl text-white mb-3">100% Handmade</h3>
-        <p class="text-white/50 text-sm leading-relaxed">
-          Chaque pièce est fabriquée à la main avec soin et passion.
-          Aucune production industrielle, que de l'artisanat authentique.
-        </p>
-      </div>
-
-      <div class="bg-white/5 border border-white/10 rounded-2xl p-8
-                  hover:border-gold/40 transition-all duration-300 group
-                  md:-translate-y-4">
-        <div class="text-4xl mb-4">💎</div>
-        <h3 class="font-serif text-xl text-white mb-3">Qualité Premium</h3>
-        <p class="text-white/50 text-sm leading-relaxed">
-          Matériaux sélectionnés avec soin. Finitions dorées, fleurs séchées,
-          céramique de qualité pour un rendu exceptionnel.
-        </p>
-      </div>
-
-      <div class="bg-white/5 border border-white/10 rounded-2xl p-8
-                  hover:border-gold/40 transition-all duration-300 group">
-        <div class="text-4xl mb-4">🔄</div>
-        <h3 class="font-serif text-xl text-white mb-3">Garantie cassé</h3>
-        <p class="text-white/50 text-sm leading-relaxed">
-          Article cassé = remplacement gratuit. Votre satisfaction
-          est notre priorité absolue.
-        </p>
-      </div>
-
+      @for (item of [
+        { icon: '✋', title: '100% Handmade',
+          desc: 'Chaque pièce fabriquée à la main avec soin et passion.' },
+        { icon: '💎', title: 'Qualité Premium',
+          desc: 'Matériaux sélectionnés, finitions dorées, céramique de qualité.' },
+        { icon: '🔄', title: 'Garantie cassé',
+          desc: 'Article cassé = remplacement gratuit. Votre satisfaction est notre priorité.' }
+      ]; track item.title; let i = $index) {
+        <div [class]="i === 1 ? 'md:-translate-y-4' : ''"
+             class="bg-white/5 border border-white/10 rounded-2xl p-8
+                    hover:border-gold/40 hover:bg-white/[0.07]
+                    transition-all duration-300">
+          <div class="text-4xl mb-4">{{ item.icon }}</div>
+          <h3 class="font-serif text-xl text-white mb-3">{{ item.title }}</h3>
+          <p class="text-white/50 text-sm leading-relaxed">{{ item.desc }}</p>
+        </div>
+      }
     </div>
   </div>
 </section>

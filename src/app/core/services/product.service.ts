@@ -9,7 +9,7 @@ export class ProductService {
       id: 1,
       name: 'Pack Amour Chic',
       slug: 'pack-amour-chic',
-      category: 'packs-decoration',
+      category: 'mariage',
       price: 49000,
       originalPrice: 59000,
       discount: 16,
@@ -25,13 +25,13 @@ export class ProductService {
       isBestSeller: true,
       rating: 4,
       reviewCount: 12,
-      includes: 'Fleurs séchées (gypsophile) et roses décoratives en plâtre peint.'
+      includes: 'Fleurs séchées et roses décoratives en plâtre peint.'
     },
     {
       id: 2,
       name: 'Pack Aroussa',
       slug: 'pack-aroussa',
-      category: 'packs-decoration',
+      category: 'mariage',
       price: 49000,
       originalPrice: 59000,
       discount: 16,
@@ -47,7 +47,7 @@ export class ProductService {
       id: 3,
       name: 'Pack Aroussa Avec Bougie',
       slug: 'pack-aroussa-bougie',
-      category: 'packs-decoration',
+      category: 'mariage',
       price: 59000,
       originalPrice: 69000,
       discount: 14,
@@ -62,40 +62,49 @@ export class ProductService {
       id: 4,
       name: 'Pack773',
       slug: 'pack-773',
-      category: 'packs-decoration',
+      category: 'decoration',
       price: 29900,
       originalPrice: 38000,
       discount: 21,
       images: ['assets/images/products/p4.jpg'],
       description: 'Pack décoratif élégant.',
       details: [{ label: 'Largeur', value: '17,6 cm' }],
-      isPromo: true
+      isPromo: true,
+      isBestSeller: true,
+      rating: 4,
+      reviewCount: 3
     },
     {
       id: 5,
       name: 'Pack778',
       slug: 'pack-778',
-      category: 'packs-decoration',
+      category: 'decoration',
       price: 25000,
       originalPrice: 33000,
       discount: 24,
       images: ['assets/images/products/p5.jpg'],
       description: 'Pack moderne et raffiné.',
       details: [{ label: 'Largeur', value: '17,5 cm' }],
-      isPromo: true
+      isPromo: true,
+      isBestSeller: true,
+      rating: 4.5,
+      reviewCount: 6
     },
     {
       id: 6,
       name: 'Pack771',
       slug: 'pack-771',
-      category: 'packs-decoration',
+      category: 'naissance',
       price: 27000,
       originalPrice: 35000,
       discount: 23,
       images: ['assets/images/products/p6.jpg'],
       description: 'Pack noir et or très tendance.',
       details: [{ label: 'Diamètre', value: '9,2 cm' }],
-      isPromo: true
+      isPromo: true,
+      isBestSeller: true,
+      rating: 5,
+      reviewCount: 4
     }
   ];
 
@@ -103,6 +112,11 @@ export class ProductService {
 
   getBySlug(slug: string): Product | undefined {
     return this.products.find(p => p.slug === slug);
+  }
+
+  getByCategory(category: string): Product[] {
+    if (category === 'tous') return this.products;
+    return this.products.filter(p => p.category === category);
   }
 
   getSimilar(product: Product, limit = 3): Product[] {
@@ -113,6 +127,15 @@ export class ProductService {
 
   getPopular(limit = 6): Product[] {
     return this.products.filter(p => p.isBestSeller).slice(0, limit);
+  }
+
+  getCategories(): { key: string; label: string; icon: string }[] {
+    return [
+      { key: 'tous',       label: 'Tous',       icon: '✨' },
+      { key: 'mariage',    label: 'Mariage',    icon: '💍' },
+      { key: 'decoration', label: 'Décoration', icon: '🌸' },
+      { key: 'naissance',  label: 'Naissance',  icon: '👶' },
+    ];
   }
 
   sort(products: Product[], option: SortOption): Product[] {
