@@ -1,29 +1,33 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
+  darkMode: 'class',
+  content: [
+    "./src/**/*.{html,ts}"
+  ],
   content: [
     "./src/**/*.{html,ts}"
   ],
   theme: {
     extend: {
       colors: {
-        gold: {
-          DEFAULT: '#3B82C4',   // bleu devient la couleur "gold" (principale)
-          light:   '#5FA3DE',
-          dark:    '#2A6BA8',
-        },
-        accent: {
-          DEFAULT: '#C9973A',   // l'ancien or devient un accent discret
-          light:   '#F0C060',
-        },
-        cream: {
-          DEFAULT: '#F4F7FA',   // blanc bleuté doux
-          dark:    '#E5EBF1',
-        },
-        dark: {
-          DEFAULT: '#0F2A47',   // bleu marine profond
-          soft:    '#16395E',
-          deep:    '#0A1E33',
-        }
+  gold: {
+    DEFAULT: '#3B82C4',
+    light:   '#5FA3DE',
+    dark:    '#2A6BA8',
+  },
+  accent: {
+    DEFAULT: '#C9973A',
+    light:   '#F0C060',
+  },
+  cream: {
+    DEFAULT: '#F4F7FA',
+    dark:    '#E5EBF1',
+  },
+  dark: {
+    DEFAULT: '#16284A',   // gardé pour navbar/footer seulement
+    soft:    '#1F3A63',
+    deep:    '#0F2A47',
+  }
       },
       fontFamily: {
         serif:  ['Playfair Display', 'serif'],

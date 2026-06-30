@@ -1,137 +1,86 @@
-<footer>
-
-  <!-- CTA Banner -->
-  <div class="relative overflow-hidden bg-cream-dark py-20">
-    <div class="absolute inset-0 opacity-5">
-      <div class="absolute top-8 left-8 w-32 h-32 border-2 border-gold rounded-full"></div>
-      <div class="absolute bottom-8 right-8 w-48 h-48 border-2 border-gold rounded-full"></div>
-      <div class="absolute top-1/2 left-1/2 w-24 h-24 border border-gold rotate-45"></div>
-    </div>
-    <div class="container-main text-center relative z-10">
-      <h2 class="font-serif text-3xl md:text-4xl text-dark mb-4">
-        Prêt à choisir le produit qui vous
-        <span class="gold-text"> correspond parfaitement ?</span>
-      </h2>
-      <p class="text-gray-500 italic mb-8 max-w-lg mx-auto">
-        Parcourez notre boutique en ligne pour apprécier l'excellence de nos produits.
-      </p>
-      <a routerLink="/boutique" class="btn-gold">Découvrir</a>
-    </div>
-  </div>
-
-  <!-- Footer principal -->
-<div style="background: linear-gradient(135deg, #0F2A47 0%, #16395E 100%);"
->
+<footer class="text-white">
 
   <!-- Séparateur doré -->
   <div class="h-0.5 bg-gradient-to-r from-transparent via-gold to-transparent"></div>
 
-  <div class="container-main py-10">
-<div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8 sm:gap-10">
+  <div style="background: linear-gradient(180deg, #16284A 0%, #0F2A47 100%);">
+    <div class="container-main py-12">
+      <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8 sm:gap-10">
 
-        <!-- Logo & Description -->
+        <!-- Logo + description -->
         <div>
           <div class="flex items-center gap-3 mb-4">
-            <div class="w-10 h-10 rounded-full border-2 border-gold
-                        flex items-center justify-center">
-              <span class="text-gold text-lg font-bold">P</span>
+            <img
+              src="assets/images/logo/logo.png"
+              alt="Pika Event Logo"
+              class="h-12 w-auto object-contain"
+              onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"
+            />
+            <div class="hidden w-10 h-10 rounded-full border-2 border-accent
+                        items-center justify-center">
+              <span class="text-accent text-lg font-bold">P</span>
             </div>
             <div>
-              <span class="font-script text-gold text-xl block">Pika Event</span>
+              <span class="font-script text-accent text-xl block">Pika Event</span>
               <span class="text-white/40 text-xs tracking-widest">HANDMADE BY AFEF</span>
             </div>
           </div>
-          <p class="text-white/50 text-sm leading-relaxed">
-            L'art de la décoration handmade. Des créations uniques,
-            faites avec amour pour vos moments précieux.
+          <p class="text-white/50 text-sm leading-relaxed max-w-xs">
+            Des créations handmade uniques et élégantes, faites avec passion
+            pour sublimer vos moments les plus précieux.
           </p>
         </div>
 
         <!-- Navigation -->
         <div>
-          <h4 class="text-gold font-semibold text-sm tracking-widest
-                     uppercase mb-5">Navigation</h4>
-          <ul class="space-y-3">
+          <h4 class="font-serif text-white text-base mb-4">Navigation</h4>
+          <ul class="space-y-2">
             <li>
-              <a routerLink="/"
-                 class="text-white/60 hover:text-gold text-sm
+              <a routerLink="/" class="text-white/70 hover:text-gold text-sm
                         transition-colors duration-200 flex items-center gap-2">
-                <span class="w-1 h-1 bg-gold rounded-full"></span>
+                <span class="w-1 h-1 bg-accent rounded-full"></span>
                 Accueil
               </a>
             </li>
             <li>
-              <a routerLink="/boutique"
-                 class="text-white/60 hover:text-gold text-sm
+              <a routerLink="/boutique" class="text-white/70 hover:text-gold text-sm
                         transition-colors duration-200 flex items-center gap-2">
-                <span class="w-1 h-1 bg-gold rounded-full"></span>
+                <span class="w-1 h-1 bg-accent rounded-full"></span>
                 Packs Décoration
               </a>
             </li>
             <li>
-              <a routerLink="/contact"
-                 class="text-white/60 hover:text-gold text-sm
+              <a routerLink="/contact" class="text-white/70 hover:text-gold text-sm
                         transition-colors duration-200 flex items-center gap-2">
-                <span class="w-1 h-1 bg-gold rounded-full"></span>
+                <span class="w-1 h-1 bg-accent rounded-full"></span>
                 Contact
               </a>
             </li>
           </ul>
         </div>
 
-        <!-- Réseaux sociaux & Contact -->
+        <!-- Contact -->
         <div>
-          <h4 class="text-gold font-semibold text-sm tracking-widest
-                     uppercase mb-5">Suivez-nous</h4>
-          <div class="flex gap-3 mb-6">
-            <!-- Facebook -->
-            <a href="#" target="_blank"
-               class="w-10 h-10 rounded-full bg-white/10 flex items-center
-                      justify-center hover:bg-gold transition-all duration-300 group">
-              <svg class="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 24 24">
-                <path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"/>
-              </svg>
-            </a>
-            <!-- Instagram -->
-            <a href="#" target="_blank"
-               class="w-10 h-10 rounded-full bg-white/10 flex items-center
-                      justify-center hover:bg-gold transition-all duration-300 group">
-              <svg class="w-5 h-5 text-white" fill="none"
-                   stroke="currentColor" viewBox="0 0 24 24">
-                <rect x="2" y="2" width="20" height="20" rx="5" ry="5"
-                      stroke-width="2"/>
-                <circle cx="12" cy="12" r="4" stroke-width="2"/>
-                <circle cx="17.5" cy="6.5" r="1" fill="currentColor"/>
-              </svg>
-            </a>
-          </div>
-
+          <h4 class="font-serif text-white text-base mb-4">Contact</h4>
           <div class="space-y-2">
             <p class="text-white/60 text-sm flex items-center gap-2">
-              <span class="text-gold">📞</span>
+              <span class="text-accent">📞</span>
               +216 XX XXX XXX
             </p>
             <p class="text-white/60 text-sm flex items-center gap-2">
-              <span class="text-gold">📍</span>
+              <span class="text-accent">📍</span>
               Tunisie
             </p>
           </div>
         </div>
-      </div>
-    </div>
 
-    <!-- Copyright -->
-    <div class="border-t border-white/10">
-      <div class="container-main py-4 flex flex-col md:flex-row
-                  items-center justify-between gap-2">
-        <p class="text-white/40 text-xs">
-          Copyright © {{ currentYear }} Pika Event — Tous droits réservés
-        </p>
+      </div>
+
+      <div class="border-t border-white/10 mt-10 pt-6 text-center">
         <p class="text-white/30 text-xs">
-          Handmade with 💛 by Afef
+          © 2026 Pika Event — Tous droits réservés
         </p>
       </div>
     </div>
   </div>
-
 </footer>

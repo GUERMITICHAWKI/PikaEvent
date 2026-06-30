@@ -1,6 +1,7 @@
 import { Component, computed, HostListener, signal } from '@angular/core';
 import { RouterLink, RouterLinkActive } from '@angular/router';
 import { CartService } from '../../../core/services/cart.service';
+import { ThemeService } from '../../../core/services/theme.service';
 import { CommonModule } from '@angular/common';
 
 @Component({
@@ -16,7 +17,10 @@ export class NavbarComponent {
 
   cartCount = computed(() => this.cartService.cartCount());
 
-  constructor(private cartService: CartService) {}
+  constructor(
+    private cartService: CartService,
+    public themeService: ThemeService
+  ) {}
 
   @HostListener('window:scroll')
   onScroll() {

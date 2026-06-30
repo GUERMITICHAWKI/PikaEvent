@@ -73,6 +73,20 @@
     @apply bg-gold text-white text-xs font-bold
            px-3 py-1 rounded-full;
   }
+  @layer base {
+  body {
+body {
+  @apply font-sans text-dark bg-white dark:bg-dark dark:text-white transition-colors duration-300;
+}  }
+}
+
+@layer components {
+  .card-product {
+    @apply bg-white dark:bg-dark-soft rounded-2xl overflow-hidden shadow-card
+           transition-all duration-300 cursor-pointer
+           hover:-translate-y-2 hover:shadow-xl;
+  }
+}
 
   .gold-text {
     background: linear-gradient(135deg, #C9973A, #F0C060, #C9973A);
@@ -81,6 +95,20 @@
     background-clip: text;
   }
 }
+@layer utilities {
+  .scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+    &::-webkit-scrollbar { display: none; }
+  }
+}
+@layer base {
+  body {
+    @apply font-sans text-dark bg-white dark:bg-dark dark:text-white
+           transition-colors duration-300;
+  }
+}
+
 @layer utilities {
   .scrollbar-hide {
     -ms-overflow-style: none;

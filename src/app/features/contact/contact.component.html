@@ -1,16 +1,16 @@
 <!-- ===== HEADER ===== -->
-<div class="bg-dark border-b border-white/10">
+<div class="bg-cream dark:bg-dark border-b border-gray-100 dark:border-white/10 transition-colors duration-300">
   <div class="container-main py-12">
-    <nav class="flex items-center gap-2 text-white/40 text-sm mb-4">
+    <nav class="flex items-center gap-2 text-gray-400 dark:text-white/40 text-sm mb-4">
       <a routerLink="/" class="hover:text-gold transition-colors">Accueil</a>
       <span>/</span>
       <span class="text-gold">Contact</span>
     </nav>
-    <h1 class="font-serif text-4xl md:text-5xl text-white mb-3">
-      Contactez <span class="gold-text">nous</span>
+    <h1 class="font-serif text-4xl md:text-5xl text-dark dark:text-white mb-3">
+      Contactez <span class="text-accent">nous</span>
     </h1>
     <div class="w-12 h-0.5 bg-gold mb-4"></div>
-    <p class="text-white/50 max-w-md">
+    <p class="text-gray-500 dark:text-white/50 max-w-md">
       Une question ? Une commande personnalisée ?
       Nous sommes là pour vous aider.
     </p>
@@ -20,7 +20,7 @@
 <div class="h-0.5 bg-gradient-to-r from-transparent via-gold to-transparent"></div>
 
 <!-- ===== CONTENU ===== -->
-<section class="py-16 bg-cream min-h-screen">
+<section class="py-16 bg-cream dark:bg-dark min-h-screen transition-colors duration-300">
   <div class="container-main">
     <div class="grid grid-cols-1 lg:grid-cols-3 gap-10">
 
@@ -28,8 +28,8 @@
       <div class="space-y-6">
 
         <!-- Carte info -->
-        <div class="bg-white rounded-2xl p-6 shadow-sm">
-          <h2 class="font-serif text-xl text-dark mb-6">
+        <div class="bg-white dark:bg-dark-soft rounded-2xl p-6 shadow-sm">
+          <h2 class="font-serif text-xl text-dark dark:text-white mb-6">
             Nos coordonnées
           </h2>
 
@@ -41,20 +41,20 @@
                 <span class="text-xl">📞</span>
               </div>
               <div>
-                <p class="text-xs text-gray-400 uppercase tracking-wider
+                <p class="text-xs text-gray-400 dark:text-white/40 uppercase tracking-wider
                            font-medium mb-1">Téléphone</p>
                 <a href="tel:+21600000000"
-                   class="text-dark font-semibold hover:text-gold
+                   class="text-dark dark:text-white font-semibold hover:text-gold
                           transition-colors">
                   +216 XX XXX XXX
                 </a>
-                <p class="text-xs text-gray-400 mt-0.5">
+                <p class="text-xs text-gray-400 dark:text-white/40 mt-0.5">
                   Disponible 7j/7
                 </p>
               </div>
             </div>
 
-            <div class="h-px bg-gray-100"></div>
+            <div class="h-px bg-gray-100 dark:bg-white/10"></div>
 
             <div class="flex items-start gap-4">
               <div class="w-11 h-11 rounded-full bg-gold/10
@@ -62,16 +62,16 @@
                 <span class="text-xl">📍</span>
               </div>
               <div>
-                <p class="text-xs text-gray-400 uppercase tracking-wider
+                <p class="text-xs text-gray-400 dark:text-white/40 uppercase tracking-wider
                            font-medium mb-1">Localisation</p>
-                <p class="text-dark font-semibold">Tunisie</p>
-                <p class="text-xs text-gray-400 mt-0.5">
+                <p class="text-dark dark:text-white font-semibold">Tunisie</p>
+                <p class="text-xs text-gray-400 dark:text-white/40 mt-0.5">
                   Livraison partout en Tunisie
                 </p>
               </div>
             </div>
 
-            <div class="h-px bg-gray-100"></div>
+            <div class="h-px bg-gray-100 dark:bg-white/10"></div>
 
             <div class="flex items-start gap-4">
               <div class="w-11 h-11 rounded-full bg-gold/10
@@ -79,10 +79,10 @@
                 <span class="text-xl">⏰</span>
               </div>
               <div>
-                <p class="text-xs text-gray-400 uppercase tracking-wider
+                <p class="text-xs text-gray-400 dark:text-white/40 uppercase tracking-wider
                            font-medium mb-1">Disponibilité</p>
-                <p class="text-dark font-semibold">7j/7 — 24h/24</p>
-                <p class="text-xs text-gray-400 mt-0.5">
+                <p class="text-dark dark:text-white font-semibold">7j/7 — 24h/24</p>
+                <p class="text-xs text-gray-400 dark:text-white/40 mt-0.5">
                   Réponse sous 24h
                 </p>
               </div>
@@ -91,40 +91,36 @@
           </div>
         </div>
 
-        <!-- Réseaux sociaux -->
-        <div class="bg-white rounded-2xl p-6 shadow-sm">
-          <h3 class="font-semibold text-dark mb-4">Suivez-nous</h3>
-          <div class="flex gap-3">
-            <a href="#" target="_blank"
-               class="flex-1 flex items-center justify-center gap-2
-                      bg-blue-500/10 text-blue-500 rounded-xl py-3
-                      hover:bg-blue-500 hover:text-white
-                      transition-all duration-300 text-sm font-medium">
-              <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
-                <path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1
-                         1 0 011-1h3z"/>
-              </svg>
-              Facebook
-            </a>
-            <a href="#" target="_blank"
-               class="flex-1 flex items-center justify-center gap-2
-                      bg-pink-500/10 text-pink-500 rounded-xl py-3
-                      hover:bg-pink-500 hover:text-white
-                      transition-all duration-300 text-sm font-medium">
-              <svg class="w-5 h-5" fill="none" stroke="currentColor"
-                   viewBox="0 0 24 24">
-                <rect x="2" y="2" width="20" height="20" rx="5" ry="5"
-                      stroke-width="2"/>
-                <circle cx="12" cy="12" r="4" stroke-width="2"/>
-                <circle cx="17.5" cy="6.5" r="1" fill="currentColor"/>
-              </svg>
-              Instagram
-            </a>
-          </div>
+        <div class="flex gap-3">
+          <a href="#" target="_blank"
+             class="flex-1 flex items-center justify-center gap-2
+                    bg-gold/10 text-gold rounded-xl py-3
+                    hover:bg-gold hover:text-white
+                    transition-all duration-300 text-sm font-medium">
+            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+              <path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1
+                       1 0 011-1h3z"/>
+            </svg>
+            Facebook
+          </a>
+          <a href="#" target="_blank"
+             class="flex-1 flex items-center justify-center gap-2
+                    bg-accent/10 text-accent rounded-xl py-3
+                    hover:bg-accent hover:text-white
+                    transition-all duration-300 text-sm font-medium">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor"
+                 viewBox="0 0 24 24">
+              <rect x="2" y="2" width="20" height="20" rx="5" ry="5"
+                    stroke-width="2"/>
+              <circle cx="12" cy="12" r="4" stroke-width="2"/>
+              <circle cx="17.5" cy="6.5" r="1" fill="currentColor"/>
+            </svg>
+            Instagram
+          </a>
         </div>
 
         <!-- Garantie card -->
-        <div class="bg-dark rounded-2xl p-6">
+        <div class="bg-dark dark:bg-dark-soft rounded-2xl p-6 border dark:border-white/10">
           <div class="text-3xl mb-3">🔄</div>
           <h3 class="font-serif text-white text-lg mb-2">
             Garantie remplacement
@@ -134,7 +130,6 @@
             Frais de livraison à la charge du client.
           </p>
         </div>
-
       </div>
 
       <!-- ===== FORMULAIRE ===== -->
@@ -143,10 +138,10 @@
         @if (submitted()) {
 
           <!-- Succès -->
-          <div class="bg-white rounded-2xl p-12 shadow-sm
+          <div class="bg-white dark:bg-dark-soft rounded-2xl p-12 shadow-sm
                       flex flex-col items-center justify-center text-center
                       min-h-96">
-            <div class="w-20 h-20 rounded-full bg-green-100
+            <div class="w-20 h-20 rounded-full bg-green-100 dark:bg-green-500/15
                         flex items-center justify-center mb-6">
               <svg class="w-10 h-10 text-green-500" fill="none"
                    stroke="currentColor" viewBox="0 0 24 24">
@@ -154,10 +149,10 @@
                       stroke-width="2" d="M5 13l4 4L19 7"/>
               </svg>
             </div>
-            <h2 class="font-serif text-2xl text-dark mb-3">
+            <h2 class="font-serif text-2xl text-dark dark:text-white mb-3">
               Message envoyé !
             </h2>
-            <p class="text-gray-400 mb-8 max-w-sm">
+            <p class="text-gray-400 dark:text-white/40 mb-8 max-w-sm">
               Merci pour votre message. Nous vous répondrons
               dans les plus brefs délais.
             </p>
@@ -174,11 +169,11 @@
         } @else {
 
           <!-- Formulaire -->
-          <div class="bg-white rounded-2xl p-8 shadow-sm">
-            <h2 class="font-serif text-2xl text-dark mb-2">
+          <div class="bg-white dark:bg-dark-soft rounded-2xl p-8 shadow-sm">
+            <h2 class="font-serif text-2xl text-dark dark:text-white mb-2">
               Envoyez-nous un message
             </h2>
-            <p class="text-gray-400 text-sm mb-8">
+            <p class="text-gray-400 dark:text-white/40 text-sm mb-8">
               Les champs marqués d'un
               <span class="text-red-400">*</span>
               sont obligatoires.
@@ -186,7 +181,8 @@
 
             <!-- Erreur -->
             @if (error()) {
-              <div class="bg-red-50 border border-red-200 text-red-500
+              <div class="bg-red-50 dark:bg-red-500/10 border border-red-200 dark:border-red-500/30
+                          text-red-500 dark:text-red-400
                           rounded-xl px-4 py-3 text-sm mb-6
                           flex items-center gap-2">
                 <span>⚠️</span>
@@ -199,7 +195,7 @@
               <!-- Nom + Téléphone -->
               <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
                 <div>
-                  <label class="block text-sm font-medium text-dark mb-2">
+                  <label class="block text-sm font-medium text-dark dark:text-white mb-2">
                     Nom complet <span class="text-red-400">*</span>
                   </label>
                   <input
@@ -207,14 +203,15 @@
                     [value]="form().name"
                     (input)="updateField('name', $any($event.target).value)"
                     placeholder="Votre nom"
-                    class="w-full px-4 py-3 border-2 border-gray-100
+                    class="w-full px-4 py-3 border-2 border-gray-100 dark:border-white/10
+                           bg-white dark:bg-dark text-dark dark:text-white
                            rounded-xl text-sm focus:outline-none
                            focus:border-gold transition-colors duration-200
-                           placeholder:text-gray-300"
+                           placeholder:text-gray-300 dark:placeholder:text-white/20"
                   />
                 </div>
                 <div>
-                  <label class="block text-sm font-medium text-dark mb-2">
+                  <label class="block text-sm font-medium text-dark dark:text-white mb-2">
                     Téléphone <span class="text-red-400">*</span>
                   </label>
                   <input
@@ -222,17 +219,18 @@
                     [value]="form().phone"
                     (input)="updateField('phone', $any($event.target).value)"
                     placeholder="XX XXX XXX"
-                    class="w-full px-4 py-3 border-2 border-gray-100
+                    class="w-full px-4 py-3 border-2 border-gray-100 dark:border-white/10
+                           bg-white dark:bg-dark text-dark dark:text-white
                            rounded-xl text-sm focus:outline-none
                            focus:border-gold transition-colors duration-200
-                           placeholder:text-gray-300"
+                           placeholder:text-gray-300 dark:placeholder:text-white/20"
                   />
                 </div>
               </div>
 
               <!-- Email -->
               <div>
-                <label class="block text-sm font-medium text-dark mb-2">
+                <label class="block text-sm font-medium text-dark dark:text-white mb-2">
                   Email
                 </label>
                 <input
@@ -240,25 +238,26 @@
                   [value]="form().email"
                   (input)="updateField('email', $any($event.target).value)"
                   placeholder="votre@email.com"
-                  class="w-full px-4 py-3 border-2 border-gray-100
+                  class="w-full px-4 py-3 border-2 border-gray-100 dark:border-white/10
+                         bg-white dark:bg-dark text-dark dark:text-white
                          rounded-xl text-sm focus:outline-none
                          focus:border-gold transition-colors duration-200
-                         placeholder:text-gray-300"
+                         placeholder:text-gray-300 dark:placeholder:text-white/20"
                 />
               </div>
 
               <!-- Sujet -->
               <div>
-                <label class="block text-sm font-medium text-dark mb-2">
+                <label class="block text-sm font-medium text-dark dark:text-white mb-2">
                   Sujet
                 </label>
                 <select
                   [value]="form().subject"
                   (change)="updateField('subject', $any($event.target).value)"
-                  class="w-full px-4 py-3 border-2 border-gray-100
+                  class="w-full px-4 py-3 border-2 border-gray-100 dark:border-white/10
                          rounded-xl text-sm focus:outline-none
                          focus:border-gold transition-colors duration-200
-                         bg-white text-gray-600 cursor-pointer">
+                         bg-white dark:bg-dark text-gray-600 dark:text-white/60 cursor-pointer">
                   <option value="">Choisir un sujet...</option>
                   @for (s of subjects; track s) {
                     <option [value]="s">{{ s }}</option>
@@ -268,7 +267,7 @@
 
               <!-- Message -->
               <div>
-                <label class="block text-sm font-medium text-dark mb-2">
+                <label class="block text-sm font-medium text-dark dark:text-white mb-2">
                   Message <span class="text-red-400">*</span>
                 </label>
                 <textarea
@@ -276,10 +275,11 @@
                   (input)="updateField('message', $any($event.target).value)"
                   placeholder="Décrivez votre demande..."
                   rows="5"
-                  class="w-full px-4 py-3 border-2 border-gray-100
+                  class="w-full px-4 py-3 border-2 border-gray-100 dark:border-white/10
+                         bg-white dark:bg-dark text-dark dark:text-white
                          rounded-xl text-sm focus:outline-none
                          focus:border-gold transition-colors duration-200
-                         placeholder:text-gray-300 resize-none">
+                         placeholder:text-gray-300 dark:placeholder:text-white/20 resize-none">
                 </textarea>
               </div>
 
@@ -288,8 +288,8 @@
                 (click)="onSubmit()"
                 [disabled]="loading()"
                 class="w-full py-4 rounded-pill font-semibold text-white
-                       text-base transition-all duration-300
-                       flex items-center justify-center gap-3"
+                      text-base transition-all duration-300
+                      flex items-center justify-center gap-3"
                 [class]="loading()
                   ? 'bg-gold/60 cursor-not-allowed'
                   : 'btn-gold'">

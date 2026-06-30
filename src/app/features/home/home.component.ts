@@ -52,6 +52,7 @@ export class HomeComponent implements OnInit {
     { value: '100%', label: 'Handmade' },
     { value: '5★',   label: 'Note moyenne' }
   ];
+heromainLoaded: any;
 
   constructor(
     private productService: ProductService,

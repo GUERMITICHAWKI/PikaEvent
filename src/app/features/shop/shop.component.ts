@@ -4,7 +4,6 @@ import { RouterLink } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { ProductService } from '../../core/services/product.service';
 import { CartService } from '../../core/services/cart.service';
-import { ToastService } from '../../core/services/toast.service';
 import { ProductCardComponent } from '../../shared/components/product-card/product-card.component';
 import { Product, SortOption } from '../../core/models/product.model';
 
@@ -22,16 +21,24 @@ export class ShopComponent implements OnInit {
   selectedSort = signal<SortOption>('default');
   searchQuery = signal<string>('');
 
-  // ✅ Catégories dynamiques depuis le service (synchronisées avec les produits)
   categories = this.productService.getCategories();
+
+  // Compteurs calculés une seule fois, réutilisés dans le template
+  categoryCounts = computed(() => {
+    const counts: Record<string, number> = { tous: this.allProducts().length };
+    this.categories.forEach(c => {
+      if (c.key !== 'tous') {
+        counts[c.key] = this.allProducts().filter(p => p.category === c.key).length;
+      }
+    });
+    return counts;
+  });
 
   sortOptions = [
     { key: 'default',    label: 'Tri par défaut' },
-    { key: 'popularity', label: 'Tri par popularité' },
-    { key: 'rating',     label: 'Tri par notes' },
-    { key: 'newest',     label: 'Plus récent' },
     { key: 'price-asc',  label: 'Prix croissant' },
     { key: 'price-desc', label: 'Prix décroissant' },
+    { key: 'rating',     label: 'Tri par notes' },
   ];
 
   filteredProducts = computed(() => {
@@ -54,16 +61,9 @@ export class ShopComponent implements OnInit {
 
   productCount = computed(() => this.filteredProducts().length);
 
-  // Compteur par catégorie (pour affichage badge)
-  countByCategory(catKey: string): number {
-    if (catKey === 'tous') return this.allProducts().length;
-    return this.allProducts().filter(p => p.category === catKey).length;
-  }
-
   constructor(
     private productService: ProductService,
-    private cartService: CartService,
-    private toastService: ToastService
+    private cartService: CartService
   ) {}
 
   ngOnInit() {
@@ -86,7 +86,6 @@ export class ShopComponent implements OnInit {
 
   addToCart(product: Product) {
     this.cartService.add(product);
-    this.toastService.show(`${product.name} ajouté au panier !`);
   }
 
   formatPrice(price: number): string {

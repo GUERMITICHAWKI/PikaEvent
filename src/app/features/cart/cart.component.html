@@ -7,7 +7,7 @@
       <span class="text-gold">Votre panier</span>
     </nav>
     <h1 class="font-serif text-4xl text-white">
-      Votre <span class="gold-text">Panier</span>
+      Votre <span class="text-accent">Panier</span>
     </h1>
   </div>
 </div>
@@ -15,7 +15,7 @@
 <div class="h-0.5 bg-gradient-to-r from-transparent via-gold to-transparent"></div>
 
 <!-- ===== CONTENU ===== -->
-<section class="py-16 bg-cream min-h-screen">
+<section class="py-16 bg-cream dark:bg-dark min-h-screen transition-colors duration-300">
   <div class="container-main">
 
     @if (isEmpty()) {
@@ -31,10 +31,10 @@
                   d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"/>
           </svg>
         </div>
-        <h2 class="font-serif text-3xl text-dark mb-3">
+        <h2 class="font-serif text-3xl text-dark dark:text-white mb-3">
           Votre panier est vide
         </h2>
-        <p class="text-gray-400 mb-8 max-w-sm">
+        <p class="text-gray-400 dark:text-white/40 mb-8 max-w-sm">
           Découvrez nos créations handmade et ajoutez vos favoris au panier.
         </p>
         <a routerLink="/boutique" class="btn-gold">
@@ -51,12 +51,12 @@
 
           <!-- Header liste -->
           <div class="flex items-center justify-between mb-6">
-            <h2 class="font-serif text-xl text-dark">
+            <h2 class="font-serif text-xl text-dark dark:text-white">
               {{ cartCount() }} article(s)
             </h2>
             <button
               (click)="clear()"
-              class="text-sm text-gray-400 hover:text-red-400
+              class="text-sm text-gray-400 dark:text-white/40 hover:text-red-400
                      transition-colors duration-200 flex items-center gap-1">
               <svg class="w-4 h-4" fill="none" stroke="currentColor"
                    viewBox="0 0 24 24">
@@ -72,23 +72,22 @@
 
           <!-- Articles -->
           @for (item of cartItems(); track item.product.id) {
-            <div class="bg-white rounded-2xl p-5 shadow-sm
+            <div class="bg-white dark:bg-dark-soft rounded-2xl p-5 shadow-sm
                         flex items-center gap-5 group
                         hover:shadow-card transition-shadow duration-300">
 
               <!-- Image -->
-              <div class="w-20 h-20 rounded-xl overflow-hidden
-                          bg-cream flex-shrink-0 relative">
+              <div class="w-20 h-20 rounded-xl overflow-hidden flex-shrink-0
+                          bg-gradient-to-br from-cream to-cream-dark
+                          dark:from-dark-deep dark:to-dark relative
+                          flex items-center justify-center">
+                <span class="text-2xl opacity-40">🌸</span>
                 <img
                   [src]="item.product.images[0]"
                   [alt]="item.product.name"
-                  class="w-full h-full object-cover"
-                  onerror="this.style.display='none'"
+                  class="absolute inset-0 w-full h-full object-cover"
+                  onerror="this.style.opacity='0'"
                 />
-                <div class="absolute inset-0 flex items-center
-                            justify-center -z-10 bg-cream">
-                  <span class="text-2xl">🌸</span>
-                </div>
               </div>
 
               <!-- Infos -->
@@ -97,7 +96,7 @@
                           font-medium mb-1">
                   {{ item.product.category }}
                 </p>
-                <h3 class="font-serif text-dark font-semibold truncate">
+                <h3 class="font-serif text-dark dark:text-white font-semibold truncate">
                   {{ item.product.name }}
                 </h3>
                 <p class="text-gold font-bold mt-1">
@@ -106,22 +105,24 @@
               </div>
 
               <!-- Quantité -->
-              <div class="flex items-center border-2 border-gray-100
+              <div class="flex items-center border-2 border-gray-100 dark:border-white/15
                           rounded-pill overflow-hidden flex-shrink-0">
                 <button
                   (click)="decrease(item)"
                   class="w-9 h-9 flex items-center justify-center
-                         text-gray-400 hover:bg-gray-100 hover:text-dark
+                         text-gray-400 dark:text-white/40 hover:bg-gray-100 dark:hover:bg-white/10
+                         hover:text-dark dark:hover:text-white
                          transition-colors text-lg font-bold">
                   −
                 </button>
-                <span class="w-8 text-center text-sm font-semibold text-dark">
+                <span class="w-8 text-center text-sm font-semibold text-dark dark:text-white">
                   {{ item.quantity }}
                 </span>
                 <button
                   (click)="increase(item)"
                   class="w-9 h-9 flex items-center justify-center
-                         text-gray-400 hover:bg-gray-100 hover:text-dark
+                         text-gray-400 dark:text-white/40 hover:bg-gray-100 dark:hover:bg-white/10
+                         hover:text-dark dark:hover:text-white
                          transition-colors text-lg font-bold">
                   +
                 </button>
@@ -129,8 +130,8 @@
 
               <!-- Sous-total -->
               <div class="text-right flex-shrink-0 hidden sm:block">
-                <p class="text-xs text-gray-400 mb-1">Sous-total</p>
-                <p class="font-bold text-dark">
+                <p class="text-xs text-gray-400 dark:text-white/40 mb-1">Sous-total</p>
+                <p class="font-bold text-dark dark:text-white">
                   {{ formatPrice(item.product.price * item.quantity) }}
                 </p>
               </div>
@@ -139,7 +140,8 @@
               <button
                 (click)="remove(item.product.id)"
                 class="w-9 h-9 rounded-full flex items-center justify-center
-                       text-gray-300 hover:bg-red-50 hover:text-red-400
+                       text-gray-300 dark:text-white/20 hover:bg-red-50 dark:hover:bg-red-500/10
+                       hover:text-red-400
                        transition-all duration-200 flex-shrink-0">
                 <svg class="w-4 h-4" fill="none" stroke="currentColor"
                      viewBox="0 0 24 24">
@@ -169,39 +171,39 @@
 
         <!-- ===== RÉSUMÉ COMMANDE ===== -->
         <div class="lg:col-span-1">
-          <div class="bg-white rounded-2xl shadow-sm p-6 sticky top-32">
+          <div class="bg-white dark:bg-dark-soft rounded-2xl shadow-sm p-6 sticky top-32">
 
-            <h2 class="font-serif text-xl text-dark mb-6 pb-4
-                       border-b border-gray-100">
+            <h2 class="font-serif text-xl text-dark dark:text-white mb-6 pb-4
+                       border-b border-gray-100 dark:border-white/10">
               Résumé de la commande
             </h2>
 
             <!-- Détails -->
             <div class="space-y-3 mb-6">
               <div class="flex justify-between text-sm">
-                <span class="text-gray-500">
+                <span class="text-gray-500 dark:text-white/50">
                   Sous-total ({{ cartCount() }} article(s))
                 </span>
-                <span class="font-medium text-dark">
+                <span class="font-medium text-dark dark:text-white">
                   {{ formatPrice(cartTotal()) }}
                 </span>
               </div>
               <div class="flex justify-between text-sm">
-                <span class="text-gray-500">Livraison</span>
+                <span class="text-gray-500 dark:text-white/50">Livraison</span>
                 <span class="text-green-500 font-medium">Gratuite 🚚</span>
               </div>
               <div class="flex justify-between text-sm">
-                <span class="text-gray-500">Paiement</span>
-                <span class="font-medium text-dark">À la livraison</span>
+                <span class="text-gray-500 dark:text-white/50">Paiement</span>
+                <span class="font-medium text-dark dark:text-white">À la livraison</span>
               </div>
             </div>
 
             <!-- Séparateur -->
-            <div class="h-px bg-gray-100 mb-6"></div>
+            <div class="h-px bg-gray-100 dark:bg-white/10 mb-6"></div>
 
             <!-- Total -->
             <div class="flex justify-between items-center mb-8">
-              <span class="font-semibold text-dark">Total</span>
+              <span class="font-semibold text-dark dark:text-white">Total</span>
               <span class="font-serif text-2xl text-gold font-bold">
                 {{ formatPrice(cartTotal()) }}
               </span>
@@ -215,15 +217,15 @@
 
             <!-- Infos sécurité -->
             <div class="mt-6 space-y-2">
-              <div class="flex items-center gap-2 text-xs text-gray-400">
+              <div class="flex items-center gap-2 text-xs text-gray-400 dark:text-white/40">
                 <span>🔒</span>
                 <span>Paiement sécurisé à la livraison</span>
               </div>
-              <div class="flex items-center gap-2 text-xs text-gray-400">
+              <div class="flex items-center gap-2 text-xs text-gray-400 dark:text-white/40">
                 <span>🔄</span>
                 <span>Remplacement garanti si cassé</span>
               </div>
-              <div class="flex items-center gap-2 text-xs text-gray-400">
+              <div class="flex items-center gap-2 text-xs text-gray-400 dark:text-white/40">
                 <span>🚚</span>
                 <span>Livraison gratuite partout en Tunisie</span>
               </div>
