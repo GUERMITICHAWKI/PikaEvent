@@ -98,38 +98,69 @@
         </div>
       </div>
 
-      <!-- Grille miniature — desktop uniquement -->
+      <!-- Grille miniature — desktop uniquement — VERSION PREMIUM -->
       <div class="hidden lg:block">
         <div class="relative">
+          <!-- Cadre décoratif -->
           <div class="absolute -inset-3 border border-accent/15
                       rounded-3xl pointer-events-none"></div>
-          <div class="bg-white dark:bg-dark-soft rounded-2xl p-5 shadow-card">
+          <!-- Lueur dorée douce derrière la carte -->
+          <div class="absolute -inset-6 bg-gold/5 rounded-[2rem] blur-2xl
+                      pointer-events-none"></div>
+
+          <div class="relative bg-white dark:bg-dark-soft rounded-2xl p-5
+                      shadow-[0_20px_50px_-12px_rgba(0,0,0,0.15)]
+                      dark:shadow-[0_20px_50px_-12px_rgba(0,0,0,0.5)]
+                      ring-1 ring-black/5 dark:ring-white/5">
+
             <div class="grid grid-cols-3 gap-3 mb-3">
               @for (product of allProducts().slice(0, 3); track product.id) {
-                <div class="rounded-xl overflow-hidden aspect-square
-                            bg-cream dark:bg-dark">
+                <div class="relative rounded-xl overflow-hidden aspect-square
+                            bg-cream dark:bg-dark group cursor-pointer
+                            ring-1 ring-black/5 dark:ring-white/10">
                   <img
                     [src]="product.images[0]"
                     [alt]="product.name"
-                    class="w-full h-full object-cover"
+                    class="w-full h-full object-cover object-center
+                           saturate-[0.9] contrast-[1.06] brightness-[1.02]
+                           transition-all duration-500
+                           group-hover:scale-110 group-hover:saturate-100"
                     onerror="this.style.opacity='0'"
                   />
+                  <!-- Voile doré uniforme pour lisser les écarts de fond -->
+                  <div class="absolute inset-0
+                              bg-gradient-to-t from-gold/15 via-transparent to-gold/5
+                              mix-blend-multiply pointer-events-none"></div>
+                  <!-- Léger vignettage bord pour un rendu studio -->
+                  <div class="absolute inset-0 shadow-[inset_0_0_20px_rgba(0,0,0,0.08)]
+                              pointer-events-none"></div>
                 </div>
               }
             </div>
+
             <div class="grid grid-cols-3 gap-3">
               @for (product of allProducts().slice(3, 6); track product.id) {
-                <div class="rounded-xl overflow-hidden aspect-square
-                            bg-cream dark:bg-dark">
+                <div class="relative rounded-xl overflow-hidden aspect-square
+                            bg-cream dark:bg-dark group cursor-pointer
+                            ring-1 ring-black/5 dark:ring-white/10">
                   <img
                     [src]="product.images[0]"
                     [alt]="product.name"
-                    class="w-full h-full object-cover"
+                    class="w-full h-full object-cover object-center
+                           saturate-[0.9] contrast-[1.06] brightness-[1.02]
+                           transition-all duration-500
+                           group-hover:scale-110 group-hover:saturate-100"
                     onerror="this.style.opacity='0'"
                   />
+                  <div class="absolute inset-0
+                              bg-gradient-to-t from-gold/15 via-transparent to-gold/5
+                              mix-blend-multiply pointer-events-none"></div>
+                  <div class="absolute inset-0 shadow-[inset_0_0_20px_rgba(0,0,0,0.08)]
+                              pointer-events-none"></div>
                 </div>
               }
             </div>
+
             <div class="mt-4 pt-4 border-t border-gray-100 dark:border-white/10
                         flex items-center justify-between">
               <span class="text-xs text-gray-400 dark:text-white/40 font-medium">
@@ -169,8 +200,38 @@
           class="flex items-center gap-1.5 px-4 py-1.5 rounded-pill border text-sm
                  font-medium transition-all duration-200 cursor-pointer
                  flex-shrink-0 whitespace-nowrap">
-          <span class="text-sm">{{ cat.icon }}</span>
-          <span>{{ cat.label }}</span>
+@switch (cat.icon) {
+  @case ('sparkle') {
+    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+            d="M12 3v3m0 12v3m9-9h-3M6 12H3m14.36-6.36l-2.12 2.12M8.76 15.24l-2.12 2.12m0-10.72l2.12 2.12m8.48 8.48l2.12 2.12"/>
+    </svg>
+  }
+  @case ('heart') {
+    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+            d="M12 21s-7-4.35-9.5-8.5C.5 8.5 3 5 6.5 5c2 0 3.5 1 5.5 3 2-2 3.5-3 5.5-3 3.5 0 6 3.5 4 7.5C19 16.65 12 21 12 21z"/>
+    </svg>
+  }
+  @case ('ring') {
+    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+            d="M12 9l2-6h-4l2 6zm0 0a6 6 0 100 12 6 6 0 000-12z"/>
+    </svg>
+  }
+  @case ('flower') {
+    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+            d="M12 12a3 3 0 100-6 3 3 0 000 6zm0 0a3 3 0 110 6 3 3 0 010-6zm0 0a3 3 0 106 0 3 3 0 00-6 0zm0 0a3 3 0 10-6 0 3 3 0 006 0z"/>
+    </svg>
+  }
+  @case ('leaf') {
+    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+            d="M11 20A7 7 0 019.8 6.1C15.5 5 20 5.5 20 5.5s.5 4.5-1.1 10.2A7 7 0 0111 20zm0 0v-7m0-2l6-6"/>
+    </svg>
+  }
+}          <span>{{ cat.label }}</span>
           <span [class]="selectedCategory() === cat.key
             ? 'bg-white/20 text-white'
             : 'bg-gray-100 dark:bg-white/10 text-gray-400 dark:text-white/50'"

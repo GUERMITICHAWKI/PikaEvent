@@ -1,3 +1,9 @@
+<!-- Barre de progression scroll dorée -->
+<div class="fixed top-0 left-0 z-[60] h-[2px] bg-gradient-to-r from-gold via-accent to-gold
+            transition-all duration-100 ease-out"
+     [style.width.%]="scrollProgress()">
+</div>
+
 <!-- Barre d'annonces -->
 @if (!scrolled()) {
   <div class="bg-gold text-white text-[11px] font-medium overflow-hidden py-1.5
@@ -17,24 +23,35 @@
 
 <!-- Navbar principale -->
 <nav [class]="scrolled()
-  ? 'sticky top-0 z-50 bg-dark/95 backdrop-blur-md shadow-lg transition-all duration-300'
-  : 'sticky top-0 z-50 bg-dark transition-all duration-300'">
+  ? 'sticky top-0 z-50 bg-dark/75 backdrop-blur-xl border-b border-white/10 shadow-[0_8px_32px_rgba(0,0,0,0.4)] transition-all duration-500'
+  : 'sticky top-0 z-50 bg-dark transition-all duration-500'">
 
   <div class="container-main flex items-center justify-between py-3">
 
-   <!-- Logo -->
-<a routerLink="/" class="flex items-center gap-2.5 group">
-  <div class="w-9 h-9 rounded-full border-2 border-accent
-              flex items-center justify-center
-              group-hover:bg-accent transition-all duration-300">
-    <span class="text-accent group-hover:text-white text-base font-bold
-                 transition-colors duration-300">P</span>
-  </div>
-  <div class="flex flex-col leading-tight">
-    <span class="font-script text-accent text-lg">Pika Event</span>
-    <span class="text-white/50 text-[10px] tracking-widest">HANDMADE BY AFEF</span>
-  </div>
-</a>
+    <!-- Logo -->
+    <a routerLink="/" class="flex items-center gap-2.5 group">
+      <img
+        src="assets/images/logo.png"
+        alt="Pika Event"
+        class="h-14 w-auto object-contain transition-transform duration-300
+               group-hover:scale-105"
+        onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"
+      />
+      <div class="hidden w-9 h-9 rounded-full border-2 border-accent
+                  items-center justify-center
+                  group-hover:bg-accent transition-all duration-300">
+        <span class="text-accent group-hover:text-white text-base font-bold
+                     transition-colors duration-300">P</span>
+      </div>
+      <div class="flex flex-col leading-tight">
+        <span class="font-script text-accent text-lg transition-all duration-300"
+              [class]="scrolled() ? 'text-base' : 'text-lg'">
+          Pika Event
+        </span>
+        <span class="text-white/50 text-[10px] tracking-widest">HANDMADE BY AFEF</span>
+      </div>
+    </a>
+
     <!-- Menu desktop -->
     <ul class="hidden md:flex items-center gap-10">
       <li>
@@ -66,33 +83,34 @@
 
     <!-- Actions droite -->
     <div class="flex items-center gap-3">
-       <!-- Toggle Mode sombre -->
-  <button
-    (click)="themeService.toggle()"
-    class="w-9 h-9 rounded-full border border-white/20 dark:border-white/10
-           flex items-center justify-center
-           hover:border-accent transition-all duration-300"
-    [attr.aria-label]="themeService.isDark() ? 'Activer le mode clair' : 'Activer le mode sombre'">
-    @if (themeService.isDark()) {
-      <!-- Icône soleil -->
-      <svg class="w-4 h-4 text-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
-              d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"/>
-      </svg>
-    } @else {
-      <!-- Icône lune -->
-      <svg class="w-4 h-4 text-white/80" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
-              d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"/>
-      </svg>
-    }
-  </button>
+
+      <!-- Toggle Mode sombre -->
+      <button
+        (click)="themeService.toggle()"
+        class="w-9 h-9 rounded-full border border-white/20
+               flex items-center justify-center
+               hover:border-accent hover:bg-white/5
+               transition-all duration-300"
+        [attr.aria-label]="themeService.isDark() ? 'Activer le mode clair' : 'Activer le mode sombre'">
+        @if (themeService.isDark()) {
+          <svg class="w-4 h-4 text-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+                  d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"/>
+          </svg>
+        } @else {
+          <svg class="w-4 h-4 text-white/80" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+                  d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"/>
+          </svg>
+        }
+      </button>
 
       <!-- Panier -->
       <a routerLink="/panier" class="relative group">
         <div class="w-9 h-9 rounded-full border border-white/20
                     flex items-center justify-center
-                    group-hover:border-gold transition-all duration-300">
+                    group-hover:border-gold group-hover:bg-white/5
+                    transition-all duration-300">
           <svg class="w-4.5 h-4.5 text-white/80 group-hover:text-gold transition-colors"
                fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
@@ -102,7 +120,7 @@
         @if (cartCount() > 0) {
           <span class="absolute -top-1 -right-1 bg-gold text-white
                        text-[10px] w-4.5 h-4.5 rounded-full flex items-center
-                       justify-center font-bold">
+                       justify-center font-bold animate-pulse">
             {{ cartCount() }}
           </span>
         }
@@ -110,7 +128,7 @@
 
       <!-- Burger mobile -->
       <button class="md:hidden w-9 h-9 flex flex-col items-center
-                     justify-center gap-1.5 group"
+                     justify-center gap-1.5"
               (click)="toggleMenu()">
         <span [class]="menuOpen()
           ? 'w-5 h-0.5 bg-gold rotate-45 translate-y-2 transition-all duration-300'
@@ -130,7 +148,7 @@
 
   <!-- Menu mobile -->
   @if (menuOpen()) {
-    <div class="md:hidden bg-dark-soft border-t border-white/10 animate-fade-in">
+    <div class="md:hidden bg-dark/90 backdrop-blur-xl border-t border-white/10 animate-fade-in">
       <ul class="flex flex-col py-4">
         <li>
           <a routerLink="/" (click)="closeMenu()"

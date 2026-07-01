@@ -1,6 +1,7 @@
 import { Injectable, signal, computed, effect } from '@angular/core';
 import { CartItem } from '../models/cart-item.model';
 import { Product } from '../models/product.model';
+import { ToastService } from './toast.service';
 
 const CART_STORAGE_KEY = 'pika-event-cart';
 
@@ -13,8 +14,7 @@ export class CartService {
   cartCount  = computed(() => this.items().reduce((s, i) => s + i.quantity, 0));
   cartTotal  = computed(() => this.items().reduce((s, i) => s + i.product.price * i.quantity, 0));
 
-  constructor() {
-    // Sauvegarde automatique à chaque changement du panier
+  constructor(private toastService: ToastService) {
     effect(() => {
       this.saveToStorage(this.items());
     });
@@ -32,6 +32,8 @@ export class CartService {
       }
       return [...list, { product, quantity: qty }];
     });
+
+    this.toastService.show(`${product.name} ajouté au panier`, 'success', '🛒');
   }
 
   remove(productId: number): void {
@@ -52,8 +54,6 @@ export class CartService {
   formatPrice(millimes: number): string {
     return (millimes / 1000).toFixed(3) + ' ت.د';
   }
-
-  // ===== Persistance localStorage =====
 
   private loadFromStorage(): CartItem[] {
     try {

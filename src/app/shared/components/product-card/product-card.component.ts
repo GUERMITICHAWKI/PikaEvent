@@ -3,7 +3,6 @@ import { RouterLink } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { Product } from '../../../core/models/product.model';
 import { ProductService } from '../../../core/services/product.service';
-import { ToastService } from '../../../core/services/toast.service';
 
 @Component({
   selector: 'app-product-card',
@@ -17,7 +16,6 @@ export class ProductCardComponent {
 
   constructor(
     private productService: ProductService,
-    private toastService: ToastService
   ) {}
 
   formatPrice(price: number): string {
@@ -28,8 +26,6 @@ export class ProductCardComponent {
     event.preventDefault();
     event.stopPropagation();
     this.addToCartEvent.emit(this.product);
-    this.toastService.show(
-      `${this.product.name} ajouté au panier !`
-    );
+
   }
 }

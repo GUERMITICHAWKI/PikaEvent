@@ -14,6 +14,7 @@ import { CommonModule } from '@angular/common';
 export class NavbarComponent {
   menuOpen = signal(false);
   scrolled = signal(false);
+  scrollProgress = signal(0);
 
   cartCount = computed(() => this.cartService.cartCount());
 
@@ -24,7 +25,11 @@ export class NavbarComponent {
 
   @HostListener('window:scroll')
   onScroll() {
-    this.scrolled.set(window.scrollY > 80);
+    const scrollY = window.scrollY;
+    this.scrolled.set(scrollY > 50);
+
+    const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+    this.scrollProgress.set(docHeight > 0 ? (scrollY / docHeight) * 100 : 0);
   }
 
   toggleMenu() {
