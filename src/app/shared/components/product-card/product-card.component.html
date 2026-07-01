@@ -25,19 +25,27 @@
       />
 
       <!-- Badges -->
-      <div class="absolute top-3 left-3 flex flex-col gap-1.5 z-10">
-        @if (product.isBestSeller) {
-          <span class="bg-accent text-white text-[11px] font-bold px-2.5 py-1 rounded-full">
-            Best-Seller
-          </span>
-        }
-        @if (product.isPromo) {
-          <span class="bg-white dark:bg-dark-soft text-dark dark:text-white
-                       text-[11px] font-semibold px-2.5 py-1 rounded-full shadow-sm">
-            Promo !
-          </span>
-        }
-      </div>
+<div class="absolute top-3 left-3 flex flex-col gap-1.5">
+  @if (product.isBestSeller) {
+    <span class="bg-accent text-white text-[11px] font-bold
+                 px-3 py-1 rounded-full shadow-sm">
+      ⭐ Best-Seller
+    </span>
+  }
+  @if (product.isPromo) {
+    <span class="bg-gold text-white text-[11px] font-semibold
+                 px-3 py-1 rounded-full shadow-sm">
+      Promo !
+    </span>
+  }
+</div>
+
+@if (product.discount) {
+  <div class="absolute top-3 right-3 bg-dark/80 backdrop-blur-sm
+              text-white text-xs font-bold px-2.5 py-1 rounded-lg">
+    -{{ product.discount }}%
+  </div>
+}
 
       <!-- Overlay + bouton ajouter au panier au hover -->
       <div class="absolute inset-0 bg-dark/0 group-hover:bg-dark/20

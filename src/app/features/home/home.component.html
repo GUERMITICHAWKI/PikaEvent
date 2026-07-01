@@ -1,172 +1,161 @@
 <!-- ===================== HERO ===================== -->
-<section class="relative min-h-[85vh] overflow-hidden flex items-center
-                bg-cream dark:bg-dark transition-colors duration-300">
-  <!-- Décor floral discret aux coins -->
+<section class="relative overflow-hidden flex items-center
+                bg-cream dark:bg-dark transition-colors duration-300
+                min-h-[90vh] lg:min-h-[85vh]">
+
   <div class="absolute inset-0 pointer-events-none overflow-hidden">
     <div class="absolute -top-10 -left-10 w-64 h-64 rounded-full
                 bg-gold/10 blur-3xl"></div>
     <div class="absolute -bottom-16 -right-16 w-80 h-80 rounded-full
                 bg-accent/10 blur-3xl"></div>
-    <div class="absolute top-1/3 -left-20 w-40 h-40 rounded-full
-                bg-accent/5 blur-2xl"></div>
   </div>
 
-  <div class="container-main relative z-10 w-full">
-    <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center py-16">
+  <div class="container-main relative z-10 w-full px-5 sm:px-6">
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center py-10 lg:py-16">
 
       <!-- Texte gauche -->
       <div class="animate-slide-left">
+
         <div class="inline-flex items-center gap-2 bg-accent/10 border
-                    border-accent/25 rounded-full px-4 py-2 mb-6">
-          <span class="w-2 h-2 bg-accent rounded-full animate-pulse"></span>
-          <span class="text-accent text-xs font-semibold tracking-widest uppercase">
+                    border-accent/25 rounded-full px-3 py-1.5 mb-4 sm:mb-6">
+          <span class="w-1.5 h-1.5 bg-accent rounded-full animate-pulse"></span>
+          <span class="text-accent text-[10px] sm:text-xs font-semibold
+                       tracking-widest uppercase">
             Nouvelle Collection 2026
           </span>
         </div>
 
-        <h1 class="font-serif text-4xl md:text-5xl lg:text-6xl
-           text-dark dark:text-white leading-tight mb-6">
-  L'art de la
-  <span class="block text-accent">décoration</span>
-  <span class="block text-gray-400 dark:text-white/60 text-3xl md:text-4xl
-               font-light italic">handmade</span>
-</h1>
+        <h1 class="font-serif text-3xl sm:text-4xl md:text-5xl lg:text-6xl
+                   text-dark dark:text-white leading-tight mb-3 sm:mb-5">
+          L'art de la
+          <span class="block text-accent">décoration</span>
+          <span class="block text-gray-400 dark:text-white/40
+                       text-2xl sm:text-3xl md:text-4xl
+                       font-light italic">handmade</span>
+        </h1>
 
-<p class="text-gray-500 dark:text-white/60 text-lg leading-relaxed mb-10 max-w-md">
-  Des créations uniques et élégantes, faites avec passion —
-  pour sublimer vos moments les plus précieux.
-</p>
-        <div class="flex flex-wrap gap-4 mb-10">
+        <p class="text-gray-500 dark:text-white/50 text-sm sm:text-base lg:text-lg
+                  leading-relaxed mb-6 max-w-md">
+          Des créations uniques et élégantes, faites avec passion —
+          pour sublimer vos moments les plus précieux.
+        </p>
+
+        <!-- Boutons côte à côte sur mobile aussi -->
+        <div class="flex flex-row gap-3 mb-8">
           <a routerLink="/boutique"
-             class="bg-dark text-white font-semibold px-10 py-4 rounded-pill
-                    transition-all duration-300 hover:bg-dark-soft
-                    hover:-translate-y-0.5 hover:shadow-lg
-                    inline-block text-center">
+             class="flex-1 sm:flex-none inline-block text-center
+                    px-5 sm:px-10 py-3 sm:py-4 rounded-pill font-semibold
+                    text-sm sm:text-base
+                    bg-dark dark:bg-white text-white dark:text-dark
+                    transition-all duration-300
+                    hover:bg-dark-soft dark:hover:bg-cream
+                    hover:-translate-y-0.5 hover:shadow-lg">
             Acheter maintenant
           </a>
           <a routerLink="/boutique"
-   class="bg-transparent text-dark dark:text-white font-semibold px-10 py-4 rounded-pill
-          border-2 border-accent/40 dark:border-accent/60 transition-all duration-300
-          hover:bg-accent hover:text-white hover:border-accent
-          inline-block text-center">
-  Voir les packs →
-</a>
+             class="flex-1 sm:flex-none inline-block text-center
+                    px-5 sm:px-10 py-3 sm:py-4 rounded-pill font-semibold
+                    text-sm sm:text-base
+                    bg-transparent text-dark dark:text-white
+                    border-2 border-dark/20 dark:border-white/20
+                    transition-all duration-300
+                    hover:bg-accent hover:text-white hover:border-accent">
+            Voir les packs →
+          </a>
         </div>
 
-        <!-- Stats avec icônes -->
-        <div class="grid grid-cols-4 gap-6 pt-6 border-t border-gray-200">
-          <div class="text-center">
-            <svg class="w-6 h-6 mx-auto mb-2 text-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <!-- Stats : scroll horizontal sur mobile -->
+        <div class="flex gap-5 sm:grid sm:grid-cols-4 sm:gap-4
+                    overflow-x-auto pb-1 sm:pb-0 scrollbar-hide
+                    pt-5 border-t border-gray-200 dark:border-white/10">
+          <div class="text-center flex-shrink-0">
+            <svg class="w-5 h-5 mx-auto mb-1 text-accent" fill="none"
+                 stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
                     d="M17 20h5v-2a4 4 0 00-3-3.87M9 20H4v-2a4 4 0 013-3.87m6-4a4 4 0 11-8 0 4 4 0 018 0zm6 4a4 4 0 11-8 0 4 4 0 018 0z"/>
             </svg>
-            <div class="text-dark font-serif text-xl font-bold">500+</div>
-            <div class="text-gray-400 text-[11px] mt-0.5">Clients satisfaits</div>
+            <div class="text-dark dark:text-white font-serif text-base sm:text-xl font-bold">
+              500+
+            </div>
+            <div class="text-gray-400 dark:text-white/40 text-[10px] mt-0.5 whitespace-nowrap">
+              Clients satisfaits
+            </div>
           </div>
-          <div class="text-center">
-            <svg class="w-6 h-6 mx-auto mb-2 text-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <div class="text-center flex-shrink-0">
+            <svg class="w-5 h-5 mx-auto mb-1 text-accent" fill="none"
+                 stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
                     d="M20 12v8a2 2 0 01-2 2H6a2 2 0 01-2-2v-8M4 7h16v5H4V7zm8-5v18M12 7c-1-2-3-3-4-3a2 2 0 00-2 2c0 1.5 2 3 6 3zm0 0c1-2 3-3 4-3a2 2 0 012 2c0 1.5-2 3-6 3z"/>
             </svg>
-            <div class="text-dark font-serif text-xl font-bold">24</div>
-            <div class="text-gray-400 text-[11px] mt-0.5">Packs disponibles</div>
+            <div class="text-dark dark:text-white font-serif text-base sm:text-xl font-bold">
+              24
+            </div>
+            <div class="text-gray-400 dark:text-white/40 text-[10px] mt-0.5 whitespace-nowrap">
+              Packs disponibles
+            </div>
           </div>
-          <div class="text-center">
-            <svg class="w-6 h-6 mx-auto mb-2 text-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <div class="text-center flex-shrink-0">
+            <svg class="w-5 h-5 mx-auto mb-1 text-accent" fill="none"
+                 stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
                     d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"/>
             </svg>
-            <div class="text-dark font-serif text-xl font-bold">100%</div>
-            <div class="text-gray-400 text-[11px] mt-0.5">Handmade</div>
+            <div class="text-dark dark:text-white font-serif text-base sm:text-xl font-bold">
+              100%
+            </div>
+            <div class="text-gray-400 dark:text-white/40 text-[10px] mt-0.5 whitespace-nowrap">
+              Handmade
+            </div>
           </div>
-          <div class="text-center">
-            <svg class="w-6 h-6 mx-auto mb-2 text-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <div class="text-center flex-shrink-0">
+            <svg class="w-5 h-5 mx-auto mb-1 text-accent" fill="none"
+                 stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
                     d="M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.519 4.674a1 1 0 00.95.69h4.915c.969 0 1.371 1.24.588 1.81l-3.976 2.888a1 1 0 00-.363 1.118l1.518 4.674c.3.922-.755 1.688-1.538 1.118l-3.976-2.888a1 1 0 00-1.176 0l-3.976 2.888c-.783.57-1.838-.196-1.538-1.118l1.518-4.674a1 1 0 00-.363-1.118l-3.976-2.888c-.783-.57-.38-1.81.588-1.81h4.914a1 1 0 00.951-.69l1.519-4.674z"/>
             </svg>
-            <div class="text-dark font-serif text-xl font-bold">5★</div>
-            <div class="text-gray-400 text-[11px] mt-0.5">Note moyenne</div>
+            <div class="text-dark dark:text-white font-serif text-base sm:text-xl font-bold">
+              5★
+            </div>
+            <div class="text-gray-400 dark:text-white/40 text-[10px] mt-0.5 whitespace-nowrap">
+              Note moyenne
+            </div>
           </div>
         </div>
       </div>
 
-      <!-- Image hero -->
-      <div class="relative rounded-[2rem] overflow-hidden
-            h-[60vh] md:h-[70vh] w-full
-            shadow-2xl ring-1 ring-accent/10">
-  <div class="absolute inset-0 flex flex-col items-center justify-center gap-4
-              bg-gradient-to-br from-cream to-cream-dark
-              dark:from-dark-soft dark:to-dark-deep">
- <img
-    src="assets/images/products/background.png"
-    alt="Pika Event Décoration"
-    class="absolute inset-0 w-full h-full object-cover object-center"
-    onerror="this.style.opacity='0'"
-  />
-
- 
-            <!-- Placeholder -->
-            <div class="absolute inset-0 flex flex-col items-center justify-center gap-4 z-10
-              bg-gradient-to-br from-cream to-cream-dark
-              dark:from-dark-soft dark:to-dark-deep
-              opacity-0 transition-opacity duration-300"
-       id="hero-placeholder">
+      <!-- Image hero — desktop uniquement -->
+      <div class="hidden lg:flex items-center justify-center animate-fade-in">
+        <div class="relative w-full max-w-md">
+          <div class="absolute -inset-3 border border-accent/15
+                      dark:border-accent/25 rounded-[2.5rem] pointer-events-none"></div>
+          <div class="relative rounded-[2rem] overflow-hidden shadow-2xl
+                      ring-1 ring-accent/10 dark:ring-accent/20"
+               style="height: 56vh; max-height: 500px;">
+            <div class="absolute inset-0 flex flex-col items-center justify-center gap-4
+                        bg-gradient-to-br from-cream to-cream-dark
+                        dark:from-dark-soft dark:to-dark-deep">
               <div class="w-20 h-20 rounded-full border-2 border-accent/30
                           flex items-center justify-center">
                 <span class="font-script text-accent text-2xl">P</span>
               </div>
               <p class="font-script text-accent text-lg">Pika Event</p>
             </div>
+            <img
+              src="assets/images/products/background.png"
+              alt="Pika Event Décoration"
+              class="absolute inset-0 w-full h-full object-cover object-center"
+              onerror="this.style.opacity='0'"
+            />
           </div>
         </div>
       </div>
 
-    
-
-
-<!-- ===================== FEATURES ===================== -->
-<section class="py-14 bg-white border-b border-gray-100">
-  <div class="container-main">
-    <div class="grid grid-cols-2 md:grid-cols-4 gap-8">
-      @for (f of features; track f.title) {
-        <div class="text-center group cursor-default">
-          <div class="w-16 h-16 rounded-full bg-cream mx-auto mb-4
-                      flex items-center justify-center text-2xl
-                      group-hover:bg-gold/10 transition-all duration-300
-                      group-hover:scale-110">
-            {{ f.icon }}
-          </div>
-          <h3 class="font-semibold text-dark text-sm mb-1">{{ f.title }}</h3>
-          <p class="text-gray-400 text-xs leading-relaxed">{{ f.desc }}</p>
-        </div>
-      }
     </div>
   </div>
 </section>
 
-<!-- ===================== SELECTION SPECIALE ===================== -->
-<section class="py-24 relative overflow-hidden">
-  <div class="absolute inset-0 bg-cream"></div>
-  <div class="container-main relative z-10 text-center">
-    <span class="inline-block bg-gold/10 text-gold text-xs font-semibold
-                 tracking-widest uppercase px-4 py-2 rounded-full mb-4">
-      Offre limitée
-    </span>
-    <h2 class="font-serif text-3xl md:text-5xl text-dark mb-4 max-w-3xl mx-auto">
-      Sélection spéciale disponibles
-      <span class="gold-text"> pour une durée limitée.</span>
-    </h2>
-    <p class="text-gray-500 italic mb-10 max-w-xl mx-auto">
-      Découvrez nos créations coup de cœur, choisies avec soin pour vous.
-    </p>
-    <a routerLink="/boutique" class="btn-gold text-base px-12 py-4">
-      Commander maintenant
-    </a>
-  </div>
-</section>
-
 <!-- ===================== PRODUITS + FILTRES ===================== -->
-<section class="py-24 bg-white">
+<section class="py-24 bg-white dark:bg-dark-soft">
   <div class="container-main">
 
     <!-- Titre -->
@@ -174,29 +163,31 @@
       <span class="text-gold text-xs font-semibold tracking-widest uppercase">
         Nos best-sellers
       </span>
-      <h2 class="section-title mt-2">Produits populaires</h2>
+      <h2 class="section-title mt-2 text-dark dark:text-white">Produits populaires</h2>
       <div class="gold-line"></div>
     </div>
 
-    <!-- ===== FILTRES CATÉGORIES ===== -->
-<div class="flex flex-wrap justify-center gap-3 mb-12 px-4
-            overflow-x-auto pb-2 sm:overflow-visible sm:pb-0">
+  <!-- ===== FILTRES CATÉGORIES ===== -->
+<div class="flex flex-nowrap justify-start sm:justify-center
+            gap-2 sm:gap-3 mb-12
+            overflow-x-auto pb-2 sm:pb-0
+            scrollbar-hide px-4 sm:px-0 -mx-4 sm:mx-0">
   @for (cat of categories; track cat.key) {
     <button
       (click)="setCategory(cat.key)"
       [class]="activeCategory() === cat.key
         ? 'bg-gold text-white border-gold shadow-gold scale-105'
-        : 'bg-white text-gray-500 border-gray-200 hover:border-gold hover:text-gold hover:scale-105'"
-      class="flex items-center gap-2 px-6 py-2.5 rounded-pill border-2
+        : 'bg-white dark:bg-dark text-gray-500 dark:text-white/60 border-gray-200 dark:border-white/10 hover:border-gold hover:text-gold hover:scale-105'"
+      class="flex items-center gap-2 px-5 py-2 rounded-pill border-2
              text-sm font-medium transition-all duration-300 cursor-pointer
-             flex-shrink-0 relative">
+             flex-shrink-0 whitespace-nowrap relative">
 
-      <span class="text-base">{{ cat.icon }}</span>
+      <span class="text-sm">{{ cat.icon }}</span>
       <span>{{ cat.label }}</span>
 
       <span [class]="activeCategory() === cat.key
         ? 'bg-white/25 text-white'
-        : 'bg-gray-100 text-gray-400'"
+        : 'bg-gray-100 dark:bg-white/10 text-gray-400 dark:text-white/50'"
             class="text-xs px-2 py-0.5 rounded-full font-bold min-w-5
                    text-center transition-colors duration-300">
         {{ categoryCounts()[cat.key] }}
@@ -210,39 +201,39 @@
   }
 </div>
 
-<!-- Grille produits filtrés avec transition -->
-<div [class]="isTransitioning()
-    ? 'opacity-0 translate-y-2'
-    : 'opacity-100 translate-y-0'"
-     class="transition-all duration-200">
+    <!-- Grille produits filtrés avec transition -->
+    <div [class]="isTransitioning()
+        ? 'opacity-0 translate-y-2'
+        : 'opacity-100 translate-y-0'"
+         class="transition-all duration-200">
 
-  @if (filteredProducts().length > 0) {
-    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-      @for (product of filteredProducts(); track product.id) {
-        <app-product-card
-          [product]="product"
-          (addToCartEvent)="addToCart($event)">
-        </app-product-card>
+      @if (filteredProducts().length > 0) {
+<div class="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-8">
+          @for (product of filteredProducts(); track product.id) {
+            <app-product-card
+              [product]="product"
+              (addToCartEvent)="addToCart($event)">
+            </app-product-card>
+          }
+        </div>
+      } @else {
+        <div class="text-center py-20 animate-fade-in">
+          <div class="w-20 h-20 rounded-full bg-cream dark:bg-dark mx-auto mb-6
+                      flex items-center justify-center text-3xl">
+            🔍
+          </div>
+          <p class="text-dark dark:text-white font-serif text-xl mb-2">
+            Aucun produit dans cette catégorie
+          </p>
+          <p class="text-gray-400 dark:text-white/40 text-sm mb-6">
+            Essayez une autre catégorie ou voyez tous nos produits
+          </p>
+          <button (click)="setCategory('tous')" class="btn-outline-gold">
+            Voir tous les produits
+          </button>
+        </div>
       }
     </div>
-  } @else {
-    <div class="text-center py-20 animate-fade-in">
-      <div class="w-20 h-20 rounded-full bg-cream mx-auto mb-6
-                  flex items-center justify-center text-3xl">
-        🔍
-      </div>
-      <p class="text-dark font-serif text-xl mb-2">
-        Aucun produit dans cette catégorie
-      </p>
-      <p class="text-gray-400 text-sm mb-6">
-        Essayez une autre catégorie ou voyez tous nos produits
-      </p>
-      <button (click)="setCategory('tous')" class="btn-outline-gold">
-        Voir tous les produits
-      </button>
-    </div>
-  }
-</div>
 
     <!-- CTA -->
     <div class="text-center mt-14">
@@ -253,13 +244,14 @@
   </div>
 </section>
 
-<section class="py-20 bg-white border-t border-gray-100">
+<!-- ===================== POURQUOI NOUS ===================== -->
+<section class="py-20 bg-white dark:bg-dark-soft border-t border-gray-100 dark:border-white/10">
   <div class="container-main">
     <div class="text-center mb-14">
       <span class="text-gold text-xs font-semibold tracking-widest uppercase">
         Notre engagement
       </span>
-      <h2 class="font-serif text-3xl md:text-4xl text-dark mt-2">
+      <h2 class="font-serif text-3xl md:text-4xl text-dark dark:text-white mt-2">
         Pourquoi choisir <span class="text-accent">Pika Event ?</span>
       </h2>
       <div class="gold-line"></div>
@@ -272,12 +264,12 @@
         { icon: '🔄', title: 'Garantie cassé', desc: 'Article cassé = remplacement gratuit. Votre satisfaction est notre priorité.' }
       ]; track item.title; let i = $index) {
         <div [class]="i === 1 ? 'md:-translate-y-4' : ''"
-             class="bg-cream border border-gray-100 rounded-2xl p-8
+             class="bg-cream dark:bg-dark border border-gray-100 dark:border-white/10 rounded-2xl p-8
                     hover:border-gold/40 hover:shadow-card
                     transition-all duration-300">
           <div class="text-4xl mb-4">{{ item.icon }}</div>
-          <h3 class="font-serif text-xl text-dark mb-3">{{ item.title }}</h3>
-          <p class="text-gray-500 text-sm leading-relaxed">{{ item.desc }}</p>
+          <h3 class="font-serif text-xl text-dark dark:text-white mb-3">{{ item.title }}</h3>
+          <p class="text-gray-500 dark:text-white/50 text-sm leading-relaxed">{{ item.desc }}</p>
         </div>
       }
     </div>

@@ -110,8 +110,66 @@ export class ProductService {
       isBestSeller: true,
       rating: 5,
       reviewCount: 4
+    },
+
+    {
+      id: 7,
+      name: 'Pack Ritej Avec Bougie',
+      slug: 'pack-ritej-bougie',
+      category: 'ritej',
+      price: 59000,
+      originalPrice: 69000,
+      discount: 14,
+      images: ['assets/images/products/pack-ritej-bougie.jpg'],
+      description: 'Pack Ritej enrichi d\'une bougie décorative.',
+      details: [
+        { label: 'Bougie', value: 'Incluse' }
+      ],
+      isPromo: true,
+      isBestSeller: true,
+      rating: 5,
+      reviewCount: 4
+    },
+    {
+      id: 7,
+      name: 'Pack Ritej Avec Bougie',
+      slug: 'pack-ritej-bougie',
+      category: 'ritej',
+      price: 59000,
+      originalPrice: 69000,
+      discount: 14,
+      images: ['assets/images/products/pack-ritej-bougie.jpg'],
+      description: 'Pack Ritej enrichi d\'une bougie décorative.',
+      details: [
+        { label: 'Bougie', value: 'Incluse' }
+      ],
+      isPromo: true,
+      isBestSeller: true,
+      rating: 5,
+      reviewCount: 4
+    },
+    {
+      id: 7,
+      name: 'Pack Ritej Avec Bougie',
+      slug: 'pack-ritej-bougie',
+      category: 'ritej',
+      price: 59000,
+      originalPrice: 69000,
+      discount: 14,
+      images: ['assets/images/products/pack-ritej-bougie.jpg'],
+      description: 'Pack Ritej enrichi d\'une bougie décorative.',
+      details: [
+        { label: 'Bougie', value: 'Incluse' }
+      ],
+      isPromo: true,
+      isBestSeller: true,
+      rating: 5,
+      reviewCount: 4
     }
+    
+    
   ];
+  
 
   getAll(): Product[] { return this.products; }
 

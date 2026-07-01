@@ -15,7 +15,7 @@
 <div class="h-0.5 bg-gradient-to-r from-transparent via-gold to-transparent"></div>
 
 <!-- ===== CONTENU ===== -->
-<section class="py-16 bg-cream dark:bg-dark min-h-screen transition-colors duration-300">
+<section class="py-8 lg:py-16 bg-cream dark:bg-dark min-h-screen transition-colors duration-300">
   <div class="container-main">
 
     @if (isEmpty()) {
@@ -44,14 +44,14 @@
 
     } @else {
 
-      <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+      <div class="flex flex-col lg:grid lg:grid-cols-3 gap-6 lg:gap-8">
 
         <!-- ===== LISTE ARTICLES ===== -->
         <div class="lg:col-span-2 space-y-4">
 
           <!-- Header liste -->
-          <div class="flex items-center justify-between mb-6">
-            <h2 class="font-serif text-xl text-dark dark:text-white">
+          <div class="flex items-center justify-between mb-4 lg:mb-6">
+            <h2 class="font-serif text-lg lg:text-xl text-dark dark:text-white">
               {{ cartCount() }} article(s)
             </h2>
             <button
@@ -72,15 +72,17 @@
 
           <!-- Articles -->
           @for (item of cartItems(); track item.product.id) {
-            <div class="bg-white dark:bg-dark-soft rounded-2xl p-5 shadow-sm
-                        flex items-center gap-5 group
+            <div class="bg-white dark:bg-dark-soft rounded-2xl p-4 lg:p-5 shadow-sm
+                        flex items-center gap-3 lg:gap-5 group
                         hover:shadow-card transition-shadow duration-300">
 
-              <!-- Image -->
-              <div class="w-20 h-20 rounded-xl overflow-hidden flex-shrink-0
-                          bg-gradient-to-br from-cream to-cream-dark
-                          dark:from-dark-deep dark:to-dark relative
-                          flex items-center justify-center">
+              <!-- Image cliquable → fiche produit -->
+              <a [routerLink]="['/produit', item.product.slug]"
+                 class="w-16 h-16 lg:w-20 lg:h-20 rounded-xl overflow-hidden flex-shrink-0
+                        bg-gradient-to-br from-cream to-cream-dark
+                        dark:from-dark-deep dark:to-dark relative
+                        flex items-center justify-center
+                        hover:ring-2 hover:ring-accent/50 transition-all duration-200">
                 <span class="text-2xl opacity-40">🌸</span>
                 <img
                   [src]="item.product.images[0]"
@@ -88,19 +90,29 @@
                   class="absolute inset-0 w-full h-full object-cover"
                   onerror="this.style.opacity='0'"
                 />
-              </div>
+              </a>
 
               <!-- Infos -->
               <div class="flex-1 min-w-0">
-                <p class="text-xs text-gold/70 uppercase tracking-wider
-                          font-medium mb-1">
+                <p class="text-[10px] lg:text-xs text-gold/70 uppercase tracking-wider
+                          font-medium mb-0.5 lg:mb-1">
                   {{ item.product.category }}
                 </p>
-                <h3 class="font-serif text-dark dark:text-white font-semibold truncate">
+                <a [routerLink]="['/produit', item.product.slug]"
+                   class="font-serif text-sm lg:text-base text-dark dark:text-white
+                          font-semibold truncate block hover:text-accent
+                          transition-colors duration-200">
                   {{ item.product.name }}
-                </h3>
-                <p class="text-gold font-bold mt-1">
+                </a>
+                <p class="text-gold font-bold text-sm lg:text-base mt-0.5 lg:mt-1">
                   {{ formatPrice(item.product.price) }}
+                </p>
+
+                <!-- Sous-total visible sur mobile sous le nom -->
+                <p class="text-xs text-gray-400 dark:text-white/40 mt-1 sm:hidden">
+                  Total : <span class="font-bold text-dark dark:text-white">
+                    {{ formatPrice(item.product.price * item.quantity) }}
+                  </span>
                 </p>
               </div>
 
@@ -109,18 +121,18 @@
                           rounded-pill overflow-hidden flex-shrink-0">
                 <button
                   (click)="decrease(item)"
-                  class="w-9 h-9 flex items-center justify-center
+                  class="w-8 h-8 lg:w-9 lg:h-9 flex items-center justify-center
                          text-gray-400 dark:text-white/40 hover:bg-gray-100 dark:hover:bg-white/10
                          hover:text-dark dark:hover:text-white
                          transition-colors text-lg font-bold">
                   −
                 </button>
-                <span class="w-8 text-center text-sm font-semibold text-dark dark:text-white">
+                <span class="w-7 lg:w-8 text-center text-sm font-semibold text-dark dark:text-white">
                   {{ item.quantity }}
                 </span>
                 <button
                   (click)="increase(item)"
-                  class="w-9 h-9 flex items-center justify-center
+                  class="w-8 h-8 lg:w-9 lg:h-9 flex items-center justify-center
                          text-gray-400 dark:text-white/40 hover:bg-gray-100 dark:hover:bg-white/10
                          hover:text-dark dark:hover:text-white
                          transition-colors text-lg font-bold">
@@ -128,10 +140,10 @@
                 </button>
               </div>
 
-              <!-- Sous-total -->
+              <!-- Sous-total desktop seulement -->
               <div class="text-right flex-shrink-0 hidden sm:block">
                 <p class="text-xs text-gray-400 dark:text-white/40 mb-1">Sous-total</p>
-                <p class="font-bold text-dark dark:text-white">
+                <p class="font-bold text-dark dark:text-white text-sm lg:text-base">
                   {{ formatPrice(item.product.price * item.quantity) }}
                 </p>
               </div>
@@ -139,7 +151,7 @@
               <!-- Supprimer -->
               <button
                 (click)="remove(item.product.id)"
-                class="w-9 h-9 rounded-full flex items-center justify-center
+                class="w-8 h-8 lg:w-9 lg:h-9 rounded-full flex items-center justify-center
                        text-gray-300 dark:text-white/20 hover:bg-red-50 dark:hover:bg-red-500/10
                        hover:text-red-400
                        transition-all duration-200 flex-shrink-0">
@@ -154,7 +166,7 @@
           }
 
           <!-- Continuer les achats -->
-          <div class="pt-4">
+          <div class="pt-2 lg:pt-4">
             <a routerLink="/boutique"
                class="inline-flex items-center gap-2 text-gold
                       hover:text-gold-dark text-sm font-medium
@@ -171,9 +183,10 @@
 
         <!-- ===== RÉSUMÉ COMMANDE ===== -->
         <div class="lg:col-span-1">
-          <div class="bg-white dark:bg-dark-soft rounded-2xl shadow-sm p-6 sticky top-32">
+          <div class="bg-white dark:bg-dark-soft rounded-2xl shadow-sm p-5 lg:p-6
+                      lg:sticky lg:top-32">
 
-            <h2 class="font-serif text-xl text-dark dark:text-white mb-6 pb-4
+            <h2 class="font-serif text-lg lg:text-xl text-dark dark:text-white mb-5 lg:mb-6 pb-4
                        border-b border-gray-100 dark:border-white/10">
               Résumé de la commande
             </h2>
@@ -202,7 +215,7 @@
             <div class="h-px bg-gray-100 dark:bg-white/10 mb-6"></div>
 
             <!-- Total -->
-            <div class="flex justify-between items-center mb-8">
+            <div class="flex justify-between items-center mb-6 lg:mb-8">
               <span class="font-semibold text-dark dark:text-white">Total</span>
               <span class="font-serif text-2xl text-gold font-bold">
                 {{ formatPrice(cartTotal()) }}
@@ -216,7 +229,7 @@
             </a>
 
             <!-- Infos sécurité -->
-            <div class="mt-6 space-y-2">
+            <div class="mt-5 lg:mt-6 space-y-2">
               <div class="flex items-center gap-2 text-xs text-gray-400 dark:text-white/40">
                 <span>🔒</span>
                 <span>Paiement sécurisé à la livraison</span>
