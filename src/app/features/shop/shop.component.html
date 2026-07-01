@@ -1,333 +1,351 @@
-<!-- ===== HERO BOUTIQUE ===== -->
-<section class="bg-cream dark:bg-dark border-b border-gray-100 dark:border-white/10
-                transition-colors duration-300">
-  <div class="container-main py-8 px-5 sm:px-6">
+<!-- ================= HERO ================= -->
+<section class="relative bg-cream dark:bg-dark overflow-hidden">
 
-    <!-- Breadcrumb -->
-    <nav class="flex items-center gap-2 text-gray-400 dark:text-white/40 text-sm mb-5">
-      <a routerLink="/" class="hover:text-gold transition-colors">Accueil</a>
-      <span>/</span>
-      <span class="text-gold">Packs Décoration</span>
-    </nav>
-
-    <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center pb-8">
-
-      <!-- Texte gauche -->
-      <div>
-        <div class="inline-flex items-center gap-2 bg-accent/10 border
-                    border-accent/25 rounded-full px-3 py-1.5 mb-4">
-          <span class="w-1.5 h-1.5 bg-accent rounded-full animate-pulse"></span>
-          <span class="text-accent text-[10px] sm:text-xs font-semibold
-                       tracking-widest uppercase">
-            Collection complète
-          </span>
-        </div>
-
-        <h1 class="font-serif text-3xl sm:text-4xl md:text-5xl
-                   text-dark dark:text-white mb-3">
-          Notre <span class="text-accent">Boutique</span>
-        </h1>
-        <div class="w-12 h-0.5 bg-gold mb-3"></div>
-        <p class="text-gray-500 dark:text-white/50 max-w-md mb-5
-                  text-sm sm:text-base">
-          Découvrez nos créations handmade uniques, faites avec passion et élégance.
-        </p>
-
-        <!-- Stats : scroll horizontal sur mobile -->
-        <div class="flex items-center gap-4 overflow-x-auto pb-1 scrollbar-hide">
-          <div class="flex items-center gap-2 flex-shrink-0">
-            <div class="w-9 h-9 rounded-full bg-gold/10
-                        flex items-center justify-center">
-              <svg class="w-4 h-4 text-gold" fill="none" stroke="currentColor"
-                   viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
-                      d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"/>
-              </svg>
-            </div>
-            <div>
-              <div class="text-dark dark:text-white font-bold text-base leading-tight">
-                {{ productCount() }}
-              </div>
-              <div class="text-gray-400 dark:text-white/40 text-xs whitespace-nowrap">
-                produit(s)
-              </div>
-            </div>
-          </div>
-
-          <div class="w-px h-8 bg-gray-200 dark:bg-white/10 flex-shrink-0"></div>
-
-          <div class="flex items-center gap-2 flex-shrink-0">
-            <div class="w-9 h-9 rounded-full bg-accent/10
-                        flex items-center justify-center">
-              <svg class="w-4 h-4 text-accent" fill="none" stroke="currentColor"
-                   viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
-                      d="M7 7h.01M7 3h5c.512 0 1.024.195 1.414.586l7 7a2 2 0 010 2.828l-7 7a2 2 0 01-2.828 0l-7-7A2 2 0 013 12V7a4 4 0 014-4z"/>
-              </svg>
-            </div>
-            <div>
-              <div class="text-dark dark:text-white font-bold text-base leading-tight">
-                -24%
-              </div>
-              <div class="text-gray-400 dark:text-white/40 text-xs whitespace-nowrap">
-                réduction max
-              </div>
-            </div>
-          </div>
-
-          <div class="w-px h-8 bg-gray-200 dark:bg-white/10 flex-shrink-0"></div>
-
-          <div class="flex items-center gap-2 flex-shrink-0">
-            <div class="w-9 h-9 rounded-full bg-green-50 dark:bg-green-500/10
-                        flex items-center justify-center">
-              <svg class="w-4 h-4 text-green-500" fill="none" stroke="currentColor"
-                   viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
-                      d="M5 13l4 4L19 7"/>
-              </svg>
-            </div>
-            <div>
-              <div class="text-dark dark:text-white font-bold text-base leading-tight">
-                Gratuite
-              </div>
-              <div class="text-gray-400 dark:text-white/40 text-xs whitespace-nowrap">
-                livraison
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Grille miniature — desktop uniquement — VERSION PREMIUM -->
-      <div class="hidden lg:block">
-        <div class="relative">
-          <!-- Cadre décoratif -->
-          <div class="absolute -inset-3 border border-accent/15
-                      rounded-3xl pointer-events-none"></div>
-          <!-- Lueur dorée douce derrière la carte -->
-          <div class="absolute -inset-6 bg-gold/5 rounded-[2rem] blur-2xl
-                      pointer-events-none"></div>
-
-          <div class="relative bg-white dark:bg-dark-soft rounded-2xl p-5
-                      shadow-[0_20px_50px_-12px_rgba(0,0,0,0.15)]
-                      dark:shadow-[0_20px_50px_-12px_rgba(0,0,0,0.5)]
-                      ring-1 ring-black/5 dark:ring-white/5">
-
-            <div class="grid grid-cols-3 gap-3 mb-3">
-              @for (product of allProducts().slice(0, 3); track product.id) {
-                <div class="relative rounded-xl overflow-hidden aspect-square
-                            bg-cream dark:bg-dark group cursor-pointer
-                            ring-1 ring-black/5 dark:ring-white/10">
-                  <img
-                    [src]="product.images[0]"
-                    [alt]="product.name"
-                    class="w-full h-full object-cover object-center
-                           saturate-[0.9] contrast-[1.06] brightness-[1.02]
-                           transition-all duration-500
-                           group-hover:scale-110 group-hover:saturate-100"
-                    onerror="this.style.opacity='0'"
-                  />
-                  <!-- Voile doré uniforme pour lisser les écarts de fond -->
-                  <div class="absolute inset-0
-                              bg-gradient-to-t from-gold/15 via-transparent to-gold/5
-                              mix-blend-multiply pointer-events-none"></div>
-                  <!-- Léger vignettage bord pour un rendu studio -->
-                  <div class="absolute inset-0 shadow-[inset_0_0_20px_rgba(0,0,0,0.08)]
-                              pointer-events-none"></div>
-                </div>
-              }
-            </div>
-
-            <div class="grid grid-cols-3 gap-3">
-              @for (product of allProducts().slice(3, 6); track product.id) {
-                <div class="relative rounded-xl overflow-hidden aspect-square
-                            bg-cream dark:bg-dark group cursor-pointer
-                            ring-1 ring-black/5 dark:ring-white/10">
-                  <img
-                    [src]="product.images[0]"
-                    [alt]="product.name"
-                    class="w-full h-full object-cover object-center
-                           saturate-[0.9] contrast-[1.06] brightness-[1.02]
-                           transition-all duration-500
-                           group-hover:scale-110 group-hover:saturate-100"
-                    onerror="this.style.opacity='0'"
-                  />
-                  <div class="absolute inset-0
-                              bg-gradient-to-t from-gold/15 via-transparent to-gold/5
-                              mix-blend-multiply pointer-events-none"></div>
-                  <div class="absolute inset-0 shadow-[inset_0_0_20px_rgba(0,0,0,0.08)]
-                              pointer-events-none"></div>
-                </div>
-              }
-            </div>
-
-            <div class="mt-4 pt-4 border-t border-gray-100 dark:border-white/10
-                        flex items-center justify-between">
-              <span class="text-xs text-gray-400 dark:text-white/40 font-medium">
-                {{ productCount() }} créations disponibles
-              </span>
-              <span class="text-xs text-accent font-semibold">
-                ✨ Handmade By Afef
-              </span>
-            </div>
-          </div>
-        </div>
-      </div>
-
+  <!-- Fond décoratif discret -->
+  <div class="absolute inset-0 pointer-events-none">
+    <div class="absolute top-0 right-0 w-1/2 h-full
+                bg-gradient-to-l from-gold/5 via-transparent to-transparent">
     </div>
   </div>
+
+  <div class="container-main relative z-10 py-16 sm:py-20 px-5 sm:px-6">
+
+    <h1
+      class="font-serif
+             text-5xl
+             md:text-6xl
+             lg:text-7xl
+             text-dark
+             dark:text-white
+             leading-none
+             mb-6">
+
+      Notre Boutique
+
+    </h1>
+
+    <div class="w-16 h-[2px] bg-gold mb-6"></div>
+
+    <p
+      class="uppercase
+             tracking-[0.25em]
+             text-gray-500
+             dark:text-white/50
+             text-sm
+             font-semibold">
+
+      {{ productCount() }} produit(s) disponible(s)
+
+    </p>
+
+  </div>
+
 </section>
 
-<!-- Séparateur doré -->
+<!-- Séparateur -->
 <div class="h-px bg-gradient-to-r from-transparent via-gold to-transparent"></div>
 
-<!-- ===== FILTRES & RECHERCHE ===== -->
-<section class="bg-white dark:bg-dark-soft sticky top-[60px] z-40
-                shadow-sm border-b border-gray-100 dark:border-white/10
-                transition-colors duration-300">
-  <div class="container-main px-5 sm:px-6 py-3 space-y-3">
+<div
+  class="h-px
+         bg-gradient-to-r
+         from-transparent
+         via-gold
+         to-transparent">
+</div>
 
-    <!-- Catégories : scroll horizontal sur mobile -->
-    <div class="flex flex-nowrap sm:flex-wrap sm:justify-center
-                gap-2 overflow-x-auto pb-1 sm:pb-0
-                scrollbar-hide -mx-5 sm:mx-0 px-5 sm:px-0">
+<!-- ===================================================== -->
+<!-- FILTRES -->
+<!-- ===================================================== -->
+
+<section
+  class="sticky
+         top-[60px]
+         z-40
+         bg-white
+         dark:bg-dark-soft
+         shadow-sm
+         border-b
+         border-gray-100
+         dark:border-white/10">
+
+  <div
+    class="container-main
+           px-5
+           sm:px-6
+           py-6">
+
+    <!-- Catégories -->
+
+    <div
+      class="flex
+             gap-3
+             overflow-x-auto
+             scrollbar-hide
+             pb-3">
+
       @for (cat of categories; track cat.key) {
+
         <button
+
           (click)="setCategory(cat.key)"
+
           [class]="selectedCategory() === cat.key
-            ? 'bg-gold text-white border-gold shadow-gold'
-            : 'bg-white dark:bg-dark text-gray-600 dark:text-white/60 border-gray-200 dark:border-white/10 hover:border-gold hover:text-gold'"
-          class="flex items-center gap-1.5 px-4 py-1.5 rounded-pill border text-sm
-                 font-medium transition-all duration-200 cursor-pointer
-                 flex-shrink-0 whitespace-nowrap">
-@switch (cat.icon) {
-  @case ('sparkle') {
-    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
-            d="M12 3v3m0 12v3m9-9h-3M6 12H3m14.36-6.36l-2.12 2.12M8.76 15.24l-2.12 2.12m0-10.72l2.12 2.12m8.48 8.48l2.12 2.12"/>
-    </svg>
-  }
-  @case ('heart') {
-    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
-            d="M12 21s-7-4.35-9.5-8.5C.5 8.5 3 5 6.5 5c2 0 3.5 1 5.5 3 2-2 3.5-3 5.5-3 3.5 0 6 3.5 4 7.5C19 16.65 12 21 12 21z"/>
-    </svg>
-  }
-  @case ('ring') {
-    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
-            d="M12 9l2-6h-4l2 6zm0 0a6 6 0 100 12 6 6 0 000-12z"/>
-    </svg>
-  }
-  @case ('flower') {
-    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
-            d="M12 12a3 3 0 100-6 3 3 0 000 6zm0 0a3 3 0 110 6 3 3 0 010-6zm0 0a3 3 0 106 0 3 3 0 00-6 0zm0 0a3 3 0 10-6 0 3 3 0 006 0z"/>
-    </svg>
-  }
-  @case ('leaf') {
-    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
-            d="M11 20A7 7 0 019.8 6.1C15.5 5 20 5.5 20 5.5s.5 4.5-1.1 10.2A7 7 0 0111 20zm0 0v-7m0-2l6-6"/>
-    </svg>
-  }
-}          <span>{{ cat.label }}</span>
-          <span [class]="selectedCategory() === cat.key
-            ? 'bg-white/20 text-white'
-            : 'bg-gray-100 dark:bg-white/10 text-gray-400 dark:text-white/50'"
-                class="text-xs px-1.5 py-0.5 rounded-full font-bold">
-            {{ categoryCounts()[cat.key] }}
-          </span>
+          ? 'bg-gold text-white border-gold shadow-lg'
+          : 'bg-white dark:bg-dark text-gray-600 dark:text-white/70 border-gray-200 dark:border-white/10 hover:border-gold hover:text-gold'"
+
+          class="rounded-full
+                 border
+                 px-6
+                 py-2.5
+                 whitespace-nowrap
+                 transition-all
+                 duration-300
+                 font-medium">
+
+          {{ cat.label }}
+
         </button>
+
       }
+
     </div>
 
-    <!-- Recherche + Tri : toujours sur une ligne -->
-    <div class="flex flex-row gap-2 pt-2
-                border-t border-gray-100 dark:border-white/10">
+    <!-- Recherche + Tri -->
+
+    <div
+      class="flex
+             flex-col
+             lg:flex-row
+             gap-4
+             mt-6">
+
+      <!-- Recherche -->
+
       <div class="relative flex-1">
-        <input
-          type="text"
-          placeholder="Rechercher..."
-          (input)="setSearch($event)"
-          class="w-full pl-8 pr-3 py-2 border border-gray-200 dark:border-white/10
-                 bg-white dark:bg-dark text-dark dark:text-white
-                 dark:placeholder:text-white/30
-                 rounded-pill text-sm focus:outline-none focus:border-gold
-                 transition-colors duration-200"
-        />
-        <svg class="absolute left-2.5 top-1/2 -translate-y-1/2 w-3.5 h-3.5
-                    text-gray-400 dark:text-white/30"
-             fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
+
+        <svg
+
+          class="absolute
+                 left-4
+                 top-1/2
+                 -translate-y-1/2
+                 w-5
+                 h-5
+                 text-gray-400"
+
+          fill="none"
+
+          stroke="currentColor"
+
+          viewBox="0 0 24 24">
+
+          <path
+
+            stroke-linecap="round"
+
+            stroke-linejoin="round"
+
+            stroke-width="2"
+
+            d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
+
         </svg>
+
+        <input
+
+          type="text"
+
+          placeholder="Rechercher un produit..."
+
+          (input)="setSearch($event)"
+
+          class="w-full
+                 rounded-full
+                 border
+                 border-gray-200
+                 dark:border-white/10
+                 bg-white
+                 dark:bg-dark
+                 text-dark
+                 dark:text-white
+                 pl-12
+                 pr-5
+                 py-3
+                 focus:border-gold
+                 focus:outline-none
+                 transition-all"/>
+
       </div>
+
+      <!-- Tri -->
 
       <select
+
         (change)="setSort($event)"
-        class="flex-shrink-0 px-3 py-2 border border-gray-200 dark:border-white/10
-               rounded-pill text-sm focus:outline-none focus:border-gold
-               bg-white dark:bg-dark text-gray-600 dark:text-white/60
-               cursor-pointer transition-colors duration-200">
+
+        class="rounded-full
+               border
+               border-gray-200
+               dark:border-white/10
+               bg-white
+               dark:bg-dark
+               text-dark
+               dark:text-white
+               px-6
+               py-3
+               focus:border-gold
+               focus:outline-none">
+
         @for (opt of sortOptions; track opt.key) {
-          <option [value]="opt.key">{{ opt.label }}</option>
+
+          <option [value]="opt.key">
+
+            {{ opt.label }}
+
+          </option>
+
         }
+
       </select>
+
     </div>
 
   </div>
+
 </section>
 
-<!-- ===== GRILLE PRODUITS ===== -->
-<section class="py-8 sm:py-12 bg-cream dark:bg-dark min-h-screen
-                transition-colors duration-300">
-  <div class="container-main px-5 sm:px-6">
+<!-- ===================================================== -->
+<!-- PRODUITS -->
+<!-- ===================================================== -->
 
-    @if (filteredProducts().length > 0) {
+<section
+  class="py-12
+         bg-cream
+         dark:bg-dark
+         min-h-screen
+         transition-colors
+         duration-300">
 
-      <div class="flex items-center justify-between mb-4 sm:mb-6">
-        <p class="text-sm text-gray-400 dark:text-white/40">
-          <span class="text-dark dark:text-white font-semibold">
-            {{ filteredProducts().length }}
-          </span>
-          produit(s) trouvé(s)
-        </p>
-      </div>
+<div class="container-main px-5 sm:px-6">
 
-      <!-- 2 colonnes sur mobile, 3 sur desktop -->
-      <div class="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
+@if(filteredProducts().length > 0){
+
+<div class="flex items-center justify-between mb-8">
+
+<p class="text-gray-500 dark:text-white/50">
+
+<span class="font-semibold text-dark dark:text-white">
+
+{{ filteredProducts().length }}
+
+</span>
+
+produit(s) trouvé(s)
+
+</p>
+
+</div>
+
+<div class="grid grid-cols-2 lg:grid-cols-3 gap-6">
         @for (product of filteredProducts(); track product.id) {
-          <app-product-card
-            [product]="product"
-            (addToCartEvent)="addToCart($event)">
-          </app-product-card>
-        }
+
+        <app-product-card
+          [product]="product"
+          (addToCartEvent)="addToCart($event)">
+        </app-product-card>
+
+      }
+
+    </div>
+
+  } @else {
+
+    <div class="flex flex-col items-center justify-center py-28">
+
+      <div
+        class="w-24 h-24
+               rounded-full
+               bg-white
+               dark:bg-dark-soft
+               shadow-lg
+               flex
+               items-center
+               justify-center
+               mb-8">
+
+        <svg
+          class="w-10 h-10 text-gray-300 dark:text-white/20"
+          fill="none"
+          stroke="currentColor"
+          viewBox="0 0 24 24">
+
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="1.5"
+            d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
+
+        </svg>
+
       </div>
 
-    } @else {
+      <h2
+        class="font-serif
+               text-3xl
+               text-dark
+               dark:text-white
+               mb-4">
 
-      <div class="flex flex-col items-center justify-center py-24 text-center">
-        <div class="w-20 h-20 rounded-full bg-white dark:bg-dark-soft
-                    flex items-center justify-center mb-6 shadow-sm">
-          <svg class="w-10 h-10 text-gray-300 dark:text-white/20"
-               fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
-                  d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
-          </svg>
-        </div>
-        <h3 class="font-serif text-2xl text-dark dark:text-white mb-3">
-          Aucun produit trouvé
-        </h3>
-        <p class="text-gray-400 dark:text-white/40 text-sm mb-8 max-w-xs">
-          Essayez de modifier vos filtres ou votre recherche.
-        </p>
-        <button (click)="setCategory('tous')" class="btn-gold">
-          Voir tous les produits
-        </button>
-      </div>
+        Aucun produit trouvé
 
-    }
+      </h2>
 
-  </div>
+      <p
+        class="text-center
+               text-gray-500
+               dark:text-white/50
+               max-w-md
+               leading-7
+               mb-8">
+
+        Aucun produit ne correspond à votre recherche.
+        Essayez une autre catégorie ou modifiez votre recherche.
+
+      </p>
+
+      <button
+
+        (click)="setCategory('tous')"
+
+        class="px-8
+               py-3
+               rounded-full
+               bg-gold
+               text-white
+               hover:scale-105
+               transition-all
+               duration-300">
+
+        Voir tous les produits
+
+      </button>
+
+    </div>
+
+  }
+
+</div>
+
 </section>
+
+<!-- ===================================================== -->
+<!-- FIN -->
+<!-- ===================================================== -->
+
+<div
+  class="h-px
+         bg-gradient-to-r
+         from-transparent
+         via-gold
+         to-transparent">
+</div>
