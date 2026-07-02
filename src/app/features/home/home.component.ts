@@ -8,11 +8,10 @@ import { ProductCardComponent } from '../../shared/components/product-card/produ
 import { Product } from '../../core/models/product.model';
 
 @Component({
-  selector: 'app-home',
-  standalone: true,
-  imports: [RouterLink, CommonModule, ProductCardComponent],
-  templateUrl: './home.component.html',
-  styleUrl: './home.component.scss'
+    selector: 'app-home',
+    imports: [RouterLink, CommonModule, ProductCardComponent],
+    templateUrl: './home.component.html',
+    styleUrl: './home.component.scss'
 })
 export class HomeComponent implements OnInit {
 

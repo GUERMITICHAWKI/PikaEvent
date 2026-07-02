@@ -5,10 +5,9 @@ import { Product } from '../../../core/models/product.model';
 import { ProductService } from '../../../core/services/product.service';
 
 @Component({
-  selector: 'app-product-card',
-  standalone: true,
-  imports: [RouterLink, CommonModule],
-  templateUrl: './product-card.component.html',
+    selector: 'app-product-card',
+    imports: [RouterLink, CommonModule],
+    templateUrl: './product-card.component.html'
 })
 export class ProductCardComponent {
   @Input() product!: Product;

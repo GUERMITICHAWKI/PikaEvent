@@ -7,11 +7,10 @@ import { ProductCardComponent } from '../../shared/components/product-card/produ
 import { Product } from '../../core/models/product.model';
 
 @Component({
-  selector: 'app-product-detail',
-  standalone: true,
-  imports: [CommonModule, RouterLink, ProductCardComponent],
-  templateUrl: './product-detail.component.html',
-  styleUrl: './product-detail.component.scss'
+    selector: 'app-product-detail',
+    imports: [CommonModule, RouterLink, ProductCardComponent],
+    templateUrl: './product-detail.component.html',
+    styleUrl: './product-detail.component.scss'
 })
 export class ProductDetailComponent implements OnInit {
 

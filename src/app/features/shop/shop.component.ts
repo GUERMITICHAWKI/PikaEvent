@@ -1,6 +1,5 @@
 import { Component, OnInit, signal, computed } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { RouterLink } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { ProductService } from '../../core/services/product.service';
 import { CartService } from '../../core/services/cart.service';
@@ -8,11 +7,10 @@ import { ProductCardComponent } from '../../shared/components/product-card/produ
 import { Product, SortOption } from '../../core/models/product.model';
 
 @Component({
-  selector: 'app-shop',
-  standalone: true,
-  imports: [CommonModule, RouterLink, FormsModule, ProductCardComponent],
-  templateUrl: './shop.component.html',
-  styleUrl: './shop.component.scss'
+    selector: 'app-shop',
+    imports: [CommonModule, FormsModule, ProductCardComponent],
+    templateUrl: './shop.component.html',
+    styleUrl: './shop.component.scss'
 })
 export class ShopComponent implements OnInit {
 
