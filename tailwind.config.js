@@ -4,30 +4,27 @@ module.exports = {
   content: [
     "./src/**/*.{html,ts}"
   ],
-  content: [
-    "./src/**/*.{html,ts}"
-  ],
   theme: {
     extend: {
       colors: {
-  gold: {
-    DEFAULT: '#3B82C4',
-    light:   '#5FA3DE',
-    dark:    '#2A6BA8',
-  },
-  accent: {
-    DEFAULT: '#C9973A',
-    light:   '#F0C060',
-  },
-  cream: {
-    DEFAULT: '#F4F7FA',
-    dark:    '#E5EBF1',
-  },
-  dark: {
-    DEFAULT: '#16284A',   // gardé pour navbar/footer seulement
-    soft:    '#1F3A63',
-    deep:    '#0F2A47',
-  }
+        gold: {
+          DEFAULT: '#C9973A',
+          light:   '#E3B966',
+          dark:    '#A67A2C',
+        },
+        accent: {
+          DEFAULT: '#C9973A',
+          light:   '#F0C060',
+        },
+        cream: {
+          DEFAULT: '#F4F7FA',
+          dark:    '#E5EBF1',
+        },
+        dark: {
+          DEFAULT: '#16284A',   // gardé pour navbar/footer seulement
+          soft:    '#1F3A63',
+          deep:    '#0F2A47',
+        }
       },
       fontFamily: {
         serif:  ['Playfair Display', 'serif'],
@@ -38,7 +35,7 @@ module.exports = {
         'pill': '50px',
       },
       boxShadow: {
-        'gold': '0 8px 24px rgba(59,130,196,0.35)',
+        'gold': '0 8px 24px rgba(201,151,58,0.35)',
         'card': '0 8px 32px rgba(15,42,71,0.10)',
       },
       animation: {
