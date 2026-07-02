@@ -1,12 +1,12 @@
 import { Component, computed } from '@angular/core';
 import { RouterLink } from '@angular/router';
-import { CommonModule } from '@angular/common';
+
 import { CartService } from '../../core/services/cart.service';
 import { CartItem } from '../../core/models/cart-item.model';
 
 @Component({
     selector: 'app-cart',
-    imports: [CommonModule, RouterLink],
+    imports: [RouterLink],
     templateUrl: './cart.component.html',
     styleUrl: './cart.component.scss'
 })

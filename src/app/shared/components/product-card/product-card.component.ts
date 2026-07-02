@@ -1,12 +1,12 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { RouterLink } from '@angular/router';
-import { CommonModule } from '@angular/common';
+
 import { Product } from '../../../core/models/product.model';
 import { ProductService } from '../../../core/services/product.service';
 
 @Component({
     selector: 'app-product-card',
-    imports: [RouterLink, CommonModule],
+    imports: [RouterLink],
     templateUrl: './product-card.component.html'
 })
 export class ProductCardComponent {

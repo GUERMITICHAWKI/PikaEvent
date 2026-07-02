@@ -1,6 +1,6 @@
 import { Component, OnInit, signal, computed } from '@angular/core';
 import { RouterLink } from '@angular/router';
-import { CommonModule } from '@angular/common';
+
 import { ProductService } from '../../core/services/product.service';
 import { CartService } from '../../core/services/cart.service';
 import { ToastService } from '../../core/services/toast.service';
@@ -9,7 +9,7 @@ import { Product } from '../../core/models/product.model';
 
 @Component({
     selector: 'app-home',
-    imports: [RouterLink, CommonModule, ProductCardComponent],
+    imports: [RouterLink, ProductCardComponent],
     templateUrl: './home.component.html',
     styleUrl: './home.component.scss'
 })

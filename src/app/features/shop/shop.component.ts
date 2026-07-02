@@ -1,5 +1,5 @@
 import { Component, OnInit, signal, computed } from '@angular/core';
-import { CommonModule } from '@angular/common';
+
 import { FormsModule } from '@angular/forms';
 import { ProductService } from '../../core/services/product.service';
 import { CartService } from '../../core/services/cart.service';
@@ -8,7 +8,7 @@ import { Product, SortOption } from '../../core/models/product.model';
 
 @Component({
     selector: 'app-shop',
-    imports: [CommonModule, FormsModule, ProductCardComponent],
+    imports: [FormsModule, ProductCardComponent],
     templateUrl: './shop.component.html',
     styleUrl: './shop.component.scss'
 })

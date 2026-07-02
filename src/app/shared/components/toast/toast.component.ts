@@ -1,10 +1,10 @@
 import { Component, computed } from '@angular/core';
-import { CommonModule } from '@angular/common';
+
 import { ToastService } from '../../../core/services/toast.service';
 
 @Component({
     selector: 'app-toast',
-    imports: [CommonModule],
+    imports: [],
     template: `
     <div class="fixed bottom-6 right-6 z-[9999] flex flex-col gap-3">
       @for (toast of toasts(); track toast.id) {

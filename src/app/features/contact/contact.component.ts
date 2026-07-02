@@ -1,5 +1,5 @@
 import { Component, signal } from '@angular/core';
-import { CommonModule } from '@angular/common';
+
 import { RouterLink } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 
@@ -13,7 +13,7 @@ interface ContactForm {
 
 @Component({
     selector: 'app-contact',
-    imports: [CommonModule, RouterLink, FormsModule],
+    imports: [RouterLink, FormsModule],
     templateUrl: './contact.component.html',
     styleUrl: './contact.component.scss'
 })
