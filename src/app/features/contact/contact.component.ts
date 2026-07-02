@@ -1,5 +1,4 @@
 import { Component, signal } from '@angular/core';
-
 import { RouterLink } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 
@@ -7,7 +6,6 @@ interface ContactForm {
   name: string;
   phone: string;
   email: string;
-  subject: string;
   message: string;
 }
 
@@ -23,7 +21,6 @@ export class ContactComponent {
     name: '',
     phone: '',
     email: '',
-    subject: '',
     message: ''
   });
 
@@ -31,21 +28,13 @@ export class ContactComponent {
   loading = signal(false);
   error = signal(false);
 
-  subjects = [
-    'Renseignement sur un produit',
-    'Suivi de commande',
-    'Commande personnalisée',
-    'Réclamation',
-    'Autre'
-  ];
-
   updateField(field: keyof ContactForm, value: string) {
     this.form.update(f => ({ ...f, [field]: value }));
   }
 
   isFormValid(): boolean {
     const f = this.form();
-    return !!(f.name.trim() && f.phone.trim() && f.message.trim());
+    return !!(f.name.trim() && f.email.trim() && f.message.trim());
   }
 
   onSubmit() {
@@ -55,14 +44,10 @@ export class ContactComponent {
       return;
     }
     this.loading.set(true);
-    // Simulation envoi
     setTimeout(() => {
       this.loading.set(false);
       this.submitted.set(true);
-      this.form.set({
-        name: '', phone: '', email: '',
-        subject: '', message: ''
-      });
+      this.form.set({ name: '', phone: '', email: '', message: '' });
     }, 1500);
   }
 
