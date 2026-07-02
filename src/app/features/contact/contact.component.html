@@ -30,11 +30,9 @@
           <p class="text-xs text-gold uppercase tracking-widest font-semibold mb-1.5">
             Email
           </p>
-          <a href="mailto:contact@pikaevent.com"
+          <a href="mailto:pikaforevent@gmail.com"
              class="text-dark dark:text-white hover:text-gold transition-colors">
             pikaforevent@gmail.com
-
-
           </a>
         </div>
 
@@ -42,11 +40,9 @@
           <p class="text-xs text-gold uppercase tracking-widest font-semibold mb-1.5">
             Téléphone
           </p>
-          <a href="tel:+21600000000"
+          <a href="tel:+21653882826"
              class="text-dark dark:text-white hover:text-gold transition-colors">
             53 882 826
-
-
           </a>
         </div>
 
@@ -112,7 +108,7 @@
           <!-- Formulaire — carte beige, style épuré -->
           <div class="bg-[#f3ede1] dark:bg-dark-soft rounded-sm p-8 sm:p-10 border-t-2 border-gold">
 
-            <!-- Erreur -->
+            <!-- Erreur globale -->
             @if (error()) {
               <div class="bg-red-50 dark:bg-red-500/10 border border-red-200 dark:border-red-500/30
                           text-red-500 dark:text-red-400
@@ -127,89 +123,136 @@
 
               <!-- Nom -->
               <div>
-                <label class="block text-xs uppercase tracking-widest font-semibold
+                <label for="contact-name"
+                       class="block text-xs uppercase tracking-widest font-semibold
                               text-dark dark:text-white mb-2">
                   Nom complet <span class="text-gold">*</span>
                 </label>
                 <input
+                  id="contact-name"
                   type="text"
                   [value]="form().name"
                   (input)="updateField('name', $any($event.target).value)"
+                  (blur)="markTouched('name')"
                   placeholder="Jean Dupont"
+                  [attr.aria-invalid]="shouldShowError('name')"
+                  [attr.aria-describedby]="shouldShowError('name') ? 'contact-name-error' : null"
                   class="w-full px-4 py-3 bg-[#f3ede1] dark:bg-dark
-                         border border-gold/40 dark:border-white/10
                          text-dark dark:text-white text-sm
-                         focus:outline-none focus:border-gold
-                         transition-colors duration-200
+                         focus:outline-none transition-colors duration-200
                          placeholder:text-gray-400/60 dark:placeholder:text-white/20"
+                  [class]="shouldShowError('name')
+                    ? 'border border-red-400 dark:border-red-500/60 focus:border-red-400'
+                    : 'border border-gold/40 dark:border-white/10 focus:border-gold'"
                 />
+                @if (shouldShowError('name')) {
+                  <p id="contact-name-error" class="text-xs text-red-500 dark:text-red-400 mt-1.5">
+                    Le nom complet est requis
+                  </p>
+                }
               </div>
 
               <!-- Email -->
               <div>
-                <label class="block text-xs uppercase tracking-widest font-semibold
+                <label for="contact-email"
+                       class="block text-xs uppercase tracking-widest font-semibold
                               text-dark dark:text-white mb-2">
                   Email <span class="text-gold">*</span>
                 </label>
                 <input
+                  id="contact-email"
                   type="email"
                   [value]="form().email"
                   (input)="updateField('email', $any($event.target).value)"
+                  (blur)="markTouched('email')"
                   placeholder="contact@pikaevent.com"
+                  [attr.aria-invalid]="shouldShowError('email')"
+                  [attr.aria-describedby]="shouldShowError('email') ? 'contact-email-error' : null"
                   class="w-full px-4 py-3 bg-[#f3ede1] dark:bg-dark
-                         border border-gold/40 dark:border-white/10
                          text-dark dark:text-white text-sm
-                         focus:outline-none focus:border-gold
-                         transition-colors duration-200
+                         focus:outline-none transition-colors duration-200
                          placeholder:text-gray-400/60 dark:placeholder:text-white/20"
+                  [class]="shouldShowError('email')
+                    ? 'border border-red-400 dark:border-red-500/60 focus:border-red-400'
+                    : 'border border-gold/40 dark:border-white/10 focus:border-gold'"
                 />
+                @if (shouldShowError('email')) {
+                  <p id="contact-email-error" class="text-xs text-red-500 dark:text-red-400 mt-1.5">
+                    Adresse email invalide
+                  </p>
+                }
               </div>
             </div>
 
             <!-- Téléphone -->
             <div class="mb-6">
-              <label class="block text-xs uppercase tracking-widest font-semibold
+              <label for="contact-phone"
+                     class="block text-xs uppercase tracking-widest font-semibold
                             text-dark dark:text-white mb-2">
                 Téléphone
+                <span class="text-gray-400 dark:text-white/30 normal-case tracking-normal font-normal">
+                  (chiffres uniquement)
+                </span>
               </label>
               <input
+                id="contact-phone"
                 type="tel"
+                inputmode="numeric"
                 [value]="form().phone"
                 (input)="updateField('phone', $any($event.target).value)"
-                placeholder="+216 XX XXX XXX"
+                (keydown)="onPhoneKeydown($event)"
+                (blur)="markTouched('phone')"
+                placeholder="12345678"
+                maxlength="8"
+                [attr.aria-invalid]="shouldShowError('phone')"
+                [attr.aria-describedby]="shouldShowError('phone') ? 'contact-phone-error' : null"
                 class="w-full px-4 py-3 bg-[#f3ede1] dark:bg-dark
-                       border border-gold/40 dark:border-white/10
                        text-dark dark:text-white text-sm
-                       focus:outline-none focus:border-gold
-                       transition-colors duration-200
+                       focus:outline-none transition-colors duration-200
                        placeholder:text-gray-400/60 dark:placeholder:text-white/20"
+                [class]="shouldShowError('phone')
+                  ? 'border border-red-400 dark:border-red-500/60 focus:border-red-400'
+                  : 'border border-gold/40 dark:border-white/10 focus:border-gold'"
               />
+              @if (shouldShowError('phone')) {
+                <p id="contact-phone-error" class="text-xs text-red-500 dark:text-red-400 mt-1.5">
+                  Le numéro doit contenir exactement 8 chiffres (ex: 12345678)
+                </p>
+              }
             </div>
 
             <!-- Message -->
             <div class="mb-2">
-              <label class="block text-xs uppercase tracking-widest font-semibold
+              <label for="contact-message"
+                     class="block text-xs uppercase tracking-widest font-semibold
                             text-dark dark:text-white mb-2">
                 Message <span class="text-gold">*</span>
               </label>
               <textarea
+                id="contact-message"
                 [value]="form().message"
                 (input)="updateField('message', $any($event.target).value)"
+                (blur)="markTouched('message')"
                 placeholder="Votre message..."
                 rows="6"
                 maxlength="2000"
+                [attr.aria-invalid]="shouldShowError('message')"
+                [attr.aria-describedby]="shouldShowError('message') ? 'contact-message-error' : null"
                 class="w-full px-4 py-3 bg-[#f3ede1] dark:bg-dark
-                       border border-gold/40 dark:border-white/10
                        text-dark dark:text-white text-sm
-                       focus:outline-none focus:border-gold
-                       transition-colors duration-200 resize-none
-                       placeholder:text-gray-400/60 dark:placeholder:text-white/20">
+                       focus:outline-none transition-colors duration-200 resize-none
+                       placeholder:text-gray-400/60 dark:placeholder:text-white/20"
+                [class]="shouldShowError('message')
+                  ? 'border border-red-400 dark:border-red-500/60 focus:border-red-400'
+                  : 'border border-gold/40 dark:border-white/10 focus:border-gold'">
               </textarea>
             </div>
 
             <div class="flex items-center justify-between mb-6">
-              @if (!form().message.trim()) {
-                <p class="text-xs text-gray-400 dark:text-white/30">Le message est requis</p>
+              @if (shouldShowError('message')) {
+                <p id="contact-message-error" class="text-xs text-red-500 dark:text-red-400">
+                  Le message est requis
+                </p>
               } @else {
                 <span></span>
               }
