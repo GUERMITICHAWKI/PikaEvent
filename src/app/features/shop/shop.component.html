@@ -242,7 +242,12 @@ produit(s) trouvé(s)
 
 </div>
 
-<div class="grid grid-cols-2 lg:grid-cols-3 gap-6">
+<div
+  [class]="isTransitioning()
+    ? 'opacity-0 translate-y-3'
+    : 'opacity-100 translate-y-0'"
+  class="grid grid-cols-2 lg:grid-cols-3 gap-6
+         transition-all duration-300 ease-out">
         @for (product of filteredProducts(); track product.id) {
 
         <app-product-card

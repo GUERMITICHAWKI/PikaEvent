@@ -18,10 +18,10 @@ export class ShopComponent implements OnInit {
   selectedCategory = signal<string>('tous');
   selectedSort = signal<SortOption>('default');
   searchQuery = signal<string>('');
+  isTransitioning = signal<boolean>(false);
 
   categories = this.productService.getCategories();
 
-  // Compteurs calculés une seule fois, réutilisés dans le template
   categoryCounts = computed(() => {
     const counts: Record<string, number> = { tous: this.allProducts().length };
     this.categories.forEach(c => {
@@ -68,18 +68,28 @@ export class ShopComponent implements OnInit {
     this.allProducts.set(this.productService.getAll());
   }
 
+  private triggerTransition(action: () => void) {
+    this.isTransitioning.set(true);
+    setTimeout(() => {
+      action();
+      // Petit délai supplémentaire pour laisser le fondu d'entrée jouer
+      setTimeout(() => this.isTransitioning.set(false), 20);
+    }, 200);
+  }
+
   setCategory(cat: string) {
-    this.selectedCategory.set(cat);
+    if (cat === this.selectedCategory()) return;
+    this.triggerTransition(() => this.selectedCategory.set(cat));
   }
 
   setSort(event: Event) {
     const val = (event.target as HTMLSelectElement).value as SortOption;
-    this.selectedSort.set(val);
+    this.triggerTransition(() => this.selectedSort.set(val));
   }
 
   setSearch(event: Event) {
     const val = (event.target as HTMLInputElement).value;
-    this.searchQuery.set(val);
+    this.searchQuery.set(val); // pas de transition sur la frappe, trop de saccades sinon
   }
 
   addToCart(product: Product) {
