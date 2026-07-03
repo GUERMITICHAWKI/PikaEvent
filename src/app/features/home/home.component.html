@@ -1,7 +1,7 @@
 <!-- ===================== HERO ===================== -->
 <section class="relative overflow-hidden flex items-center
                 bg-cream dark:bg-dark transition-colors duration-300
-                min-h-[90vh] lg:min-h-[85vh]">
+                min-h-[90vh] lg:min-h-0">
 
   <div class="absolute inset-0 pointer-events-none overflow-hidden">
     <div class="absolute -top-10 -left-10 w-64 h-64 rounded-full
@@ -11,8 +11,7 @@
   </div>
 
   <div class="container-main relative z-10 w-full px-5 sm:px-6">
-<div class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center py-10 lg:py-16">
-
+<div class="grid grid-cols-1 lg:grid-cols-[1.1fr_0.9fr] gap-8 items-center py-6 lg:py-10">
       <!-- Texte gauche -->
       <div class="animate-slide-left">
 
@@ -124,28 +123,42 @@
       </div>
 
       <!-- Image hero — desktop uniquement -->
-<div class="hidden lg:flex items-center justify-center animate-fade-in">
-  <div class="relative w-full max-w-md">
+<div class="hidden lg:flex items-center justify-center self-center animate-fade-in">
+  <div class="relative w-full max-w-xl group">
     <div class="absolute -inset-3 border border-accent/15
                 dark:border-accent/25 rounded-[3rem] pointer-events-none"></div>
-    <div class="relative rounded-[2.5rem] overflow-hidden shadow-2xl
-                ring-1 ring-accent/10 dark:ring-accent/20"
-         style="height: clamp(475px, 75vh, 700px);">
-      <div class="absolute inset-0 flex flex-col items-center justify-center gap-4
-                  bg-gradient-to-br from-cream to-cream-dark
-                  dark:from-dark-soft dark:to-dark-deep">
-        <div class="w-20 h-20 rounded-full border-2 border-accent/30
-                    flex items-center justify-center">
-          <span class="font-script text-accent text-2xl">P</span>
+
+    <!-- Wrapper flottement -->
+    <div class="animate-float">
+
+      <!-- Wrapper zoom au survol -->
+      <div class="relative rounded-[2.5rem] overflow-hidden shadow-2xl
+                  ring-1 ring-accent/10 dark:ring-accent/20
+                  transition-transform duration-700
+                  group-hover:scale-[1.03]"
+           style="height: clamp(520px, 74dvh, 720px);">
+        <div class="absolute inset-0 flex flex-col items-center justify-center gap-4
+                    bg-gradient-to-br from-cream to-cream-dark
+                    dark:from-dark-soft dark:to-dark-deep">
+          <div class="w-20 h-20 rounded-full border-2 border-accent/30
+                      flex items-center justify-center">
+            <span class="font-script text-accent text-2xl">P</span>
+          </div>
+          <p class="font-script text-accent text-lg">Pika Event</p>
         </div>
-        <p class="font-script text-accent text-lg">Pika Event</p>
+        <img
+          src="assets/images/products/background.png"
+          alt="Pika Event Décoration"
+          class="absolute inset-0 w-full h-full object-cover object-center"
+          onerror="this.style.opacity='0'"
+        />
+        <!-- Effet reflet doré -->
+        <div class="absolute inset-0 pointer-events-none overflow-hidden">
+          <div class="absolute inset-0 -translate-x-full
+                      bg-gradient-to-r from-transparent via-white/25 to-transparent
+                      animate-shine"></div>
+        </div>
       </div>
-      <img
-        src="assets/images/products/background.png"
-        alt="Pika Event Décoration"
-        class="absolute inset-0 w-full h-full object-cover object-center"
-        onerror="this.style.opacity='0'"
-      />
     </div>
   </div>
 </div>

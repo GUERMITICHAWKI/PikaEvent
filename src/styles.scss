@@ -49,6 +49,25 @@
   .container-main {
     @apply max-w-6xl mx-auto px-6 md:px-8;
   }
+  @keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-14px); }
+}
+
+.animate-float {
+  animation: float 5s ease-in-out infinite;
+}
+
+@keyframes shine {
+  0% { transform: translateX(-100%); }
+  15% { transform: translateX(100%); }
+  100% { transform: translateX(100%); }
+}
+
+.animate-shine {
+  animation: shine 4s ease-in-out infinite;
+  animation-delay: 1s;
+}
 
   .section-title {
     @apply font-serif text-3xl md:text-4xl text-dark mb-2;
