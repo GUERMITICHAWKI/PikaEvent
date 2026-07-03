@@ -1,0 +1,85 @@
+<div class="bg-dark border-b border-white/10">
+  <div class="container-main py-8">
+    <nav class="flex items-center gap-2 text-white/40 text-sm mb-4">
+      <a routerLink="/" class="hover:text-gold transition-colors">Accueil</a>
+      <span>/</span>
+      <span class="text-gold">Mes favoris</span>
+    </nav>
+    <h1 class="font-serif text-4xl text-white">
+      Mes <span class="text-accent">Favoris</span>
+    </h1>
+  </div>
+</div>
+
+<div class="h-0.5 bg-gradient-to-r from-transparent via-gold to-transparent"></div>
+
+<section class="py-8 lg:py-16 bg-cream dark:bg-dark min-h-screen transition-colors duration-300">
+  <div class="container-main">
+
+    @if (isEmpty()) {
+      <div class="flex flex-col items-center justify-center py-32 text-center">
+        <div class="w-24 h-24 rounded-full bg-gold/10 flex items-center justify-center mb-6">
+          <svg class="w-12 h-12 text-gold" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+                  d="M12 21s-7-4.35-9.5-8.5C.5 8.5 3 5 6.5 5c2 0 3.5 1 5.5 3 2-2 3.5-3 5.5-3 3.5 0 6 3.5 4 7.5C19 16.65 12 21 12 21z"/>
+          </svg>
+        </div>
+        <h2 class="font-serif text-3xl text-dark dark:text-white mb-3">
+          Aucun favori pour le moment
+        </h2>
+        <p class="text-gray-400 dark:text-white/40 mb-8 max-w-sm">
+          Cliquez sur le cœur d'un produit pour l'ajouter ici.
+        </p>
+        <a routerLink="/boutique" class="btn-gold">Voir les produits</a>
+      </div>
+    } @else {
+
+      <div class="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
+        @for (product of items(); track product.id) {
+          <div class="bg-white dark:bg-dark-soft rounded-2xl overflow-hidden shadow-card relative group">
+
+            <button
+              (click)="remove(product.id)"
+              class="absolute top-3 right-3 z-20 w-9 h-9 rounded-full
+                     bg-white/90 dark:bg-dark/90 backdrop-blur-sm shadow-sm
+                     flex items-center justify-center hover:scale-110 transition-all duration-200">
+              <svg class="w-4.5 h-4.5 text-red-500" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M12 21s-7-4.35-9.5-8.5C.5 8.5 3 5 6.5 5c2 0 3.5 1 5.5 3 2-2 3.5-3 5.5-3 3.5 0 6 3.5 4 7.5C19 16.65 12 21 12 21z"/>
+              </svg>
+            </button>
+
+            <a [routerLink]="['/produit', product.slug]" class="block">
+              <div class="relative aspect-square overflow-hidden">
+                <img
+                  [src]="product.images[0]"
+                  [alt]="product.name"
+                  class="w-full h-full object-cover transition-transform
+                         duration-500 group-hover:scale-105"
+                  onerror="this.style.opacity='0'"
+                />
+              </div>
+              <div class="p-5">
+                <h3 class="font-serif text-dark dark:text-white text-lg mb-2 truncate">
+                  {{ product.name }}
+                </h3>
+                <span class="text-gold font-bold text-lg">
+                  {{ formatPrice(product.price) }}
+                </span>
+              </div>
+            </a>
+
+            <div class="px-5 pb-5">
+              <button
+                (click)="addToCart(product)"
+                class="w-full py-2.5 rounded-pill bg-gold text-white text-sm font-semibold
+                       hover:bg-gold-dark transition-colors duration-200">
+                Ajouter au panier
+              </button>
+            </div>
+          </div>
+        }
+      </div>
+
+    }
+  </div>
+</section>

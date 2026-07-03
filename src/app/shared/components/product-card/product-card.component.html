@@ -1,11 +1,27 @@
 <div class="bg-white dark:bg-dark-soft rounded-2xl overflow-hidden shadow-card
             transition-all duration-300 cursor-pointer
-            hover:-translate-y-2 hover:shadow-xl group">
+            hover:-translate-y-2 hover:shadow-xl group relative">
+
+  <!-- Bouton favoris -->
+  <button
+    (click)="onToggleWishlist($event)"
+    class="absolute top-3 right-3 z-20 w-9 h-9 rounded-full
+           bg-white/90 dark:bg-dark/90 backdrop-blur-sm shadow-sm
+           flex items-center justify-center
+           hover:scale-110 transition-all duration-200"
+    [attr.aria-label]="isFavorite() ? 'Retirer des favoris' : 'Ajouter aux favoris'">
+    <svg class="w-4.5 h-4.5 transition-colors duration-200"
+         [class]="isFavorite() ? 'text-red-500' : 'text-gray-400 dark:text-white/40'"
+         [attr.fill]="isFavorite() ? 'currentColor' : 'none'"
+         stroke="currentColor" viewBox="0 0 24 24">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+            d="M12 21s-7-4.35-9.5-8.5C.5 8.5 3 5 6.5 5c2 0 3.5 1 5.5 3 2-2 3.5-3 5.5-3 3.5 0 6 3.5 4 7.5C19 16.65 12 21 12 21z"/>
+    </svg>
+  </button>
 
   <a [routerLink]="['/produit', product.slug]" class="block">
     <div class="relative overflow-hidden aspect-square">
 
-      <!-- Fond placeholder permanent -->
       <div class="absolute inset-0 flex flex-col items-center justify-center gap-2
                   bg-gradient-to-br from-cream to-cream-dark
                   dark:from-dark-deep dark:to-dark-soft">
@@ -15,7 +31,6 @@
         </span>
       </div>
 
-      <!-- Image par-dessus -->
       <img
         [src]="product.images[0]"
         [alt]="product.name"
@@ -24,30 +39,28 @@
         onerror="this.style.opacity='0'"
       />
 
-      <!-- Badges -->
-<div class="absolute top-3 left-3 flex flex-col gap-1.5">
-  @if (product.isBestSeller) {
-    <span class="bg-accent text-white text-[11px] font-bold
-                 px-3 py-1 rounded-full shadow-sm">
-      ⭐ Best-Seller
-    </span>
-  }
-  @if (product.isPromo) {
-    <span class="bg-gold text-white text-[11px] font-semibold
-                 px-3 py-1 rounded-full shadow-sm">
-      Promo !
-    </span>
-  }
-</div>
+      <div class="absolute top-3 left-3 flex flex-col gap-1.5">
+        @if (product.isBestSeller) {
+          <span class="bg-accent text-white text-[11px] font-bold
+                       px-3 py-1 rounded-full shadow-sm">
+            ⭐ Best-Seller
+          </span>
+        }
+        @if (product.isPromo) {
+          <span class="bg-gold text-white text-[11px] font-semibold
+                       px-3 py-1 rounded-full shadow-sm">
+            Promo !
+          </span>
+        }
+      </div>
 
-@if (product.discount) {
-  <div class="absolute top-3 right-3 bg-dark/80 backdrop-blur-sm
-              text-white text-xs font-bold px-2.5 py-1 rounded-lg">
-    -{{ product.discount }}%
-  </div>
-}
+      @if (product.discount) {
+        <div class="absolute top-14 right-3 bg-dark/80 backdrop-blur-sm
+                    text-white text-xs font-bold px-2.5 py-1 rounded-lg">
+          -{{ product.discount }}%
+        </div>
+      }
 
-      <!-- Overlay + bouton ajouter au panier au hover -->
       <div class="absolute inset-0 bg-dark/0 group-hover:bg-dark/20
                   transition-all duration-300 flex items-end justify-center pb-4
                   opacity-0 group-hover:opacity-100 z-10">
@@ -62,7 +75,6 @@
     </div>
 
     <div class="p-5">
-      <!-- Étoiles -->
       @if (product.rating) {
         <div class="flex items-center gap-1 mb-2">
           @for (star of [1,2,3,4,5]; track star) {

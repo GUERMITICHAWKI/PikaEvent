@@ -131,6 +131,26 @@
           </svg>
         }
       </button>
+      <!-- Favoris -->
+<a routerLink="/favoris" class="relative group">
+  <div class="w-9 h-9 rounded-full border border-white/20
+              flex items-center justify-center
+              group-hover:border-gold group-hover:bg-white/5
+              transition-all duration-300">
+    <svg class="w-4.5 h-4.5 text-white/80 group-hover:text-gold transition-colors"
+         fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+            d="M12 21s-7-4.35-9.5-8.5C.5 8.5 3 5 6.5 5c2 0 3.5 1 5.5 3 2-2 3.5-3 5.5-3 3.5 0 6 3.5 4 7.5C19 16.65 12 21 12 21z"/>
+    </svg>
+  </div>
+  @if (wishlistCount() > 0) {
+    <span class="absolute -top-1 -right-1 bg-gold text-white
+                 text-[10px] w-4.5 h-4.5 rounded-full flex items-center
+                 justify-center font-bold">
+      {{ wishlistCount() }}
+    </span>
+  }
+</a>
 
       <!-- Panier -->
       <a routerLink="/panier" class="relative group">

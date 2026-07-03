@@ -2,6 +2,8 @@ import { Component, computed, HostListener, signal } from '@angular/core';
 import { RouterLink, RouterLinkActive } from '@angular/router';
 import { CartService } from '../../../core/services/cart.service';
 import { ThemeService } from '../../../core/services/theme.service';
+import { WishlistService } from '../../../core/services/wishlist.service';
+
 
 
 @Component({
@@ -16,9 +18,12 @@ export class NavbarComponent {
   scrollProgress = signal(0);
 
   cartCount = computed(() => this.cartService.cartCount());
+  wishlistCount = computed(() => this.wishlistService.wishlistCount());
+
 
   constructor(
     private cartService: CartService,
+      public wishlistService: WishlistService,
     public themeService: ThemeService
   ) {}
 

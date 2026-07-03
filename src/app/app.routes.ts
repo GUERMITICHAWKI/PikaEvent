@@ -32,6 +32,12 @@ export const routes: Routes = [
         .then(m => m.ContactComponent)
   },
   {
+    path: 'favoris',
+    loadComponent: () =>
+      import('./features/wishlist/wishlist.component')
+        .then(m => m.WishlistComponent)
+  },
+  {
     path: '**',
     loadComponent: () =>
       import('./features/not-found/not-found.component')
