@@ -1,5 +1,7 @@
 import { Component, OnInit, signal, computed } from '@angular/core';
 import { ActivatedRoute, RouterLink } from '@angular/router';
+import { SeoService } from '../../core/services/seo.service';
+
 
 import { ProductService } from '../../core/services/product.service';
 import { CartService } from '../../core/services/cart.service';
@@ -32,7 +34,8 @@ export class ProductDetailComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private productService: ProductService,
-    private cartService: CartService
+    private cartService: CartService,
+    private seoService: SeoService
   ) {}
 
   ngOnInit() {
@@ -41,6 +44,10 @@ export class ProductDetailComponent implements OnInit {
       const product = this.productService.getBySlug(slug);
       if (product) {
         this.product.set(product);
+        this.seoService.update({
+  title: product.name,
+  description: product.description?.slice(0, 155) || `Découvrez ${product.name}, une création handmade Pika Event.`
+});
         this.similarProducts.set(
           this.productService.getSimilar(product, 3)
         );
