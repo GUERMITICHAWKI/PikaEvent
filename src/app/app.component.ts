@@ -5,11 +5,14 @@ import { NavbarComponent } from './shared/components/navbar/navbar.component';
 import { FooterComponent } from './shared/components/footer/footer.component';
 import { CommonModule } from '@angular/common';
 import { SeoService } from './core/services/seo.service';
+import { ToastComponent } from './shared/components/toast/toast.component';
+import{ProductService}from'./core/services/product.service';
+
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, NavbarComponent, FooterComponent, CommonModule],
+  imports: [RouterOutlet, NavbarComponent, FooterComponent, CommonModule, ToastComponent, ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
 })

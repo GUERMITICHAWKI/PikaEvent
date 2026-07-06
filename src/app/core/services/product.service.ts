@@ -13,7 +13,7 @@ export class ProductService {
       price: 49000,
       originalPrice: 59000,
       discount: 17,
-      images: ['assets/images/products/amour1.png'],
+      images: ['assets/images/products/amour1.webp'],
       description: 'Un plateau élégant avec calligraphie dorée pour célébrer l\'amour.',
       details: [
         { label: 'Nombre de pièces', value: '6 pièces' },
@@ -37,7 +37,7 @@ export class ProductService {
       price: 49000,
       originalPrice: 59000,
       discount: 17,
-      images: ['assets/images/products/aroussa1.png'],
+      images: ['assets/images/products/aroussa1.webp'],
       description: 'Le pack idéal pour célébrer la mariée, finition papillon doré.',
       details: [
         { label: 'Nombre de pièces', value: '6 pièces' },
@@ -60,7 +60,7 @@ export class ProductService {
       price: 59000,
       originalPrice: 69000,
       discount: 14,
-      images: ['assets/images/products/aroussabougie.png'],
+      images: ['assets/images/products/aroussabougie.webp'],
       description: 'Pack Aroussa enrichi d\'une bougie décorative.',
       details: [
         { label: 'Nombre de pièces', value: '7 pièces' },
@@ -85,7 +85,7 @@ export class ProductService {
       price: 49000,
       originalPrice: 59000,
       discount: 17,
-      images: ['assets/images/products/rayhan1.png'],
+      images: ['assets/images/products/rayhan1.webp'],
       description: 'Plateau décoratif avec petits pots dorés et fleurs séchées.',
       details: [
         { label: 'Nombre de pièces', value: '6 pièces' },
@@ -108,7 +108,7 @@ export class ProductService {
       price: 49000,
       originalPrice: 59000,
       discount: 17,
-      images: ['assets/images/products/ritej1.png'],
+      images: ['assets/images/products/ritej1.webp'],
       description: 'Pack décoratif raffiné avec calligraphie et fleurs séchées.',
       details: [
         { label: 'Nombre de pièces', value: '6 pièces' },
@@ -131,7 +131,7 @@ export class ProductService {
       price: 59000,
       originalPrice: 69000,
       discount: 14,
-      images: ['assets/images/products/ritej2boujie.png'],
+      images: ['assets/images/products/ritej2boujie.webp'],
       description: 'Pack Ritej enrichi d\'une bougie décorative.',
       details: [
         { label: 'Nombre de pièces', value: '7 pièces' },
@@ -159,7 +159,7 @@ export class ProductService {
       price: 49000,
       originalPrice: 59000,
       discount: 17,
-      images: ['assets/images/products/rymes1.png'],
+      images: ['assets/images/products/rymes1.webp'],
       description: 'Pack décoratif avec pots dorés et calligraphie, finition papillon.',
       details: [
         { label: 'Nombre de pièces', value: '6 pièces' },
@@ -182,7 +182,7 @@ export class ProductService {
       price: 25000,
       originalPrice: 33000,
       discount: 24,
-      images: ['assets/images/products/pack770.png'],
+      images: ['assets/images/products/pack770.webp'],
       description: 'Vase décoratif avec bougie et fleurs séchées dorées.',
       details: [
         { label: 'Nombre de pièces', value: '3 pièces' },
@@ -203,7 +203,7 @@ export class ProductService {
       price: 27000,
       originalPrice: 35000,
       discount: 23,
-      images: ['assets/images/products/771.png'],
+      images: ['assets/images/products/771.webp'],
       description: 'Pack décoratif noir et doré avec fleurs séchées.',
       details: [
         { label: 'Nombre de pièces', value: '3 pièces' },
@@ -224,7 +224,7 @@ export class ProductService {
       price: 25000,
       originalPrice: 33000,
       discount: 24,
-      images: ['assets/images/products/772.png'],
+      images: ['assets/images/products/772.webp'],
       description: 'Bougeoir et vase rose avec fleurs séchées.',
       details: [
         { label: 'Nombre de pièces', value: '3 pièces' },
@@ -245,7 +245,7 @@ export class ProductService {
       price: 29900,
       originalPrice: 38000,
       discount: 21,
-      images: ['assets/images/products/773.png'],
+      images: ['assets/images/products/773.webp'],
       description: 'Pack décoratif avec calligraphie "Mashallah" et pot doré.',
       details: [
         { label: 'Nombre de pièces', value: '4 pièces' },
@@ -266,7 +266,7 @@ export class ProductService {
       price: 25000,
       originalPrice: 30000,
       discount: 17,
-      images: ['assets/images/products/774.png'],
+      images: ['assets/images/products/774.webp'],
       description: 'Pack spécial Ramadan Kareem avec pince dorée.',
       details: [
         { label: 'Nombre de pièces', value: '3 pièces' },
@@ -285,7 +285,7 @@ export class ProductService {
       price: 29900,
       originalPrice: 38000,
       discount: 21,
-      images: ['assets/images/products/775.png'],
+      images: ['assets/images/products/775.webp'],
       description: 'Duo vase et pot doré avec fleurs séchées, base dorée.',
       details: [
         { label: 'Nombre de pièces', value: '3 pièces' },
@@ -306,7 +306,7 @@ export class ProductService {
       price: 25000,
       originalPrice: 30000,
       discount: 17,
-      images: ['assets/images/products/776.png'],
+      images: ['assets/images/products/776.webp'],
       description: 'Plateau avec pot doré et calligraphie cœurs rouges.',
       details: [
         { label: 'Nombre de pièces', value: '3 pièces' },
@@ -325,7 +325,7 @@ export class ProductService {
       price: 29900,
       originalPrice: 38000,
       discount: 21,
-      images: ['assets/images/products/777.png'],
+      images: ['assets/images/products/777.webp'],
       description: 'Duo pots dorés avec pince et fleurs séchées.',
       details: [
         { label: 'Nombre de pièces', value: '4 pièces' },
@@ -345,7 +345,7 @@ export class ProductService {
       price: 25000,
       originalPrice: 33000,
       discount: 24,
-      images: ['assets/images/products/778.png'],
+      images: ['assets/images/products/778.webp'],
       description: 'Pack décoratif lune et pot doré, calligraphie "Tabsomri".',
       details: [
         { label: 'Nombre de pièces', value: '4 pièces' },
@@ -365,7 +365,7 @@ export class ProductService {
       price: 25000,
       originalPrice: 30000,
       discount: 17,
-      images: ['assets/images/products/779.png'],
+      images: ['assets/images/products/779.webp'],
       description: 'Pack décoratif avec pot doré, calligraphie "Mashallah".',
       details: [
         { label: 'Nombre de pièces', value: '3 pièces' },
@@ -384,7 +384,7 @@ export class ProductService {
       price: 29900,
       originalPrice: 38000,
       discount: 21,
-      images: ['assets/images/products/781.png'],
+      images: ['assets/images/products/781.webp'],
       description: 'Duo pots strié blanc et doré, calligraphie "Mashallah".',
       details: [
         { label: 'Nombre de pièces', value: '4 pièces' },
@@ -404,7 +404,7 @@ export class ProductService {
       price: 29900,
       originalPrice: 38000,
       discount: 21,
-      images: ['assets/images/products/782.png'],
+      images: ['assets/images/products/782.webp'],
       description: 'Pack spécial Ramadan avec feuilles dorées décoratives.',
       details: [
         { label: 'Nombre de pièces', value: '4 pièces' },
@@ -424,7 +424,7 @@ export class ProductService {
       price: 27000,
       originalPrice: 35000,
       discount: 23,
-      images: ['assets/images/products/783.png'],
+      images: ['assets/images/products/783.webp'],
       description: 'Pack Ramadan avec lune décorative et pot doré "Ramadan".',
       details: [
         { label: 'Nombre de pièces', value: '4 pièces' },
@@ -444,7 +444,7 @@ export class ProductService {
       price: 25000,
       originalPrice: 30000,
       discount: 17,
-      images: ['assets/images/products/784.png'],
+      images: ['assets/images/products/784.webp'],
       description: 'Plateau marbré avec pot doré, motifs lune et étoiles.',
       details: [
         { label: 'Nombre de pièces', value: '3 pièces' },
@@ -463,7 +463,7 @@ export class ProductService {
       price: 29900,
       originalPrice: 38000,
       discount: 21,
-      images: ['assets/images/products/785.png'],
+      images: ['assets/images/products/785.webp'],
       description: 'Pack décoratif avec pot doré et calligraphie, finition papillon.',
       details: [
         { label: 'Nombre de pièces', value: '4 pièces' },
@@ -483,7 +483,7 @@ export class ProductService {
       price: 27000,
       originalPrice: 35000,
       discount: 23,
-      images: ['assets/images/products/786.png'],
+      images: ['assets/images/products/786.webp'],
       description: 'Pack décoratif avec vase, fleurs séchées et silhouette romantique.',
       details: [
         { label: 'Nombre de pièces', value: '3 pièces' },
@@ -504,7 +504,7 @@ export class ProductService {
       price: 25000,
       originalPrice: 33000,
       discount: 24,
-      images: ['assets/images/products/787.png'],
+      images: ['assets/images/products/787.webp'],
       description: 'Pack décoratif avec pot en forme de coquillage et fleurs séchées.',
       details: [
         { label: 'Nombre de pièces', value: '3 pièces' },
