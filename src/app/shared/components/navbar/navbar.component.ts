@@ -1,4 +1,4 @@
-import { Component, computed, HostListener, signal } from '@angular/core';
+import { Component, computed, HostListener, signal, ChangeDetectionStrategy } from '@angular/core';
 import { RouterLink, RouterLinkActive } from '@angular/router';
 import { CartService } from '../../../core/services/cart.service';
 import { ThemeService } from '../../../core/services/theme.service';
@@ -10,6 +10,7 @@ import { WishlistService } from '../../../core/services/wishlist.service';
     selector: 'app-navbar',
     imports: [RouterLink, RouterLinkActive],
     templateUrl: './navbar.component.html',
+    changeDetection: ChangeDetectionStrategy.Eager,
     styleUrl: './navbar.component.scss'
 })
 export class NavbarComponent {

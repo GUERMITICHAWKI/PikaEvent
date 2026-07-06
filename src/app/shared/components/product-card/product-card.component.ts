@@ -1,4 +1,4 @@
-import { Component, Input, Output, EventEmitter, computed } from '@angular/core';
+import { Component, Input, Output, EventEmitter, computed, ChangeDetectionStrategy } from '@angular/core';
 import { RouterLink } from '@angular/router';
 
 import { Product } from '../../../core/models/product.model';
@@ -9,6 +9,7 @@ import { WishlistService } from '../../../core/services/wishlist.service';
   selector: 'app-product-card',
   standalone: true,
   imports: [RouterLink],
+  changeDetection: ChangeDetectionStrategy.Eager,
   templateUrl: './product-card.component.html',
 })
 export class ProductCardComponent {

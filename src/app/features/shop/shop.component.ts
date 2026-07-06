@@ -1,4 +1,4 @@
-import { Component, OnInit, signal, computed } from '@angular/core';
+import { Component, OnInit, signal, computed, ChangeDetectionStrategy } from '@angular/core';
 
 import { FormsModule } from '@angular/forms';
 import { ProductService } from '../../core/services/product.service';
@@ -10,6 +10,7 @@ import { Product, SortOption } from '../../core/models/product.model';
     selector: 'app-shop',
     imports: [FormsModule, ProductCardComponent],
     templateUrl: './shop.component.html',
+    changeDetection: ChangeDetectionStrategy.Eager,
     styleUrl: './shop.component.scss'
 })
 export class ShopComponent implements OnInit {

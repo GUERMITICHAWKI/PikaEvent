@@ -1,4 +1,4 @@
-import { Component, OnInit, signal, computed } from '@angular/core';
+import { Component, OnInit, signal, computed, ChangeDetectionStrategy } from '@angular/core';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 import { SeoService } from '../../core/services/seo.service';
 
@@ -12,6 +12,7 @@ import { Product } from '../../core/models/product.model';
     selector: 'app-product-detail',
     imports: [RouterLink, ProductCardComponent],
     templateUrl: './product-detail.component.html',
+    changeDetection: ChangeDetectionStrategy.Eager,
     styleUrl: './product-detail.component.scss'
 })
 export class ProductDetailComponent implements OnInit {

@@ -1,4 +1,4 @@
-import { Component, OnInit, signal, computed } from '@angular/core';
+import { Component, OnInit, signal, computed, ChangeDetectionStrategy } from '@angular/core';
 import { RouterLink } from '@angular/router';
 
 import { ProductService } from '../../core/services/product.service';
@@ -11,6 +11,7 @@ import { Product } from '../../core/models/product.model';
     selector: 'app-home',
     imports: [RouterLink, ProductCardComponent],
     templateUrl: './home.component.html',
+    changeDetection: ChangeDetectionStrategy.Eager,
     styleUrl: './home.component.scss'
 })
 export class HomeComponent implements OnInit {

@@ -1,4 +1,4 @@
-import { Component, computed } from '@angular/core';
+import { Component, computed, ChangeDetectionStrategy } from '@angular/core';
 import { RouterLink } from '@angular/router';
 
 import { CartService } from '../../core/services/cart.service';
@@ -8,6 +8,7 @@ import { CartItem } from '../../core/models/cart-item.model';
     selector: 'app-cart',
     imports: [RouterLink],
     templateUrl: './cart.component.html',
+    changeDetection: ChangeDetectionStrategy.Eager,
     styleUrl: './cart.component.scss'
 })
 export class CartComponent {

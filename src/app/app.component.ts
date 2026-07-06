@@ -1,4 +1,4 @@
-import { Component, HostListener, OnInit, signal, inject } from '@angular/core';
+import { Component, HostListener, OnInit, signal, inject, ChangeDetectionStrategy } from '@angular/core';
 import { Router, RouterOutlet, NavigationEnd, ActivatedRoute } from '@angular/router';
 import { filter, map, mergeMap } from 'rxjs/operators';
 import { NavbarComponent } from './shared/components/navbar/navbar.component';
@@ -14,6 +14,7 @@ import{ProductService}from'./core/services/product.service';
   standalone: true,
   imports: [RouterOutlet, NavbarComponent, FooterComponent, ToastComponent],
   templateUrl: './app.component.html',
+  changeDetection: ChangeDetectionStrategy.Eager,
   styleUrl: './app.component.scss'
 })
 export class AppComponent implements OnInit {
