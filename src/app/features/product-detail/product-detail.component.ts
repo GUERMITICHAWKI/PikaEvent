@@ -40,14 +40,27 @@ export class ProductDetailComponent implements OnInit {
   ) {}
 
   ngOnInit() {
+    
     this.route.params.subscribe(params => {
       const slug = params['slug'];
       const product = this.productService.getBySlug(slug);
+      
       if (product) {
         this.product.set(product);
         this.seoService.update({
   title: product.name,
   description: product.description?.slice(0, 155) || `Découvrez ${product.name}, une création handmade Pika Event.`
+});
+this.seoService.update({
+  title: product.name,
+  description: product.description?.slice(0, 155) || `Découvrez ${product.name}, une création handmade Pika Event.`
+});
+this.seoService.setProductJsonLd({
+  name: product.name,
+  description: product.description || `${product.name}, création handmade Pika Event.`,
+  image: product.images?.[0],
+  price: product.price,
+  currency: 'TND'
 });
         this.similarProducts.set(
           this.productService.getSimilar(product, 3)

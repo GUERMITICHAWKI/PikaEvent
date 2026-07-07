@@ -24,7 +24,7 @@
   onerror="this.style.opacity='0'"
 />
 
-      <!-- Badges -->
+      <!-- Badges gauche -->
 <div class="absolute top-3 left-3 flex flex-col gap-1.5">
   @if (product.isBestSeller) {
     <span class="bg-accent text-white text-[11px] font-bold
@@ -40,12 +40,30 @@
   }
 </div>
 
-@if (product.discount) {
-  <div class="absolute top-3 right-3 bg-dark/80 backdrop-blur-sm
-              text-white text-xs font-bold px-2.5 py-1 rounded-lg">
-    -{{ product.discount }}%
-  </div>
-}
+<!-- Coeur favoris + badge réduction, empilés à droite -->
+<div class="absolute top-3 right-3 z-20 flex flex-col items-end gap-1.5">
+  <button
+    (click)="onToggleWishlist($event)"
+    class="w-8 h-8 rounded-full bg-white/90 dark:bg-dark/80 backdrop-blur-sm
+           flex items-center justify-center shadow-sm
+           hover:scale-110 transition-transform duration-200"
+    [attr.aria-label]="isFavorite() ? 'Retirer des favoris' : 'Ajouter aux favoris'">
+    <svg class="w-4 h-4 transition-colors duration-200"
+         [class]="isFavorite() ? 'text-red-500' : 'text-gray-400 dark:text-white/50'"
+         [attr.fill]="isFavorite() ? 'currentColor' : 'none'"
+         stroke="currentColor" viewBox="0 0 24 24">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+            d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"/>
+    </svg>
+  </button>
+
+  @if (product.discount) {
+    <div class="bg-dark/80 backdrop-blur-sm
+                text-white text-xs font-bold px-2.5 py-1 rounded-lg">
+      -{{ product.discount }}%
+    </div>
+  }
+</div>
 
       <!-- Overlay + bouton ajouter au panier au hover -->
       <div class="absolute inset-0 bg-dark/0 group-hover:bg-dark/20

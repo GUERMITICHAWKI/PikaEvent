@@ -7,8 +7,8 @@ export const routes: Routes = [
       import('./features/home/home.component')
         .then(m => m.HomeComponent),
     data: {
-      title: 'Pika Event | Décoration Handmade en Tunisie',
-      description: 'Décoration handmade unique et élégante pour tous vos événements. Packs faits main avec passion, livraison gratuite partout en Tunisie.'
+      title: 'Décoration Handmade Tunisie | Pika Event',
+      description: 'Pika Event : décoration handmade sur-mesure en Tunisie. Packs pour mariages, anniversaires, baby shower et fiançailles. Livraison gratuite en Tunisie.'
     }
   },
   {
@@ -17,8 +17,8 @@ export const routes: Routes = [
       import('./features/shop/shop.component')
         .then(m => m.ShopComponent),
     data: {
-      title: 'Boutique - Packs Décoration',
-      description: 'Découvrez tous nos packs de décoration handmade : mariages, anniversaires, baby shower et plus encore. Livraison gratuite en Tunisie.'
+      title: 'Packs Décoration Mariage & Anniversaire',
+      description: 'Tous nos packs de décoration handmade : mariage, anniversaire, baby shower, fiançailles. Créations uniques faites main, livraison gratuite en Tunisie.'
     }
   },
   {
@@ -27,7 +27,7 @@ export const routes: Routes = [
       import('./features/product-detail/product-detail.component')
         .then(m => m.ProductDetailComponent)
     // Le title/description est défini dynamiquement dans le composant
-    // (nom du produit réel), pas ici.
+    // (nom + description réelle du produit), pas ici.
   },
   {
     path: 'panier',
@@ -46,7 +46,7 @@ export const routes: Routes = [
         .then(m => m.ContactComponent),
     data: {
       title: 'Contact',
-      description: 'Contactez Pika Event pour toute question sur nos packs de décoration handmade ou pour passer commande.'
+      description: 'Contactez Pika Event pour commander vos packs de décoration handmade partout en Tunisie. Réponse rapide, livraison gratuite.'
     }
   },
   {
