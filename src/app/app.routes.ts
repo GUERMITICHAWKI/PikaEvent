@@ -30,6 +30,10 @@ export const routes: Routes = [
     // (nom + description réelle du produit), pas ici.
   },
   {
+  path: 'checkout',
+  loadComponent: () => import('./pages/checkout/checkout.component').then(m => m.CheckoutComponent)
+},
+  {
     path: 'panier',
     loadComponent: () =>
       import('./features/cart/cart.component')

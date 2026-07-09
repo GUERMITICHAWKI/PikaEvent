@@ -1,0 +1,208 @@
+<div class="bg-cream dark:bg-dark border-b border-gray-100 dark:border-white/10 transition-colors duration-300">
+  <div class="container-main py-12">
+    <nav class="flex items-center gap-2 text-gray-400 dark:text-white/40 text-sm mb-4">
+      <a routerLink="/" class="hover:text-gold transition-colors">Accueil</a>
+      <span>/</span>
+      <a routerLink="/panier" class="hover:text-gold transition-colors">Panier</a>
+      <span>/</span>
+      <span class="text-gold">Commande</span>
+    </nav>
+    <h1 class="font-serif text-4xl md:text-5xl text-dark dark:text-white mb-3">
+      Finaliser ma <span class="text-accent">commande</span>
+    </h1>
+    <div class="w-12 h-0.5 bg-gold mb-4"></div>
+  </div>
+</div>
+
+<div class="h-0.5 bg-gradient-to-r from-transparent via-gold to-transparent"></div>
+
+<section class="py-16 bg-cream dark:bg-dark min-h-screen transition-colors duration-300">
+  <div class="container-main">
+
+    @if (submitted()) {
+
+      <div class="bg-[#f3ede1] dark:bg-dark-soft rounded-sm p-12 border-t-2 border-gold
+                  flex flex-col items-center justify-center text-center min-h-96 max-w-xl mx-auto">
+        <div class="w-16 h-16 rounded-full bg-green-100 dark:bg-green-500/15
+                    flex items-center justify-center mb-6">
+          <svg class="w-8 h-8 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+          </svg>
+        </div>
+        <h2 class="font-serif text-2xl text-dark dark:text-white mb-3">Commande confirmée !</h2>
+        <p class="text-gray-500 dark:text-white/40 mb-8 max-w-sm">
+          Merci pour votre commande. Nous vous contacterons rapidement pour la livraison.
+        </p>
+        <a routerLink="/boutique"
+           class="px-6 py-3 bg-gold text-white text-sm uppercase tracking-wider font-semibold
+                  hover:bg-gold-dark transition-colors duration-300">
+          Continuer mes achats
+        </a>
+      </div>
+
+    } @else if (isEmpty()) {
+
+      <div class="text-center py-20">
+        <p class="text-gray-500 dark:text-white/40 mb-6">Votre panier est vide.</p>
+        <a routerLink="/boutique"
+           class="px-6 py-3 bg-gold text-white text-sm uppercase tracking-wider font-semibold
+                  hover:bg-gold-dark transition-colors duration-300">
+          Voir la boutique
+        </a>
+      </div>
+
+    } @else {
+
+      <div class="grid grid-cols-1 lg:grid-cols-3 gap-10">
+
+        <!-- Récapitulatif panier -->
+        <div class="lg:col-span-1 order-2 lg:order-1">
+          <div class="bg-[#f3ede1] dark:bg-dark-soft rounded-sm p-6 border-t-2 border-gold sticky top-6">
+            <h2 class="font-serif text-xl text-dark dark:text-white mb-5">Votre panier</h2>
+
+            <div class="space-y-4 mb-6">
+              @for (item of cartItems(); track item.product.id) {
+                <div class="flex gap-3 items-start pb-4 border-b border-gray-200 dark:border-white/10">
+                  <img [src]="item.product.images[0]" [alt]="item.product.name"
+                       class="w-16 h-16 object-cover rounded-sm" />
+                  <div class="flex-1 min-w-0">
+                    <p class="text-sm text-dark dark:text-white truncate">{{ item.product.name }}</p>
+                    <p class="text-xs text-gray-400 dark:text-white/40 mt-1">
+                      {{ formatPrice(item.product.price) }} × {{ item.quantity }}
+                    </p>
+                    <div class="flex items-center gap-2 mt-2">
+                      <button (click)="decrease(item.product.id, item.quantity)"
+                              class="w-6 h-6 border border-gold/40 text-gold text-xs">−</button>
+                      <span class="text-xs text-dark dark:text-white w-4 text-center">{{ item.quantity }}</span>
+                      <button (click)="increase(item.product.id, item.quantity)"
+                              class="w-6 h-6 border border-gold/40 text-gold text-xs">+</button>
+                      <button (click)="remove(item.product.id)"
+                              class="ml-auto text-xs text-red-400 hover:text-red-500">Suppr.</button>
+                    </div>
+                  </div>
+                </div>
+              }
+            </div>
+
+            <div class="flex items-center justify-between pt-2">
+              <span class="text-sm uppercase tracking-wider text-dark dark:text-white font-semibold">Total</span>
+              <span class="text-xl font-serif text-gold">{{ formatPrice(cartTotal()) }}</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Formulaire livraison -->
+        <div class="lg:col-span-2 order-1 lg:order-2">
+          <div class="bg-[#f3ede1] dark:bg-dark-soft rounded-sm p-8 sm:p-10 border-t-2 border-gold">
+
+            @if (error()) {
+              <div class="bg-red-50 dark:bg-red-500/10 border border-red-200 dark:border-red-500/30
+                          text-red-500 dark:text-red-400 px-4 py-3 text-sm mb-6 flex items-center gap-2">
+                <span>⚠️</span>
+                {{ errorMessage() }}
+              </div>
+            }
+
+            <div class="mb-6">
+              <label for="checkout-name"
+                     class="block text-xs uppercase tracking-widest font-semibold text-dark dark:text-white mb-2">
+                Nom complet <span class="text-gold">*</span>
+              </label>
+              <input id="checkout-name" type="text"
+                [value]="form().name"
+                (input)="updateField('name', $any($event.target).value)"
+                (blur)="markTouched('name')"
+                placeholder="Jean Dupont"
+                class="w-full px-4 py-3 bg-[#f3ede1] dark:bg-dark text-dark dark:text-white text-sm
+                       focus:outline-none transition-colors duration-200
+                       placeholder:text-gray-400/60 dark:placeholder:text-white/20"
+                [class]="shouldShowError('name')
+                  ? 'border border-red-400 dark:border-red-500/60 focus:border-red-400'
+                  : 'border border-gold/40 dark:border-white/10 focus:border-gold'" />
+              @if (shouldShowError('name')) {
+                <p class="text-xs text-red-500 dark:text-red-400 mt-1.5">Le nom complet est requis</p>
+              }
+            </div>
+
+            <div class="mb-6">
+              <label for="checkout-phone"
+                     class="block text-xs uppercase tracking-widest font-semibold text-dark dark:text-white mb-2">
+                Téléphone <span class="text-gold">*</span>
+              </label>
+              <input id="checkout-phone" type="tel" inputmode="numeric" maxlength="8"
+                [value]="form().phone"
+                (input)="updateField('phone', $any($event.target).value)"
+                (keydown)="onPhoneKeydown($event)"
+                (blur)="markTouched('phone')"
+                placeholder="12345678"
+                class="w-full px-4 py-3 bg-[#f3ede1] dark:bg-dark text-dark dark:text-white text-sm
+                       focus:outline-none transition-colors duration-200
+                       placeholder:text-gray-400/60 dark:placeholder:text-white/20"
+                [class]="shouldShowError('phone')
+                  ? 'border border-red-400 dark:border-red-500/60 focus:border-red-400'
+                  : 'border border-gold/40 dark:border-white/10 focus:border-gold'" />
+              @if (shouldShowError('phone')) {
+                <p class="text-xs text-red-500 dark:text-red-400 mt-1.5">8 chiffres requis (ex: 12345678)</p>
+              }
+            </div>
+
+            <div class="mb-6">
+              <label for="checkout-address"
+                     class="block text-xs uppercase tracking-widest font-semibold text-dark dark:text-white mb-2">
+                Adresse de livraison <span class="text-gold">*</span>
+              </label>
+              <textarea id="checkout-address" rows="3"
+                [value]="form().address"
+                (input)="updateField('address', $any($event.target).value)"
+                (blur)="markTouched('address')"
+                placeholder="Rue, ville, code postal..."
+                class="w-full px-4 py-3 bg-[#f3ede1] dark:bg-dark text-dark dark:text-white text-sm
+                       focus:outline-none transition-colors duration-200 resize-none
+                       placeholder:text-gray-400/60 dark:placeholder:text-white/20"
+                [class]="shouldShowError('address')
+                  ? 'border border-red-400 dark:border-red-500/60 focus:border-red-400'
+                  : 'border border-gold/40 dark:border-white/10 focus:border-gold'"></textarea>
+              @if (shouldShowError('address')) {
+                <p class="text-xs text-red-500 dark:text-red-400 mt-1.5">L'adresse est requise</p>
+              }
+            </div>
+
+            <div class="mb-6">
+              <label for="checkout-email"
+                     class="block text-xs uppercase tracking-widest font-semibold text-dark dark:text-white mb-2">
+                Email
+                <span class="text-gray-400 dark:text-white/30 normal-case tracking-normal font-normal">(optionnel)</span>
+              </label>
+              <input id="checkout-email" type="email"
+                [value]="form().email"
+                (input)="updateField('email', $any($event.target).value)"
+                (blur)="markTouched('email')"
+                placeholder="contact@email.com"
+                class="w-full px-4 py-3 bg-[#f3ede1] dark:bg-dark text-dark dark:text-white text-sm
+                       focus:outline-none transition-colors duration-200
+                       placeholder:text-gray-400/60 dark:placeholder:text-white/20"
+                [class]="shouldShowError('email')
+                  ? 'border border-red-400 dark:border-red-500/60 focus:border-red-400'
+                  : 'border border-gold/40 dark:border-white/10 focus:border-gold'" />
+              @if (shouldShowError('email')) {
+                <p class="text-xs text-red-500 dark:text-red-400 mt-1.5">Email invalide</p>
+              }
+            </div>
+
+            <button (click)="onSubmit()" [disabled]="loading()"
+              class="w-full px-8 py-3.5 text-sm uppercase tracking-widest font-semibold text-white
+                     transition-all duration-300 flex items-center justify-center gap-3"
+              [class]="loading() ? 'bg-gold/60 cursor-not-allowed' : 'bg-gold hover:bg-gold-dark'">
+              @if (loading()) {
+                Envoi...
+              } @else {
+                Confirmer la commande — {{ formatPrice(cartTotal()) }}
+              }
+            </button>
+
+          </div>
+        </div>
+      </div>
+    }
+  </div>
+</section>
