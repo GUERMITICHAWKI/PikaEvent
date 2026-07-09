@@ -1,4 +1,4 @@
-import { Component, OnInit, signal, computed, ChangeDetectionStrategy } from '@angular/core';
+import { Component, signal, computed, ChangeDetectionStrategy } from '@angular/core';
 import { RouterLink } from '@angular/router';
 
 import { ProductService } from '../../core/services/product.service';
@@ -14,13 +14,14 @@ import { Product } from '../../core/models/product.model';
     changeDetection: ChangeDetectionStrategy.Eager,
     styleUrl: './home.component.scss'
 })
-export class HomeComponent implements OnInit {
+export class HomeComponent {
 
-  allProducts    = signal<Product[]>([]);
   activeCategory = signal<string>('tous');
   isTransitioning = signal<boolean>(false);
 
   categories = this.productService.getCategories();
+
+  allProducts = signal<Product[]>([]);
 
   filteredProducts = computed(() => {
     const cat = this.activeCategory();
@@ -52,16 +53,17 @@ export class HomeComponent implements OnInit {
     { value: '100%', label: 'Handmade' },
     { value: '5★',   label: 'Note moyenne' }
   ];
-heromainLoaded: any;
+
+  heromainLoaded: any;
 
   constructor(
     private productService: ProductService,
     private cartService: CartService,
     private toastService: ToastService
-  ) {}
-
-  ngOnInit() {
-    this.allProducts.set(this.productService.getPopular(6));
+  ) {
+    this.productService.getPopular(6).subscribe(products => {
+      this.allProducts.set(products);
+    });
   }
 
   setCategory(cat: string) {

@@ -1,4 +1,4 @@
-import { Component, OnInit, signal, computed, ChangeDetectionStrategy } from '@angular/core';
+import { Component, signal, computed, ChangeDetectionStrategy } from '@angular/core';
 
 import { FormsModule } from '@angular/forms';
 import { ProductService } from '../../core/services/product.service';
@@ -13,9 +13,8 @@ import { Product, SortOption } from '../../core/models/product.model';
     changeDetection: ChangeDetectionStrategy.Eager,
     styleUrl: './shop.component.scss'
 })
-export class ShopComponent implements OnInit {
+export class ShopComponent {
 
-  allProducts = signal<Product[]>([]);
   selectedCategory = signal<string>('tous');
   selectedSort = signal<SortOption>('default');
   searchQuery = signal<string>('');
@@ -24,10 +23,10 @@ export class ShopComponent implements OnInit {
   categories = this.productService.getCategories();
 
   categoryCounts = computed(() => {
-    const counts: Record<string, number> = { tous: this.allProducts().length };
+    const counts: Record<string, number> = { tous: this.productService.products().length };
     this.categories.forEach(c => {
       if (c.key !== 'tous') {
-        counts[c.key] = this.allProducts().filter(p => p.category === c.key).length;
+        counts[c.key] = this.productService.products().filter(p => p.category === c.key).length;
       }
     });
     return counts;
@@ -41,7 +40,7 @@ export class ShopComponent implements OnInit {
   ];
 
   filteredProducts = computed(() => {
-    let list = this.allProducts();
+    let list = this.productService.products();
 
     if (this.selectedCategory() !== 'tous') {
       list = list.filter(p => p.category === this.selectedCategory());
@@ -64,10 +63,6 @@ export class ShopComponent implements OnInit {
     private productService: ProductService,
     private cartService: CartService
   ) {}
-
-  ngOnInit() {
-    this.allProducts.set(this.productService.getAll());
-  }
 
   private triggerTransition(action: () => void) {
     this.isTransitioning.set(true);

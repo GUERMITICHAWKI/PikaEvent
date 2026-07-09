@@ -1,7 +1,7 @@
-import { Component, OnInit, signal, computed, ChangeDetectionStrategy } from '@angular/core';
+import { Component, signal, computed, effect, ChangeDetectionStrategy } from '@angular/core';
 import { ActivatedRoute, RouterLink } from '@angular/router';
+import { toSignal } from '@angular/core/rxjs-interop';
 import { SeoService } from '../../core/services/seo.service';
-
 
 import { ProductService } from '../../core/services/product.service';
 import { CartService } from '../../core/services/cart.service';
@@ -15,7 +15,9 @@ import { Product } from '../../core/models/product.model';
     changeDetection: ChangeDetectionStrategy.Eager,
     styleUrl: './product-detail.component.scss'
 })
-export class ProductDetailComponent implements OnInit {
+export class ProductDetailComponent {
+
+  private slug = toSignal(this.route.params, { initialValue: {} as any });
 
   product = signal<Product | null>(null);
   similarProducts = signal<Product[]>([]);
@@ -37,31 +39,28 @@ export class ProductDetailComponent implements OnInit {
     private productService: ProductService,
     private cartService: CartService,
     private seoService: SeoService
-  ) {}
+  ) {
+    effect(() => {
+      const slugValue = this.slug()['slug'];
+      const products = this.productService.products(); // dépendance : se redéclenche quand les produits arrivent
 
-  ngOnInit() {
-    
-    this.route.params.subscribe(params => {
-      const slug = params['slug'];
-      const product = this.productService.getBySlug(slug);
-      
+      if (!slugValue || products.length === 0) return;
+
+      const product = this.productService.getBySlug(slugValue);
+
       if (product) {
         this.product.set(product);
         this.seoService.update({
-  title: product.name,
-  description: product.description?.slice(0, 155) || `Découvrez ${product.name}, une création handmade Pika Event.`
-});
-this.seoService.update({
-  title: product.name,
-  description: product.description?.slice(0, 155) || `Découvrez ${product.name}, une création handmade Pika Event.`
-});
-this.seoService.setProductJsonLd({
-  name: product.name,
-  description: product.description || `${product.name}, création handmade Pika Event.`,
-  image: product.images?.[0],
-  price: product.price,
-  currency: 'TND'
-});
+          title: product.name,
+          description: product.description?.slice(0, 155) || `Découvrez ${product.name}, une création handmade Pika Event.`
+        });
+        this.seoService.setProductJsonLd({
+          name: product.name,
+          description: product.description || `${product.name}, création handmade Pika Event.`,
+          image: product.images?.[0],
+          price: product.price,
+          currency: 'TND'
+        });
         this.similarProducts.set(
           this.productService.getSimilar(product, 3)
         );
