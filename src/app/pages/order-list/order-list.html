@@ -1,0 +1,149 @@
+<div class="p-8">
+  <h1 class="font-serif text-3xl text-dark mb-8">Commandes reçues</h1>
+
+  <div class="space-y-4">
+    @for (order of orders(); track order.id) {
+      <div class="bg-white rounded-sm shadow-sm overflow-hidden">
+
+        <!-- Ligne principale -->
+        <div class="p-5 flex items-center justify-between cursor-pointer hover:bg-[#fafafa] transition-colors"
+     (click)="toggleExpand(order)">
+          <div class="flex items-center gap-6">
+            <div>
+              <p class="text-xs text-gray-400 uppercase tracking-wider mb-1">Commande</p>
+              <p class="text-dark font-semibold">#{{ order.id }}</p>
+            </div>
+            <div>
+              <p class="text-xs text-gray-400 uppercase tracking-wider mb-1">Client</p>
+              <p class="text-dark">{{ order.customerName }}</p>
+              <p class="text-xs text-gray-400">{{ order.phone }}</p>
+            </div>
+            <div>
+              <p class="text-xs text-gray-400 uppercase tracking-wider mb-1">Date</p>
+              <p class="text-dark text-sm">{{ formatDate(order.createdAt) }}</p>
+            </div>
+            <div>
+              <p class="text-xs text-gray-400 uppercase tracking-wider mb-1">Total</p>
+              <p class="text-gold font-semibold">{{ formatPrice(order.total) }}</p>
+            </div>
+          </div>
+
+          <div class="flex items-center gap-4">
+            <span class="px-3 py-1.5 rounded-full text-xs font-medium"
+                  [class]="statusColors[order.status]">
+              {{ statusLabels[order.status] || order.status }}
+            </span>
+            <svg class="w-5 h-5 text-gray-400 transition-transform"
+                 [class.rotate-180]="expandedId() === order.id"
+                 fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+            </svg>
+          </div>
+        </div>
+
+        @if (expandedId() === order.id) {
+  <div class="border-t border-gray-100 bg-[#fafafa]">
+
+    <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 px-6 pt-6 pb-5">
+      <div class="bg-white rounded-sm p-4 border-l-2 border-gold">
+        <p class="text-[10px] text-gray-400 uppercase tracking-widest mb-1.5">Adresse de livraison</p>
+        <p class="text-dark text-sm">{{ order.address }}</p>
+      </div>
+      <div class="bg-white rounded-sm p-4 border-l-2 border-gold">
+        <p class="text-[10px] text-gray-400 uppercase tracking-widest mb-1.5">Contact</p>
+        <p class="text-dark text-sm">{{ order.phone }}</p>
+        @if (order.email) {
+          <p class="text-gray-400 text-xs mt-0.5">{{ order.email }}</p>
+        }
+      </div>
+    </div>
+
+    <div class="px-6 pb-5">
+      <p class="text-[10px] text-gray-400 uppercase tracking-widest mb-3">
+        Articles commandés ({{ order.items.length }})
+      </p>
+      <div class="space-y-2">
+        @for (item of order.items; track item.id) {
+          <div class="flex items-center gap-4 bg-white rounded-sm px-4 py-3 shadow-sm">
+
+           @if (item.product?.imageUrl) {
+  <button (click)="openPreview(item.product?.imageUrl, $event)"
+          class="flex-shrink-0 group relative">
+    <img [src]="item.product?.imageUrl" [alt]="item.productName"
+         class="w-12 h-12 object-cover rounded-sm border border-gray-100
+                group-hover:ring-2 group-hover:ring-gold/50 transition-all duration-200 cursor-zoom-in" />
+  </button>
+} @else {
+  <div class="w-12 h-12 bg-gray-50 rounded-sm flex items-center justify-center
+              text-gray-300 text-[10px] flex-shrink-0 border border-gray-100">
+    N/A
+  </div>
+}
+
+            <div class="flex-1 min-w-0">
+              <p class="text-dark text-sm font-medium truncate">{{ item.productName }}</p>
+              <p class="text-gray-400 text-xs mt-0.5">
+                {{ formatPrice(item.unitPrice) }} × {{ item.quantity }}
+              </p>
+            </div>
+
+            <p class="text-gold font-semibold text-sm flex-shrink-0">
+              {{ formatPrice(item.unitPrice * item.quantity) }}
+            </p>
+          </div>
+        }
+      </div>
+    </div>
+
+    <div class="flex items-center justify-between px-6 py-4 border-t border-gray-200 bg-white">
+      <div class="flex items-center gap-3">
+        <label class="text-[10px] text-gray-400 uppercase tracking-widest">Statut</label>
+        <select
+          [value]="order.status"
+          (change)="changeStatus(order, $any($event.target).value)"
+          (click)="$event.stopPropagation()"
+          class="px-3 py-2 border border-gray-200 text-sm rounded-sm focus:outline-none focus:border-gold bg-white">
+          @for (s of statusOptions; track s) {
+            <option [value]="s">{{ statusLabels[s] }}</option>
+          }
+        </select>
+      </div>
+
+      <button
+        (click)="deleteOrder(order); $event.stopPropagation()"
+        class="text-red-400 hover:text-red-500 text-xs uppercase tracking-wider
+               flex items-center gap-1.5">
+        <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/>
+        </svg>
+        Supprimer la commande
+      </button>
+    </div>
+
+  </div>
+}
+      </div>
+    }
+
+    @if (orders().length === 0) {
+      <p class="text-center text-gray-400 py-16">Aucune commande pour l'instant.</p>
+    }
+    <!-- Lightbox aperçu image -->
+@if (previewImage()) {
+  <div class="fixed inset-0 bg-dark/80 z-50 flex items-center justify-center p-8"
+       (click)="closePreview()">
+    <img [src]="previewImage()" alt="Aperçu produit"
+         class="max-w-full max-h-full rounded-sm shadow-2xl" />
+    <button (click)="closePreview()"
+            class="absolute top-6 right-6 w-10 h-10 rounded-full bg-white/10 hover:bg-white/20
+                   flex items-center justify-center text-white transition-colors">
+      <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+      </svg>
+    </button>
+  </div>
+}
+  </div>
+
+</div>

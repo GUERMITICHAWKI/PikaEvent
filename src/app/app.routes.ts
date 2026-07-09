@@ -1,17 +1,32 @@
 import { Routes } from '@angular/router';
+import { AdminLayoutComponent } from './layout/admin-layout/admin-layout';
 
 export const routes: Routes = [
-  { path: '', redirectTo: 'produits', pathMatch: 'full' },
   {
-    path: 'produits',
-    loadComponent: () => import('./pages/product-list/product-list').then(m => m.ProductListComponent)
-  },
-  {
-    path: 'produits/nouveau',
-    loadComponent: () => import('./pages/product-form/product-form').then(m => m.ProductFormComponent)
-  },
-  {
-    path: 'produits/:id/modifier',
-    loadComponent: () => import('./pages/product-form/product-form').then(m => m.ProductFormComponent)
+    path: '',
+    component: AdminLayoutComponent,
+    children: [
+      { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
+      {
+        path: 'dashboard',
+        loadComponent: () => import('./pages/dashboard/dashboard').then(m => m.DashboardComponent)
+      },
+      {
+        path: 'produits',
+        loadComponent: () => import('./pages/product-list/product-list').then(m => m.ProductListComponent)
+      },
+      {
+        path: 'produits/nouveau',
+        loadComponent: () => import('./pages/product-form/product-form').then(m => m.ProductFormComponent)
+      },
+      {
+        path: 'produits/:id/modifier',
+        loadComponent: () => import('./pages/product-form/product-form').then(m => m.ProductFormComponent)
+      },
+      {
+        path: 'commandes',
+        loadComponent: () => import('./pages/order-list/order-list').then(m => m.OrderListComponent)
+      }
+    ]
   }
 ];

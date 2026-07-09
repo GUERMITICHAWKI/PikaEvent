@@ -1,0 +1,55 @@
+<div class="min-h-screen flex bg-cream">
+
+  <!-- Sidebar -->
+  <aside class="w-64 bg-dark flex flex-col flex-shrink-0">
+
+    <div class="px-6 py-7 border-b border-white/10">
+      <p class="font-serif text-xl text-white">Pika<span class="text-gold">Admin</span></p>
+      <p class="text-[11px] text-white/30 uppercase tracking-widest mt-1">Espace gestion</p>
+    </div>
+
+    <nav class="flex-1 px-3 py-6 space-y-1">
+      <a routerLink="/dashboard" routerLinkActive="bg-white/10 text-white border-gold"
+         [routerLinkActiveOptions]="{exact: true}"
+         class="flex items-center gap-3 px-4 py-3 rounded-sm text-white/50 border-l-2 border-transparent
+                hover:bg-white/5 hover:text-white/80 transition-colors text-sm">
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+                d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/>
+        </svg>
+        Tableau de bord
+      </a>
+
+      <a routerLink="/produits" routerLinkActive="bg-white/10 text-white border-gold"
+         class="flex items-center gap-3 px-4 py-3 rounded-sm text-white/50 border-l-2 border-transparent
+                hover:bg-white/5 hover:text-white/80 transition-colors text-sm">
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+                d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"/>
+        </svg>
+        Produits
+      </a>
+
+      <a routerLink="/commandes" routerLinkActive="bg-white/10 text-white border-gold"
+         class="flex items-center gap-3 px-4 py-3 rounded-sm text-white/50 border-l-2 border-transparent
+                hover:bg-white/5 hover:text-white/80 transition-colors text-sm">
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+                d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4"/>
+        </svg>
+        Commandes
+      </a>
+    </nav>
+
+    <div class="px-6 py-5 border-t border-white/10">
+      <p class="text-[11px] text-white/25">Pika Event © 2026</p>
+    </div>
+
+  </aside>
+
+  <!-- Contenu -->
+  <main class="flex-1 overflow-y-auto">
+    <router-outlet></router-outlet>
+  </main>
+
+</div>

@@ -1,0 +1,65 @@
+<div class="p-8">
+
+  <div class="mb-8">
+    <h1 class="font-serif text-3xl text-dark mb-1">Tableau de bord</h1>
+    <p class="text-gray-400 text-sm">Vue d'ensemble de votre boutique Pika Event</p>
+  </div>
+
+  <!-- Stats -->
+  <div class="grid grid-cols-2 lg:grid-cols-4 gap-5 mb-10">
+
+    <div class="bg-white rounded-sm p-6 border-t-2 border-gold">
+      <p class="text-xs text-gray-400 uppercase tracking-widest mb-2">Produits</p>
+      <p class="font-serif text-3xl text-dark">{{ totalProducts() }}</p>
+      <p class="text-xs text-gold mt-1">{{ promoProducts() }} en promo</p>
+    </div>
+
+    <div class="bg-white rounded-sm p-6 border-t-2 border-dark">
+      <p class="text-xs text-gray-400 uppercase tracking-widest mb-2">Commandes</p>
+      <p class="font-serif text-3xl text-dark">{{ totalOrders() }}</p>
+      <p class="text-xs text-gray-400 mt-1">au total</p>
+    </div>
+
+    <div class="bg-white rounded-sm p-6 border-t-2 border-yellow-400">
+      <p class="text-xs text-gray-400 uppercase tracking-widest mb-2">En attente</p>
+      <p class="font-serif text-3xl text-dark">{{ pendingOrders() }}</p>
+      <p class="text-xs text-yellow-600 mt-1">à traiter</p>
+    </div>
+
+    <div class="bg-white rounded-sm p-6 border-t-2 border-green-500">
+      <p class="text-xs text-gray-400 uppercase tracking-widest mb-2">Chiffre d'affaires</p>
+      <p class="font-serif text-2xl text-dark">{{ formatPrice(totalRevenue()) }}</p>
+      <p class="text-xs text-gray-400 mt-1">commandes non annulées</p>
+    </div>
+
+  </div>
+
+  <!-- Commandes récentes -->
+  <div class="bg-white rounded-sm shadow-sm">
+    <div class="px-6 py-4 border-b border-gray-100 flex items-center justify-between">
+      <h2 class="font-serif text-lg text-dark">Commandes récentes</h2>
+      <a routerLink="/commandes" class="text-xs text-gold hover:text-gold-dark uppercase tracking-wider">
+        Voir tout →
+      </a>
+    </div>
+
+    <div class="divide-y divide-gray-50">
+      @for (order of recentOrders(); track order.id) {
+        <div class="px-6 py-4 flex items-center justify-between text-sm">
+          <div class="flex items-center gap-4">
+            <span class="text-gray-400">#{{ order.id }}</span>
+            <span class="text-dark">{{ order.customerName }}</span>
+            <span class="text-gray-300">{{ formatDate(order.createdAt) }}</span>
+          </div>
+          <div class="flex items-center gap-4">
+            <span class="text-gold font-medium">{{ formatPrice(order.total) }}</span>
+          </div>
+        </div>
+      }
+      @if (recentOrders().length === 0) {
+        <p class="text-center text-gray-400 py-10 text-sm">Aucune commande pour l'instant.</p>
+      }
+    </div>
+  </div>
+
+</div>
