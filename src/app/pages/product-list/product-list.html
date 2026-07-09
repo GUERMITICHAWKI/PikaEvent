@@ -1,0 +1,63 @@
+<div class="min-h-screen bg-cream p-8">
+  <div class="flex items-center justify-between mb-8">
+    <h1 class="font-serif text-3xl text-dark">Gestion des produits</h1>
+    <a routerLink="/produits/nouveau"
+       class="px-5 py-2.5 bg-gold text-white text-sm uppercase tracking-wider font-semibold hover:bg-gold-dark transition-colors">
+      + Nouveau produit
+    </a>
+  </div>
+
+  <div class="bg-white rounded-sm shadow-sm overflow-hidden">
+    <table class="w-full text-sm">
+      <thead class="bg-[#f3ede1] text-dark uppercase text-xs tracking-wider">
+        <tr>
+          <th class="px-4 py-3 text-left">Image</th>
+          <th class="px-4 py-3 text-left">Nom</th>
+          <th class="px-4 py-3 text-left">Catégorie</th>
+          <th class="px-4 py-3 text-left">Prix</th>
+          <th class="px-4 py-3 text-left">Promo</th>
+          <th class="px-4 py-3 text-right">Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        @for (p of products(); track p.id) {
+          <tr class="border-t border-gray-100">
+            <td class="px-4 py-3">
+              @if (p.imageUrl) {
+                <img [src]="p.imageUrl" [alt]="p.name" class="w-12 h-12 object-cover rounded-sm" />
+              } @else {
+                <div class="w-12 h-12 bg-gray-100 rounded-sm flex items-center justify-center text-gray-300 text-xs">
+                  N/A
+                </div>
+              }
+            </td>
+            <td class="px-4 py-3 text-dark">{{ p.name }}</td>
+            <td class="px-4 py-3 text-gray-500">{{ categoryLabels[p.category] }}</td>
+            <td class="px-4 py-3 text-dark">{{ formatPrice(p.price) }}</td>
+            <td class="px-4 py-3">
+              @if (p.isPromo) {
+                <span class="px-2 py-1 bg-gold/10 text-gold text-xs rounded-sm">-{{ p.discount }}%</span>
+              } @else {
+                <span class="text-gray-300 text-xs">—</span>
+              }
+            </td>
+            <td class="px-4 py-3 text-right">
+              <a [routerLink]="['/produits', p.id, 'modifier']"
+                 class="text-gold hover:text-gold-dark text-xs uppercase tracking-wider mr-4">
+                Modifier
+              </a>
+              <button (click)="deleteProduct(p)"
+                      class="text-red-400 hover:text-red-500 text-xs uppercase tracking-wider">
+                Supprimer
+              </button>
+            </td>
+          </tr>
+        }
+      </tbody>
+    </table>
+
+    @if (products().length === 0) {
+      <p class="text-center text-gray-400 py-12">Aucun produit pour l'instant.</p>
+    }
+  </div>
+</div>

@@ -1,0 +1,220 @@
+<div class="min-h-screen bg-cream p-8">
+  <div class="max-w-2xl mx-auto">
+
+    <div class="flex items-center gap-2 text-gray-400 text-sm mb-6">
+      <a routerLink="/produits" class="hover:text-gold">Produits</a>
+      <span>/</span>
+      <span class="text-gold">{{ isEditMode() ? 'Modifier' : 'Nouveau' }}</span>
+    </div>
+
+    <h1 class="font-serif text-3xl text-dark mb-8">
+      {{ isEditMode() ? 'Modifier le produit' : 'Nouveau produit' }}
+    </h1>
+
+    @if (error()) {
+      <div class="bg-red-50 border border-red-200 text-red-500 px-4 py-3 text-sm mb-6">
+        ⚠️ {{ error() }}
+      </div>
+    }
+
+    <div class="bg-white rounded-sm shadow-sm p-8 space-y-6">
+
+      <!-- Image -->
+      <div>
+        <label class="block text-xs uppercase tracking-widest font-semibold text-dark mb-2">
+          Image du produit
+        </label>
+
+        <div class="flex items-center gap-4">
+          @if (previewUrl()) {
+            <img [src]="previewUrl()" class="w-24 h-24 object-cover rounded-sm border border-gray-200" />
+          } @else if (currentImageUrl()) {
+            <img [src]="currentImageUrl()" class="w-24 h-24 object-cover rounded-sm border border-gray-200" />
+          } @else {
+            <div class="w-24 h-24 bg-gray-100 rounded-sm flex items-center justify-center text-gray-300 text-xs">
+              Aucune image
+            </div>
+          }
+
+          <div class="flex flex-col gap-2">
+            <label class="px-4 py-2 border border-gold text-gold text-xs uppercase tracking-wider text-center cursor-pointer hover:bg-gold hover:text-white transition-colors">
+              Choisir une image
+              <input type="file" accept="image/*" class="hidden" (change)="onFileSelected($event)" />
+            </label>
+            @if (previewUrl()) {
+              <button (click)="removeSelectedImage()" class="text-xs text-red-400 hover:text-red-500">
+                Annuler la sélection
+              </button>
+            }
+          </div>
+        </div>
+        @if (uploading()) {
+          <p class="text-xs text-gold mt-2">Envoi de l'image en cours...</p>
+        }
+      </div>
+
+      <!-- Nom -->
+      <div>
+        <label class="block text-xs uppercase tracking-widest font-semibold text-dark mb-2">
+          Nom du produit <span class="text-gold">*</span>
+        </label>
+        <input
+          type="text"
+          [value]="form().name"
+          (input)="onNameChange($any($event.target).value)"
+          placeholder="Pack Amour Chic"
+          class="w-full px-4 py-3 border border-gray-200 text-sm focus:outline-none focus:border-gold" />
+        @if (submitAttempted() && errors().name) {
+          <p class="text-xs text-red-500 mt-1">Le nom est requis</p>
+        }
+      </div>
+
+      <!-- Slug -->
+      <div>
+        <label class="block text-xs uppercase tracking-widest font-semibold text-dark mb-2">
+          Slug (URL) <span class="text-gold">*</span>
+        </label>
+        <input
+          type="text"
+          [value]="form().slug"
+          (input)="updateField('slug', $any($event.target).value)"
+          placeholder="pack-amour-chic"
+          class="w-full px-4 py-3 border border-gray-200 text-sm focus:outline-none focus:border-gold" />
+        @if (submitAttempted() && errors().slug) {
+          <p class="text-xs text-red-500 mt-1">Le slug est requis</p>
+        }
+      </div>
+
+      <!-- Catégorie -->
+      <div>
+        <label class="block text-xs uppercase tracking-widest font-semibold text-dark mb-2">
+          Catégorie
+        </label>
+        <select
+          [value]="form().category"
+          (change)="updateField('category', $any($event.target).value)"
+          class="w-full px-4 py-3 border border-gray-200 text-sm focus:outline-none focus:border-gold bg-white">
+          @for (cat of categories; track cat) {
+            <option [value]="cat">{{ categoryLabels[cat] }}</option>
+          }
+        </select>
+      </div>
+
+      <!-- Prix -->
+      <div class="grid grid-cols-3 gap-4">
+        <div>
+          <label class="block text-xs uppercase tracking-widest font-semibold text-dark mb-2">
+            Prix (millimes) <span class="text-gold">*</span>
+          </label>
+          <input
+            type="number"
+            [value]="form().price"
+            (input)="updateField('price', $any($event.target).value)"
+            placeholder="49000"
+            class="w-full px-4 py-3 border border-gray-200 text-sm focus:outline-none focus:border-gold" />
+          @if (submitAttempted() && errors().price) {
+            <p class="text-xs text-red-500 mt-1">Prix requis (&gt; 0)</p>
+          }
+        </div>
+
+        <div>
+          <label class="block text-xs uppercase tracking-widest font-semibold text-dark mb-2">
+            Prix original
+          </label>
+          <input
+            type="number"
+            [value]="form().originalPrice"
+            (input)="updateField('originalPrice', $any($event.target).value)"
+            placeholder="59000"
+            class="w-full px-4 py-3 border border-gray-200 text-sm focus:outline-none focus:border-gold" />
+        </div>
+
+        <div>
+          <label class="block text-xs uppercase tracking-widest font-semibold text-dark mb-2">
+            Remise (%)
+          </label>
+          <input
+            type="number"
+            [value]="form().discount"
+            (input)="updateField('discount', $any($event.target).value)"
+            placeholder="17"
+            class="w-full px-4 py-3 border border-gray-200 text-sm focus:outline-none focus:border-gold" />
+          <p class="text-xs text-gray-400 mt-1">La remise détermine automatiquement si le produit est en promo.</p>
+        </div>
+      </div>
+
+      <!-- Description -->
+      <div>
+        <label class="block text-xs uppercase tracking-widest font-semibold text-dark mb-2">
+          Description <span class="text-gold">*</span>
+        </label>
+        <textarea
+          rows="3"
+          [value]="form().description"
+          (input)="updateField('description', $any($event.target).value)"
+          placeholder="Un plateau élégant avec calligraphie dorée..."
+          class="w-full px-4 py-3 border border-gray-200 text-sm focus:outline-none focus:border-gold resize-none"></textarea>
+        @if (submitAttempted() && errors().description) {
+          <p class="text-xs text-red-500 mt-1">La description est requise</p>
+        }
+      </div>
+
+      <!-- Détails -->
+      <div>
+        <label class="block text-xs uppercase tracking-widest font-semibold text-dark mb-2">
+          Détails techniques
+        </label>
+        <textarea
+          rows="4"
+          [value]="form().details"
+          (input)="updateField('details', $any($event.target).value)"
+          placeholder="Nombre de pièces: 6 pièces | Couleur: Blanc | ..."
+          class="w-full px-4 py-3 border border-gray-200 text-sm focus:outline-none focus:border-gold resize-none"></textarea>
+        <p class="text-xs text-gray-400 mt-1">Séparez chaque détail par « | » (ex: Couleur: Blanc | Hauteur: 8 cm)</p>
+      </div>
+
+      <!-- Note & avis -->
+      <div class="grid grid-cols-2 gap-4">
+        <div>
+          <label class="block text-xs uppercase tracking-widest font-semibold text-dark mb-2">
+            Note (0-5)
+          </label>
+          <input
+            type="number" step="0.5" min="0" max="5"
+            [value]="form().rating"
+            (input)="updateField('rating', $any($event.target).value)"
+            placeholder="4.5"
+            class="w-full px-4 py-3 border border-gray-200 text-sm focus:outline-none focus:border-gold" />
+        </div>
+        <div>
+          <label class="block text-xs uppercase tracking-widest font-semibold text-dark mb-2">
+            Nombre d'avis
+          </label>
+          <input
+            type="number" min="0"
+            [value]="form().reviewCount"
+            (input)="updateField('reviewCount', $any($event.target).value)"
+            placeholder="12"
+            class="w-full px-4 py-3 border border-gray-200 text-sm focus:outline-none focus:border-gold" />
+        </div>
+      </div>
+
+      <!-- Actions -->
+      <div class="flex items-center gap-4 pt-4">
+        <button
+          (click)="onSubmit()"
+          [disabled]="loading()"
+          class="px-8 py-3 text-sm uppercase tracking-widest font-semibold text-white transition-colors"
+          [class]="loading() ? 'bg-gold/60 cursor-not-allowed' : 'bg-gold hover:bg-gold-dark'">
+          @if (loading()) {
+            Enregistrement...
+          } @else {
+            {{ isEditMode() ? 'Mettre à jour' : 'Créer le produit' }}
+          }
+        </button>
+        <a routerLink="/produits" class="text-sm text-gray-400 hover:text-gray-600">Annuler</a>
+      </div>
+
+    </div>
+  </div>
+</div>
