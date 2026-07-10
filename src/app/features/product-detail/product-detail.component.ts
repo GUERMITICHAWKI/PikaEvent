@@ -1,6 +1,5 @@
 import { Component, signal, computed, effect, ChangeDetectionStrategy } from '@angular/core';
 import { ActivatedRoute, RouterLink } from '@angular/router';
-import { toSignal } from '@angular/core/rxjs-interop';
 import { SeoService } from '../../core/services/seo.service';
 
 import { ProductService } from '../../core/services/product.service';
@@ -17,7 +16,7 @@ import { Product } from '../../core/models/product.model';
 })
 export class ProductDetailComponent {
 
-  private slug = toSignal(this.route.params, { initialValue: {} as any });
+  private currentSlug = signal<string | null>(null);
 
   product = signal<Product | null>(null);
   similarProducts = signal<Product[]>([]);
@@ -40,9 +39,15 @@ export class ProductDetailComponent {
     private cartService: CartService,
     private seoService: SeoService
   ) {
+    // Met à jour le signal à chaque changement de route (nouveau slug dans l'URL)
+    this.route.params.subscribe(params => {
+      this.currentSlug.set(params['slug'] ?? null);
+    });
+
+    // Se redéclenche quand le slug change OU quand les produits arrivent/changent
     effect(() => {
-      const slugValue = this.slug()['slug'];
-      const products = this.productService.products(); // dépendance : se redéclenche quand les produits arrivent
+      const slugValue = this.currentSlug();
+      const products = this.productService.products();
 
       if (!slugValue || products.length === 0) return;
 
