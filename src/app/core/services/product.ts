@@ -16,11 +16,14 @@ export class ProductService {
   }
 
   loadProducts(): void {
-    this.http.get<Product[]>(this.apiUrl).subscribe({
-      next: (data) => this._products.set(data),
-      error: (err) => console.error('Erreur chargement produits :', err)
-    });
-  }
+  this.http.get<Product[]>(this.apiUrl).subscribe({
+    next: (data) => this._products.set(
+      [...data].sort((a, b) => b.id - a.id)
+    ),
+    error: (err) => console.error('Erreur chargement produits :', err)
+  });
+}
+
 
   getById(id: number): Observable<Product> {
     return this.http.get<Product>(`${this.apiUrl}/${id}`);

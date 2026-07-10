@@ -57,6 +57,9 @@
         },
         "serve": {
           "builder": "@angular/build:dev-server",
+          "options": {
+          "port": 52238
+              },
           "configurations": {
             "production": {
               "buildTarget": "pika-admin:build:production"

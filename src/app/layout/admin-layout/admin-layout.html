@@ -42,8 +42,11 @@
     </nav>
 
     <div class="px-6 py-5 border-t border-white/10">
-      <p class="text-[11px] text-white/25">Pika Event © 2026</p>
-    </div>
+  <p class="text-[11px] text-white/25 mb-2">Pika Event © 2026</p>
+  <button (click)="logout()" class="text-xs text-white/40 hover:text-red-400 transition-colors">
+    Se déconnecter
+  </button>
+</div>
 
   </aside>
 
@@ -51,5 +54,14 @@
   <main class="flex-1 overflow-y-auto">
     <router-outlet></router-outlet>
   </main>
+  @if (toastService.message()) {
+  <div class="fixed bottom-6 right-6 bg-dark text-white px-5 py-3.5 rounded-sm shadow-xl
+              flex items-center gap-2 text-sm z-50">
+    <svg class="w-4 h-4 text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+    </svg>
+    {{ toastService.message() }}
+  </div>
+}
 
 </div>

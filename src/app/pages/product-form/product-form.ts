@@ -4,6 +4,8 @@ import { ProductService } from '../../core/services/product';
 import { UploadService } from '../../core/services/upload';
 import { CategoryEnum, CATEGORY_LABELS } from '../../core/models/category.enum';
 import { ProductPayload } from '../../core/models/product.model';
+import { ToastService } from '../../core/services/toast';
+
 
 interface ProductFormState {
   name: string;
@@ -74,7 +76,8 @@ export class ProductFormComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router,
     private productService: ProductService,
-    private uploadService: UploadService
+    private uploadService: UploadService,
+    private toastService: ToastService
   ) {}
 
   ngOnInit() {
@@ -195,6 +198,9 @@ export class ProductFormComponent implements OnInit {
     request.subscribe({
       next: () => {
         this.loading.set(false);
+        this.toastService.show(
+          this.isEditMode() ? 'Produit modifié avec succès' : 'Produit ajouté avec succès'
+        );
         this.router.navigate(['/produits']);
       },
       error: (err) => {

@@ -1,0 +1,55 @@
+<div class="min-h-screen bg-dark flex items-center justify-center px-4">
+  <div class="w-full max-w-sm">
+
+    <div class="text-center mb-8">
+      <p class="font-serif text-3xl text-white">Pika<span class="text-gold">Admin</span></p>
+      <p class="text-xs text-white/30 uppercase tracking-widest mt-1">Espace gestion</p>
+    </div>
+
+    <div class="bg-white rounded-sm p-8 shadow-xl">
+
+      @if (error()) {
+        <div class="bg-red-50 border border-red-200 text-red-500 px-4 py-3 text-sm mb-5">
+          ⚠️ {{ error() }}
+        </div>
+      }
+
+      <div class="mb-5">
+        <label class="block text-xs uppercase tracking-widest font-semibold text-dark mb-2">
+          Identifiant
+        </label>
+        <input
+          type="text"
+          [value]="username()"
+          (input)="username.set($any($event.target).value)"
+          (keydown.enter)="onSubmit()"
+          class="w-full px-4 py-3 border border-gray-200 text-sm focus:outline-none focus:border-gold" />
+      </div>
+
+      <div class="mb-6">
+        <label class="block text-xs uppercase tracking-widest font-semibold text-dark mb-2">
+          Mot de passe
+        </label>
+        <input
+          type="password"
+          [value]="password()"
+          (input)="password.set($any($event.target).value)"
+          (keydown.enter)="onSubmit()"
+          class="w-full px-4 py-3 border border-gray-200 text-sm focus:outline-none focus:border-gold" />
+      </div>
+
+      <button
+        (click)="onSubmit()"
+        [disabled]="loading()"
+        class="w-full py-3.5 text-sm uppercase tracking-widest font-semibold text-white transition-colors"
+        [class]="loading() ? 'bg-gold/60 cursor-not-allowed' : 'bg-gold hover:bg-gold-dark'">
+        @if (loading()) {
+          Connexion...
+        } @else {
+          Se connecter
+        }
+      </button>
+
+    </div>
+  </div>
+</div>
