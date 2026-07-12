@@ -24,7 +24,7 @@
   onerror="this.style.opacity='0'"
 />
 
-      <!-- Badges gauche -->
+<!-- Badges gauche -->
 <div class="absolute top-3 left-3 flex flex-col gap-1.5">
   @if (product.isBestSeller) {
     <span class="bg-accent text-white text-[11px] font-bold
@@ -38,6 +38,12 @@
       Promo !
     </span>
   }
+  @if (specialOffer()) {
+  <span class="bg-purple-500 text-white text-[11px] font-semibold
+               px-3 py-1 rounded-full shadow-sm">
+    {{ specialOfferLabel() }}
+  </span>
+}
 </div>
 
 <!-- Coeur favoris + badge réduction, empilés à droite -->

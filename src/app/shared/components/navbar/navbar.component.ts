@@ -3,8 +3,7 @@ import { RouterLink, RouterLinkActive } from '@angular/router';
 import { CartService } from '../../../core/services/cart.service';
 import { ThemeService } from '../../../core/services/theme.service';
 import { WishlistService } from '../../../core/services/wishlist.service';
-
-
+import { OfferService } from '../../../core/services/offer.service';
 
 @Component({
     selector: 'app-navbar',
@@ -20,12 +19,13 @@ export class NavbarComponent {
 
   cartCount = computed(() => this.cartService.cartCount());
   wishlistCount = computed(() => this.wishlistService.wishlistCount());
-
+  offersVisible = computed(() => this.offerService.settings()?.offersPageVisible ?? false);
 
   constructor(
     private cartService: CartService,
-      public wishlistService: WishlistService,
-    public themeService: ThemeService
+    public wishlistService: WishlistService,
+    public themeService: ThemeService,
+    private offerService: OfferService
   ) {}
 
   @HostListener('window:scroll')

@@ -1,0 +1,91 @@
+<div class="bg-dark border-b border-white/10">
+  <div class="container-main py-12">
+    <nav class="flex items-center gap-2 text-white/40 text-sm mb-4">
+      <a routerLink="/" class="hover:text-gold transition-colors">Accueil</a>
+      <span>/</span>
+      <span class="text-gold">Nos offres</span>
+    </nav>
+    <h1 class="font-serif text-4xl text-white">
+      Nos <span class="text-accent">Offres</span>
+    </h1>
+    <p class="text-white/50 mt-2 max-w-md">
+      Profitez de nos promotions en cours, sans code à saisir — tout s'applique automatiquement.
+    </p>
+  </div>
+</div>
+
+<div class="h-0.5 bg-gradient-to-r from-transparent via-gold to-transparent"></div>
+
+<section class="py-12 lg:py-16 bg-cream dark:bg-dark min-h-screen transition-colors duration-300">
+  <div class="container-main">
+
+    @if (offers().length === 0) {
+      <div class="text-center py-20">
+        <p class="text-gray-400 dark:text-white/40 mb-6">Aucune offre en cours pour le moment.</p>
+        <a routerLink="/boutique" class="btn-gold">Voir la boutique</a>
+      </div>
+    } @else {
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        @for (offer of offers(); track offer.id) {
+          <div class="bg-white dark:bg-dark-soft rounded-2xl p-6 shadow-sm border-t-2 border-gold
+                      flex flex-col hover:shadow-card transition-shadow duration-300">
+
+            <span class="inline-block self-start px-3 py-1 bg-gold/10 text-gold text-xs
+                        font-semibold uppercase tracking-wider rounded-full mb-4">
+              {{ typeBadgeLabel(offer.type) }}
+            </span>
+
+            <h2 class="font-serif text-xl text-dark dark:text-white mb-2">{{ offer.title }}</h2>
+
+            @if (offer.description) {
+              <p class="text-gray-500 dark:text-white/50 text-sm mb-4 flex-1">{{ offer.description }}</p>
+            }
+
+            <div class="space-y-1.5 mt-auto pt-4 border-t border-gray-100 dark:border-white/10">
+              @if (offer.value && offer.type !== 'BUNDLE') {
+                <p class="text-sm text-dark dark:text-white">
+                  <span class="text-gold font-bold">{{ offer.value }}{{ offer.type === 'FIXED_AMOUNT' ? ' ' + 'ت.د' : '%' }}</span>
+                  de remise
+                </p>
+              }
+              @if (offer.minCartAmount) {
+                <p class="text-xs text-gray-400 dark:text-white/40">
+                  Dès {{ formatPrice(offer.minCartAmount) }} d'achat
+                </p>
+              }
+              @if (offer.giftProduct) {
+                <p class="text-xs text-gray-400 dark:text-white/40">
+                  Cadeau : {{ offer.giftProduct.name }}
+                </p>
+              }
+              @if (offer.tiers.length > 0) {
+                <div class="text-xs text-gray-400 dark:text-white/40 space-y-0.5">
+                  @for (tier of offer.tiers; track tier.minQuantity) {
+                    <p>{{ tier.minQuantity }}+ articles → -{{ tier.discountPercentage }}%</p>
+                  }
+                </div>
+              }
+              @if (offer.endDate) {
+                <p class="text-xs text-red-400 font-medium">
+                  Jusqu'au {{ offer.endDate | slice:0:10 }}
+                </p>
+              }
+              @if (offer.promoCode) {
+                <p class="text-xs text-dark dark:text-white bg-gray-50 dark:bg-white/5 px-2 py-1 rounded-sm inline-block mt-2">
+                  Code : <span class="font-mono font-bold">{{ offer.promoCode }}</span>
+                </p>
+              }
+            </div>
+
+            @if (offer.targetProducts.length > 0) {
+              <a routerLink="/boutique"
+                 class="mt-4 text-xs text-gold hover:text-gold-dark uppercase tracking-wider text-center">
+                Voir les produits concernés →
+              </a>
+            }
+          </div>
+        }
+      </div>
+    }
+  </div>
+</section>
