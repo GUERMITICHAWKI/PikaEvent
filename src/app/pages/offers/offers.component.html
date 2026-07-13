@@ -27,13 +27,26 @@
     } @else {
       <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
         @for (offer of offers(); track offer.id) {
-          <div class="bg-white dark:bg-dark-soft rounded-2xl p-6 shadow-sm border-t-2 border-gold
+          <div [class]="'border-t-2 ' + cardBorderClasses(offer.type)"
+               class="bg-white dark:bg-dark-soft rounded-2xl p-6 shadow-sm
                       flex flex-col hover:shadow-card transition-shadow duration-300">
 
-            <span class="inline-block self-start px-3 py-1 bg-gold/10 text-gold text-xs
-                        font-semibold uppercase tracking-wider rounded-full mb-4">
-              {{ typeBadgeLabel(offer.type) }}
-            </span>
+            <!-- Badge type + compte à rebours -->
+            <div class="flex items-center justify-between gap-2 mb-4">
+              <span [class]="badgeClasses(offer.type)"
+                    class="inline-flex items-center gap-1.5 self-start px-3 py-1
+                           text-xs font-semibold uppercase tracking-wider rounded-full">
+                <span>{{ typeIcon(offer.type) }}</span>
+                {{ typeBadgeLabel(offer.type) }}
+              </span>
+
+              @if (countdown(offer); as time) {
+                <span class="inline-flex items-center gap-1 px-2.5 py-1 bg-red-500
+                             text-white text-[11px] font-bold rounded-full animate-pulse">
+                  ⏱ {{ time }}
+                </span>
+              }
+            </div>
 
             <h2 class="font-serif text-xl text-dark dark:text-white mb-2">{{ offer.title }}</h2>
 
@@ -41,23 +54,55 @@
               <p class="text-gray-500 dark:text-white/50 text-sm mb-4 flex-1">{{ offer.description }}</p>
             }
 
+            <!-- Miniatures des produits concernés (cliquables) -->
+            @if (offer.targetProducts.length > 0) {
+              <div class="flex items-center gap-1.5 mb-4 -mt-1">
+                @for (p of offer.targetProducts.slice(0, 5); track p.id) {
+                  @if (p.imageUrl) {
+                    <a [routerLink]="['/produit', p['slug']]"
+                       class="block hover:scale-105 transition-transform duration-200">
+                      <img [src]="p.imageUrl" [alt]="p.name"
+                           class="w-9 h-9 rounded-lg object-cover border-2 border-white dark:border-dark-soft
+                                  shadow-sm"
+                           onerror="this.style.display='none'"/>
+                    </a>
+                  }
+                }
+                @if (offer.targetProducts.length > 5) {
+                  <span class="text-xs text-gray-400 dark:text-white/40 ml-1">
+                    +{{ offer.targetProducts.length - 5 }}
+                  </span>
+                }
+              </div>
+            }
+
             <div class="space-y-1.5 mt-auto pt-4 border-t border-gray-100 dark:border-white/10">
-              @if (offer.value && offer.type !== 'BUNDLE') {
+
+              @if (valueLine(offer); as line) {
                 <p class="text-sm text-dark dark:text-white">
-                  <span class="text-gold font-bold">{{ offer.value }}{{ offer.type === 'FIXED_AMOUNT' ? ' ' + 'ت.د' : '%' }}</span>
-                  de remise
+                  <span [class]="badgeClasses(offer.type)" class="font-bold rounded px-1">
+                    {{ line }}
+                  </span>
                 </p>
               }
+
               @if (offer.minCartAmount) {
                 <p class="text-xs text-gray-400 dark:text-white/40">
                   Dès {{ formatPrice(offer.minCartAmount) }} d'achat
                 </p>
               }
+
               @if (offer.giftProduct) {
-                <p class="text-xs text-gray-400 dark:text-white/40">
-                  Cadeau : {{ offer.giftProduct.name }}
-                </p>
+                <div class="flex items-center gap-2 text-xs text-gray-500 dark:text-white/50">
+                  @if (offer.giftProduct.imageUrl) {
+                    <img [src]="offer.giftProduct.imageUrl" [alt]="offer.giftProduct.name"
+                         class="w-7 h-7 rounded-lg object-cover flex-shrink-0"
+                         onerror="this.style.display='none'"/>
+                  }
+                  <span>Cadeau : {{ offer.giftProduct.name }}</span>
+                </div>
               }
+
               @if (offer.tiers.length > 0) {
                 <div class="text-xs text-gray-400 dark:text-white/40 space-y-0.5">
                   @for (tier of offer.tiers; track tier.minQuantity) {
@@ -65,11 +110,13 @@
                   }
                 </div>
               }
-              @if (offer.endDate) {
+
+              @if (offer.endDate && offer.type !== 'FLASH_SALE') {
                 <p class="text-xs text-red-400 font-medium">
                   Jusqu'au {{ offer.endDate | slice:0:10 }}
                 </p>
               }
+
               @if (offer.promoCode) {
                 <p class="text-xs text-dark dark:text-white bg-gray-50 dark:bg-white/5 px-2 py-1 rounded-sm inline-block mt-2">
                   Code : <span class="font-mono font-bold">{{ offer.promoCode }}</span>

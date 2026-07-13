@@ -39,11 +39,11 @@
     </span>
   }
   @if (specialOffer()) {
-  <span class="bg-purple-500 text-white text-[11px] font-semibold
-               px-3 py-1 rounded-full shadow-sm">
-    {{ specialOfferLabel() }}
-  </span>
-}
+    <span class="bg-purple-500 text-white text-[11px] font-semibold
+                 px-3 py-1 rounded-full shadow-sm">
+      {{ specialOfferLabel() }}
+    </span>
+  }
 </div>
 
 <!-- Coeur favoris + badge réduction, empilés à droite -->
@@ -63,10 +63,10 @@
     </svg>
   </button>
 
-  @if (product.discount) {
+  @if (cardDiscountPercent(); as pct) {
     <div class="bg-dark/80 backdrop-blur-sm
                 text-white text-xs font-bold px-2.5 py-1 rounded-lg">
-      -{{ product.discount }}%
+      -{{ pct }}%
     </div>
   }
 </div>
@@ -116,11 +116,11 @@
 
       <div class="flex items-center gap-2">
         <span class="text-gold font-bold text-lg">
-          {{ formatPrice(product.price) }}
+          {{ formatPrice(displayPrice()) }}
         </span>
-        @if (product.originalPrice) {
+        @if (displayOriginalPrice()) {
           <span class="text-gray-400 dark:text-white/30 text-sm line-through">
-            {{ formatPrice(product.originalPrice) }}
+            {{ formatPrice(displayOriginalPrice()!) }}
           </span>
         }
       </div>

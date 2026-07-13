@@ -18,18 +18,23 @@ export class CartComponent {
   cartTotal  = computed(() => this.cartService.cartTotal());
   isEmpty    = computed(() => this.cartService.cartCount() === 0);
 
+  flashSaleOffer    = computed(() => this.cartService.flashSaleOffer());
+  flashSaleDiscount = computed(() => this.cartService.flashSaleDiscount());
+  shippingFee       = computed(() => this.cartService.shippingFee());
+  orderTotal        = computed(() => this.cartService.orderTotal());
+
   constructor(private cartService: CartService) {}
 
   increase(item: CartItem) {
-    this.cartService.updateQty(item.product.id, item.quantity + 1);
+    this.cartService.updateQty(item.product.id, item.quantity + 1, item.appliedOffer?.offerId);
   }
 
   decrease(item: CartItem) {
-    this.cartService.updateQty(item.product.id, item.quantity - 1);
+    this.cartService.updateQty(item.product.id, item.quantity - 1, item.appliedOffer?.offerId);
   }
 
-  remove(productId: number) {
-    this.cartService.remove(productId);
+  remove(item: CartItem) {
+    this.cartService.remove(item.product.id, item.appliedOffer?.offerId);
   }
 
   clear() {
