@@ -1,0 +1,91 @@
+
+<div class="p-8">
+
+  <div class="flex items-center justify-between mb-6">
+    <div>
+      <h1 class="font-serif text-3xl text-dark mb-1">Offres & Promotions</h1>
+      <p class="text-gray-400 text-sm">Gérez les remises et promotions de la boutique</p>
+    </div>
+    <a routerLink="/offres/nouvelle"
+       class="px-5 py-2.5 bg-gold text-white text-sm uppercase tracking-wider font-semibold hover:bg-gold-dark transition-colors">
+      + Nouvelle offre
+    </a>
+  </div>
+
+  <!-- Switch visibilité page publique -->
+  <div class="bg-white rounded-sm shadow-sm p-5 mb-6 flex items-center justify-between">
+    <div>
+      <p class="text-dark font-medium text-sm">Page "Nos offres" visible dans la navbar publique</p>
+      <p class="text-gray-400 text-xs mt-0.5">Indépendant des offres actives — contrôle uniquement l'affichage du lien</p>
+    </div>
+    <button (click)="toggleNavbar()"
+            class="w-12 h-7 rounded-full transition-colors relative flex-shrink-0"
+            [class]="settings()?.offersPageVisible ? 'bg-gold' : 'bg-gray-200'">
+      <span class="absolute top-1 w-5 h-5 bg-white rounded-full transition-transform shadow-sm"
+            [class]="settings()?.offersPageVisible ? 'translate-x-6' : 'translate-x-1'"></span>
+    </button>
+  </div>
+
+  <div class="bg-white rounded-sm shadow-sm overflow-hidden">
+    <table class="w-full text-sm">
+      <thead class="bg-[#f3ede1] text-dark uppercase text-xs tracking-wider">
+        <tr>
+          <th class="px-4 py-3 text-left">Titre</th>
+          <th class="px-4 py-3 text-left">Type</th>
+          <th class="px-4 py-3 text-left">Valeur</th>
+          <th class="px-4 py-3 text-left">Période</th>
+          <th class="px-4 py-3 text-left">Statut</th>
+          <th class="px-4 py-3 text-right">Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        @for (offer of offers(); track offer.id) {
+          <tr class="border-t border-gray-100">
+            <td class="px-4 py-3">
+              <p class="text-dark font-medium">{{ offer.title }}</p>
+              @if (offer.description) {
+                <p class="text-gray-400 text-xs mt-0.5">{{ offer.description }}</p>
+              }
+            </td>
+            <td class="px-4 py-3 text-gray-500">{{ typeLabels[offer.type] }}</td>
+            <td class="px-4 py-3 text-dark">
+              @if (offer.value) {
+                {{ offer.value }}{{ offer.type === 'PERCENTAGE' || offer.type === 'FLASH_SALE' ? '%' : ' ' + 'ت.د' }}
+              } @else {
+                <span class="text-gray-300">—</span>
+              }
+            </td>
+            <td class="px-4 py-3 text-xs text-gray-400">
+              @if (offer.startDate || offer.endDate) {
+                {{ offer.startDate ? (offer.startDate | slice:0:10) : '...' }} → {{ offer.endDate ? (offer.endDate | slice:0:10) : '...' }}
+              } @else {
+                <span class="text-gray-300">Permanente</span>
+              }
+            </td>
+            <td class="px-4 py-3">
+              <button (click)="toggleActive(offer)"
+                      class="px-3 py-1.5 rounded-full text-xs font-medium transition-colors"
+                      [class]="offer.currentlyValid ? 'bg-green-100 text-green-700' : 'bg-gray-100 text-gray-500'">
+                {{ offer.currentlyValid ? 'Active' : (offer.active ? 'Inactive (dates)' : 'Désactivée') }}
+              </button>
+            </td>
+            <td class="px-4 py-3 text-right">
+              <a [routerLink]="['/offres', offer.id, 'modifier']"
+                 class="text-gold hover:text-gold-dark text-xs uppercase tracking-wider mr-4">
+                Modifier
+              </a>
+              <button (click)="deleteOffer(offer)"
+                      class="text-red-400 hover:text-red-500 text-xs uppercase tracking-wider">
+                Supprimer
+              </button>
+            </td>
+          </tr>
+        }
+      </tbody>
+    </table>
+
+    @if (offers().length === 0) {
+      <p class="text-center text-gray-400 py-12">Aucune offre pour l'instant.</p>
+    }
+  </div>
+</div>

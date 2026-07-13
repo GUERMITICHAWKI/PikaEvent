@@ -32,6 +32,18 @@ export const routes: Routes = [
       {
         path: 'commandes',
         loadComponent: () => import('./pages/order-list/order-list').then(m => m.OrderListComponent)
+      },
+      {
+        path: 'offres',
+        loadComponent: () => import('./pages/offer-list/offer-list').then(m => m.OfferListComponent)
+      },
+      {
+        path: 'offres/nouvelle',
+        loadComponent: () => import('./pages/offer-form/offer-form').then(m => m.OfferFormComponent)
+      },
+      {
+        path: 'offres/:id/modifier',
+        loadComponent: () => import('./pages/offer-form/offer-form').then(m => m.OfferFormComponent)
       }
     ]
   }

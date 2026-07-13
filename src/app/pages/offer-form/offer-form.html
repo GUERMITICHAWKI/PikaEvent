@@ -1,0 +1,256 @@
+<div class="p-8">
+  <div class="max-w-3xl mx-auto">
+
+    <div class="flex items-center gap-2 text-gray-400 text-sm mb-6">
+      <a routerLink="/offres" class="hover:text-gold">Offres</a>
+      <span>/</span>
+      <span class="text-gold">{{ isEditMode() ? 'Modifier' : 'Nouvelle' }}</span>
+    </div>
+
+    <h1 class="font-serif text-3xl text-dark mb-8">
+      {{ isEditMode() ? 'Modifier l\'offre' : 'Nouvelle offre' }}
+    </h1>
+
+    @if (error()) {
+      <div class="bg-red-50 border border-red-200 text-red-500 px-4 py-3 text-sm mb-6">
+        ⚠️ {{ error() }}
+      </div>
+    }
+
+    <div class="bg-white rounded-sm shadow-sm p-8 space-y-6">
+
+      <!-- Type d'offre (détermine les champs affichés ci-dessous) -->
+      <div>
+        <label class="block text-xs uppercase tracking-widest font-semibold text-dark mb-2">
+          Type d'offre <span class="text-gold">*</span>
+        </label>
+        <select
+          [value]="form().type"
+          (change)="updateField('type', $any($event.target).value)"
+          class="w-full px-4 py-3 border border-gray-200 text-sm focus:outline-none focus:border-gold bg-white">
+          @for (t of offerTypes; track t) {
+            <option [value]="t">{{ typeLabels[t] }}</option>
+          }
+        </select>
+      </div>
+
+      <!-- Titre -->
+      <div>
+        <label class="block text-xs uppercase tracking-widest font-semibold text-dark mb-2">
+          Titre <span class="text-gold">*</span>
+        </label>
+        <input type="text"
+          [value]="form().title"
+          (input)="updateField('title', $any($event.target).value)"
+          placeholder="Remise de bienvenue"
+          class="w-full px-4 py-3 border border-gray-200 text-sm focus:outline-none focus:border-gold" />
+        @if (submitAttempted() && errors().title) {
+          <p class="text-xs text-red-500 mt-1">Le titre est requis</p>
+        }
+      </div>
+
+      <!-- Description -->
+      <div>
+        <label class="block text-xs uppercase tracking-widest font-semibold text-dark mb-2">
+          Description
+        </label>
+        <textarea rows="2"
+          [value]="form().description"
+          (input)="updateField('description', $any($event.target).value)"
+          placeholder="-15% sur votre commande"
+          class="w-full px-4 py-3 border border-gray-200 text-sm focus:outline-none focus:border-gold resize-none"></textarea>
+      </div>
+
+      <!-- Valeur (selon type) -->
+      @if (showValue()) {
+        <div>
+          <label class="block text-xs uppercase tracking-widest font-semibold text-dark mb-2">
+            {{ valueLabel() }} <span class="text-gold">*</span>
+          </label>
+          <input type="number"
+            [value]="form().value"
+            (input)="updateField('value', $any($event.target).value)"
+            class="w-full px-4 py-3 border border-gray-200 text-sm focus:outline-none focus:border-gold" />
+          @if (submitAttempted() && errors().value) {
+            <p class="text-xs text-red-500 mt-1">Valeur requise (&gt; 0)</p>
+          }
+        </div>
+      }
+
+      <!-- Seuil panier (livraison gratuite / cadeau) -->
+      @if (showMinCartAmount()) {
+        <div>
+          <label class="block text-xs uppercase tracking-widest font-semibold text-dark mb-2">
+            Seuil de panier déclencheur (millimes)
+          </label>
+          <input type="number"
+            [value]="form().minCartAmount"
+            (input)="updateField('minCartAmount', $any($event.target).value)"
+            placeholder="100000"
+            class="w-full px-4 py-3 border border-gray-200 text-sm focus:outline-none focus:border-gold" />
+          <p class="text-xs text-gray-400 mt-1">Ex: 100000 = 100.000 ت.د</p>
+        </div>
+      }
+
+      <!-- Seuil de stock -->
+      @if (showStockThreshold()) {
+        <div>
+          <label class="block text-xs uppercase tracking-widest font-semibold text-dark mb-2">
+            Seuil de stock déclencheur
+          </label>
+          <input type="number"
+            [value]="form().stockThreshold"
+            (input)="updateField('stockThreshold', $any($event.target).value)"
+            placeholder="5"
+            class="w-full px-4 py-3 border border-gray-200 text-sm focus:outline-none focus:border-gold" />
+          <p class="text-xs text-gray-400 mt-1">La remise s'applique si le stock du produit descend à ce niveau ou moins</p>
+        </div>
+      }
+
+      <!-- Dates (vente flash / offres limitées) -->
+      @if (showDates()) {
+        <div class="grid grid-cols-2 gap-4">
+          <div>
+            <label class="block text-xs uppercase tracking-widest font-semibold text-dark mb-2">
+              Début
+            </label>
+            <input type="datetime-local"
+              [value]="form().startDate"
+              (input)="updateField('startDate', $any($event.target).value)"
+              class="w-full px-4 py-3 border border-gray-200 text-sm focus:outline-none focus:border-gold" />
+          </div>
+          <div>
+            <label class="block text-xs uppercase tracking-widest font-semibold text-dark mb-2">
+              Fin
+            </label>
+            <input type="datetime-local"
+              [value]="form().endDate"
+              (input)="updateField('endDate', $any($event.target).value)"
+              class="w-full px-4 py-3 border border-gray-200 text-sm focus:outline-none focus:border-gold" />
+          </div>
+        </div>
+        <p class="text-xs text-gray-400 -mt-4">Laissez vide pour une offre permanente (sauf vente flash, où une fin est recommandée)</p>
+      }
+
+      <!-- Produits ciblés -->
+      @if (showTargetProducts()) {
+        <div>
+          <label class="block text-xs uppercase tracking-widest font-semibold text-dark mb-2">
+            Produits ciblés
+          </label>
+          <p class="text-xs text-gray-400 mb-3">Aucune sélection = s'applique à tout le panier</p>
+          <div class="max-h-64 overflow-y-auto border border-gray-200 rounded-sm divide-y divide-gray-100">
+            @for (p of allProducts(); track p.id) {
+              <label class="flex items-center gap-3 px-4 py-2.5 hover:bg-gray-50 cursor-pointer">
+                <input type="checkbox"
+                  [checked]="isProductTargeted(p.id)"
+                  (change)="toggleTargetProduct(p.id)"
+                  class="accent-gold" />
+                @if (p.imageUrl) {
+                  <img [src]="p.imageUrl" class="w-8 h-8 object-cover rounded-sm" />
+                } @else {
+                  <div class="w-8 h-8 bg-gray-100 rounded-sm"></div>
+                }
+                <span class="text-sm text-dark">{{ p.name }}</span>
+              </label>
+            }
+          </div>
+        </div>
+      }
+
+      <!-- Même produit uniquement (paliers de quantité) -->
+      @if (showSameProductOnly()) {
+        <label class="flex items-center gap-3 cursor-pointer">
+          <input type="checkbox"
+            [checked]="form().sameProductOnly"
+            (change)="updateField('sameProductOnly', $any($event.target).checked)"
+            class="accent-gold w-4 h-4" />
+          <span class="text-sm text-dark">
+            Compter chaque produit ciblé séparément (sinon, additionne les quantités de tous les produits ciblés ensemble)
+          </span>
+        </label>
+      }
+
+      <!-- Paliers de quantité -->
+      @if (showTiers()) {
+        <div>
+          <label class="block text-xs uppercase tracking-widest font-semibold text-dark mb-2">
+            Paliers de remise
+          </label>
+          <div class="space-y-2">
+            @for (tier of tiers(); track $index) {
+              <div class="flex items-center gap-3">
+                <span class="text-xs text-gray-400 w-16">À partir de</span>
+                <input type="number" [value]="tier.minQuantity"
+                  (input)="updateTier($index, 'minQuantity', +$any($event.target).value)"
+                  class="w-20 px-3 py-2 border border-gray-200 text-sm focus:outline-none focus:border-gold" />
+                <span class="text-xs text-gray-400">articles →</span>
+                <input type="number" [value]="tier.discountPercentage"
+                  (input)="updateTier($index, 'discountPercentage', +$any($event.target).value)"
+                  class="w-20 px-3 py-2 border border-gray-200 text-sm focus:outline-none focus:border-gold" />
+                <span class="text-xs text-gray-400">% de remise</span>
+                <button (click)="removeTier($index)" class="ml-auto text-red-400 hover:text-red-500 text-xs">
+                  Supprimer
+                </button>
+              </div>
+            }
+          </div>
+          <button (click)="addTier()" type="button"
+            class="mt-3 text-xs text-gold hover:text-gold-dark uppercase tracking-wider">
+            + Ajouter un palier
+          </button>
+        </div>
+      }
+
+      <!-- Produit cadeau -->
+      @if (showGiftProduct()) {
+        <div>
+          <label class="block text-xs uppercase tracking-widest font-semibold text-dark mb-2">
+            Produit offert
+          </label>
+          <select
+            [value]="form().giftProductId ?? ''"
+            (change)="updateField('giftProductId', $any($event.target).value ? +$any($event.target).value : null)"
+            class="w-full px-4 py-3 border border-gray-200 text-sm focus:outline-none focus:border-gold bg-white">
+            <option value="">Sélectionner un produit</option>
+            @for (p of allProducts(); track p.id) {
+              <option [value]="p.id">{{ p.name }}</option>
+            }
+          </select>
+        </div>
+      }
+
+      <!-- Code promo optionnel -->
+      <div>
+        <label class="block text-xs uppercase tracking-widest font-semibold text-dark mb-2">
+          Code promo (optionnel)
+        </label>
+        <input type="text"
+          [value]="form().promoCode"
+          (input)="updateField('promoCode', $any($event.target).value)"
+          placeholder="Laissez vide pour une offre automatique"
+          class="w-full px-4 py-3 border border-gray-200 text-sm focus:outline-none focus:border-gold" />
+      </div>
+
+      <!-- Actif -->
+      <label class="flex items-center gap-3 cursor-pointer">
+        <input type="checkbox"
+          [checked]="form().active"
+          (change)="updateField('active', $any($event.target).checked)"
+          class="accent-gold w-4 h-4" />
+        <span class="text-sm text-dark">Offre active</span>
+      </label>
+
+      <!-- Actions -->
+      <div class="flex items-center gap-4 pt-4">
+        <button (click)="onSubmit()" [disabled]="loading()"
+          class="px-8 py-3 text-sm uppercase tracking-widest font-semibold text-white transition-colors"
+          [class]="loading() ? 'bg-gold/60 cursor-not-allowed' : 'bg-gold hover:bg-gold-dark'">
+          {{ loading() ? 'Enregistrement...' : (isEditMode() ? 'Mettre à jour' : 'Créer l\'offre') }}
+        </button>
+        <a routerLink="/offres" class="text-sm text-gray-400 hover:text-gray-600">Annuler</a>
+      </div>
+
+    </div>
+  </div>
+</div>
